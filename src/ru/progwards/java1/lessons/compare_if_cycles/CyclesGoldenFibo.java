@@ -6,8 +6,9 @@ public class CyclesGoldenFibo {
         for (int i = 1; i <= 15; i++) {
             System.out.println(fiboNumber(i));
             if (fiboNumber(i) <= 100) {
-                System.out.println("Треугольник со сторонами " + fiboNumber(i) + " и " + fiboNumber(z));
-                System.out.println(isGoldenTriangle(fiboNumber(i), fiboNumber(i), fiboNumber(z)));
+                if (isGoldenTriangle(fiboNumber(z), fiboNumber(z), fiboNumber(i))) {
+                    System.out.println("Треугольник со сторонами " + fiboNumber(z) + " и " + fiboNumber(i));
+                }
                 z++;
             }
         }
@@ -43,15 +44,15 @@ public class CyclesGoldenFibo {
 
     public static boolean isGoldenTriangle(int a, int b, int c) {
         if (a == b && b != c) {
-            if (a / c >= 1.61703 && a / c <= 1.61903) {
+            if ((double) a / c >= 1.61703d && (double) a / c <= 1.61903d) {
                 return true;
             }
         } else if (a == c && a != b) {
-            if (a / b >= 1.61703 && a / b <= 1.61903) {
+            if ((double) a / b >= 1.61703d && (double) a / b <= 1.61903d) {
                 return true;
             }
         } else if (b == c && a != c) {
-            if (b / a >= 1.61703 && b / a <= 1.61903) {
+            if ((double) b / a >= 1.61703d && (double) b / a <= 1.61903d) {
                 return true;
             }
         }
