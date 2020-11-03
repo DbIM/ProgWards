@@ -6,7 +6,7 @@ public class CyclesGoldenFibo {
         for (int i = 1; i <= 15; i++) {
             System.out.println(fiboNumber(i));
             if (fiboNumber(i) <= 100) {
-                System.out.println("Треугольник со сторонами " + fiboNumber(i) + " и " + fiboNumber(z) );
+                System.out.println("Треугольник со сторонами " + fiboNumber(i) + " и " + fiboNumber(z));
                 System.out.println(isGoldenTriangle(fiboNumber(i), fiboNumber(i), fiboNumber(z)));
                 z++;
             }
@@ -14,6 +14,9 @@ public class CyclesGoldenFibo {
     }
 
     public static boolean containsDigit(int number, int digit) {
+        if (number == 0 && digit == 0) {
+            return true;
+        }
         while (number != 0) {
             int i = number % 10;
             number /= 10;
@@ -54,5 +57,4 @@ public class CyclesGoldenFibo {
         }
         return false;
     }
-
 }
