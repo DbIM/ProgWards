@@ -2,7 +2,26 @@ package ru.progwards.java1.lessons.test;
 
 public class Test1 {
     public static void main(String[] args) {
-        System.out.println(factorial(19));
+        Integer a = 5;
+        Integer b = 1;
+        System.out.println(a.compareTo(b));
+    }
+
+    public int compareTo(Rectangle anRectangle) {
+        if (this.compareTo(anRectangle) == 1) {
+            return Integer.parseInt((this + " > " + anRectangle + " : 1"));
+        } else if (this.compareTo(anRectangle) == 0) {
+            return Integer.parseInt((this + " = " + anRectangle + " : 0"));
+        }
+        return Integer.parseInt((this + " < " + anRectangle + " : -1"));
+    }
+
+    public int sumArrayItems(int[] a){
+        int k = 0;
+        for(int i=0;i<a.length;i++){
+            k+=a[i];
+        }
+        return k;
     }
 
     static String textGrade(int grade) {
@@ -41,4 +60,17 @@ public class Test1 {
     }
 
 }
+
+//Правильные ответы: int a[];,
+// int []a = new int[10];,
+// int []a = {10, 26, 12, 35};,
+// int a[] = {11, 22, 33};//int item = a[1];,
+// int a[][][];,
+// int a1[], a2[], a3[];
+//int a[][] = {a1, a2, a3};,
+//int a[][];//int item = a[1][2];
+
+//Правильные ответы: Массив это хранилище объектов заданного типа,
+// Размер массива задается при создании, и не может быть изменен в дальнейшем,
+// Размер массива можно узнать через свойство length
 

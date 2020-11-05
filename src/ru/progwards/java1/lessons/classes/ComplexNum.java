@@ -41,5 +41,4 @@ public class ComplexNum {
         return new ComplexNum((a * c + b * d) / (c * c + d * d),
                 (b * c - a * d) / (c * c + d * d));
     }
-
 }
