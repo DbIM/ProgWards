@@ -10,21 +10,19 @@ public class Rectangle {
     }
 
     public double area() {
-        return a*b;
+        return a * b;
     }
 
     public int compareTo(Rectangle anRectangle) {
-        if (this.area() > anRectangle.area()){
+        if (this.area() > anRectangle.area()) {
             return (1);
-        }
-        else  if (this.area() < anRectangle.area()){
+        } else if (this.area() < anRectangle.area()) {
             return (-1);
         }
         return (0);
     }
 
-
     public static void main(String[] args) {
-        System.out.println(new Rectangle(2,3).compareTo(new Rectangle(3, 2)));
+        System.out.println(new Rectangle(2, 3).compareTo(new Rectangle(3, 2)));
     }
 }

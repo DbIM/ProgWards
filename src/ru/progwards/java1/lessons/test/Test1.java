@@ -1,10 +1,20 @@
 package ru.progwards.java1.lessons.test;
 
+import java.util.Arrays;
+
 public class Test1 {
     public static void main(String[] args) {
-        Integer a = 5;
-        Integer b = 1;
-        System.out.println(a.compareTo(b));
+        System.out.println(8%3);
+
+    }
+
+    public static int arrayMax(int[] a){
+        if (a.length == 0) {
+            return 0;
+        }
+        int x = a.length - 1;
+        Arrays.sort(a);
+        return a[x];
     }
 
     public int sumArrayItems(int[] a){
