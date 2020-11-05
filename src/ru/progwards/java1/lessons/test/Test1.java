@@ -7,15 +7,6 @@ public class Test1 {
         System.out.println(a.compareTo(b));
     }
 
-    public int compareTo(Rectangle anRectangle) {
-        if (this.compareTo(anRectangle) == 1) {
-            return Integer.parseInt((this + " > " + anRectangle + " : 1"));
-        } else if (this.compareTo(anRectangle) == 0) {
-            return Integer.parseInt((this + " = " + anRectangle + " : 0"));
-        }
-        return Integer.parseInt((this + " < " + anRectangle + " : -1"));
-    }
-
     public int sumArrayItems(int[] a){
         int k = 0;
         for(int i=0;i<a.length;i++){
