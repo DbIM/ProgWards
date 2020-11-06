@@ -3,46 +3,49 @@ package ru.progwards.java1.lessons.arrays;
 import java.util.Arrays;
 
 public class DIntArray {
-
-
-
-    private int[] array = new int[]{};
-
-    public DIntArray() {
-    }
-
-/*    public DIntArray(int array[]) {
-        this.array = array;
-    }*/
+    private int[] arr = new int[]{};
 
     public void add(int num) {
-        int[] newArray = Arrays.copyOf(array, array.length + 1);
-        newArray[array.length - 1] = num;
+
+        if (num > arr.length) {
+            return;
+        }
+
+        int[] arrayInt = new int[]{};
+        arrayInt = Arrays.copyOf(arr, arr.length + 1);
+        arrayInt[arrayInt.length - 1] = num;
     }
 
     public void atInsert(int pos, int num) {
-        int[] newArray = Arrays.copyOf(array, array.length);
-        newArray[pos] = num;
+        int tempDigital = 0;
+        int[] arrayIntIns = Arrays.copyOf(arr, arr.length + 1);
+
+
+        tempDigital = arrayIntIns[pos];
+        arrayIntIns[pos] = num;
+        arrayIntIns[arrayIntIns.length - 1] = tempDigital;
     }
+
 
     public void atDelete(int pos) {
-        array[pos] = 0;
-        Arrays.sort(array);
-        for (int i = 0; i < array.length; i++) {
-            for (int j = i + 1; j < array.length; j++) {
-                int x;
-                if (array[i] < array[j]) {
-                    x = array[i];
-                    array[i] = array[j];
-                    array[j] = x;
-                }
+        int j = 0;
+        int arrayIntDel[] = new int[arr.length - 1];
+
+
+        for (int i = 0; i < arr.length; i++) {
+            if (i == pos) {
+                arrayIntDel[j] = arr[i + 1];
+            } else {
+                arrayIntDel[j] = arr[i];
+                j++;
             }
         }
-        int[] newArray = Arrays.copyOf(array, array.length - 1);
+
     }
 
-    //возвращает элемент по индексу pos.
     public int at(int pos) {
-        return array[pos];
+        return arr[pos];
     }
+
+
 }

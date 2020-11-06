@@ -4,20 +4,10 @@ import java.util.Arrays;
 
 public class Test1 {
     public static void main(String[] args) {
-        int[] array = {2,1,3,5,0};
-        Arrays.sort(array);
-        for (int i = 0; i < array.length; i++) {
-            for (int j = i + 1; j < array.length; j++) {
-                int x;
-                if (array[i] < array[j]) {
-                    x = array[i];
-                    array[i] = array[j];
-                    array[j] = x;
-                }
-            }
-        }
-        int[] newArray = Arrays.copyOf(array, array.length - 1);
-        System.out.println(Arrays.toString(newArray));
+        int[] a1 = {12, 5, 0, 58, 36};
+        int[] a2 = Arrays.copyOf(a1, a1.length);
+        a2[2] = 0;
+        System.out.println(Arrays.equals(a1, a2));
     }
 
     public static void reverse(int[] a) {
@@ -87,16 +77,13 @@ public class Test1 {
 
 }
 
-//Правильные ответы: int a[];,
+// int a[];,
 // int []a = new int[10];,
 // int []a = {10, 26, 12, 35};,
-// int a[] = {11, 22, 33};//int item = a[1];,
-// int a[][][];,
+// int a[] = {11, 22, 33};
+//int item = a[1];, int a[][][];,
 // int a1[], a2[], a3[];
 //int a[][] = {a1, a2, a3};,
-//int a[][];//int item = a[1][2];
-
-//Правильные ответы: Массив это хранилище объектов заданного типа,
-// Размер массива задается при создании, и не может быть изменен в дальнейшем,
-// Размер массива можно узнать через свойство length
+//int a[][];
+//int item = a[1][2];
 
