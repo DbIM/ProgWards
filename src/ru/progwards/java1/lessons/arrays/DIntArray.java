@@ -4,12 +4,11 @@ import java.util.Arrays;
 
 public class DIntArray {
 
-    private int[] array = new int[]{};
+    private int[] array;
 
     public DIntArray(int[] array) {
         this.array = array;
     }
-
 
     public void add(int num) {
         int[] newArray = Arrays.copyOf(array, array.length + 1);
