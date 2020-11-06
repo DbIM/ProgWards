@@ -4,18 +4,20 @@ import java.util.Arrays;
 
 public class DIntArray {
 
-    private int[] array;
 
-/*    public DIntArray(int[] array) {
-        this.array = array;
-    }*/
+
+    private int[] array = new int[]{};
 
     public DIntArray() {
     }
 
+/*    public DIntArray(int array[]) {
+        this.array = array;
+    }*/
+
     public void add(int num) {
         int[] newArray = Arrays.copyOf(array, array.length + 1);
-        newArray[array.length] = num;
+        newArray[array.length - 1] = num;
     }
 
     public void atInsert(int pos, int num) {
