@@ -4,8 +4,33 @@ import java.util.Arrays;
 
 public class Test1 {
     public static void main(String[] args) {
-        System.out.println(8%3);
+        int[] array = {2,1,3,5,0};
+        Arrays.sort(array);
+        for (int i = 0; i < array.length; i++) {
+            for (int j = i + 1; j < array.length; j++) {
+                int x;
+                if (array[i] < array[j]) {
+                    x = array[i];
+                    array[i] = array[j];
+                    array[j] = x;
+                }
+            }
+        }
+        int[] newArray = Arrays.copyOf(array, array.length - 1);
+        System.out.println(Arrays.toString(newArray));
+    }
 
+    public static void reverse(int[] a) {
+        for (int i = 0; i < a.length; i++) {
+            for (int j = i + 1; j < a.length; j++) {
+                int x;
+                if (a[i] < a[j]) {
+                    x = a[i];
+                    a[i] = a[j];
+                    a[j] = x;
+                }
+            }
+        }
     }
 
     public static int arrayMax(int[] a){
