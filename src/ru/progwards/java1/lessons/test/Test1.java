@@ -4,11 +4,10 @@ import java.util.Arrays;
 
 public class Test1 {
     public static void main(String[] args) {
-        int[] a1 = {12, 5, 0, 58, 36};
-        int[] a2 = Arrays.copyOf(a1, a1.length);
-        a2[2] = 0;
-        System.out.println(Arrays.equals(a1, a2));
+
     }
+
+
 
     public static void reverse(int[] a) {
         for (int i = 0; i < a.length; i++) {
@@ -80,10 +79,8 @@ public class Test1 {
 // int a[];,
 // int []a = new int[10];,
 // int []a = {10, 26, 12, 35};,
-// int a[] = {11, 22, 33};
-//int item = a[1];, int a[][][];,
-// int a1[], a2[], a3[];
-//int a[][] = {a1, a2, a3};,
-//int a[][];
-//int item = a[1][2];
+// int a[] = {11, 22, 33};//int item = a[1];,
+// int a[][][];,
+// int a1[], a2[], a3[];//int a[][] = {a1, a2, a3};,
+//int a[][];//int item = a[1][2];
 

@@ -10,8 +10,8 @@ public class DIntArray {
 
 
     public void add(int num) {
-        int[] arrayCopy = Arrays.copyOf(getArray(), getArray().length + 1); //добавляем длину
-        arrayCopy[arrayCopy.length - 1] = num;   //последний индекс= num
+        int[] arrayCopy = Arrays.copyOf(getArray(), getArray().length + 1);
+        arrayCopy[arrayCopy.length - 1] = num;
         array = arrayCopy;
     }
 
