@@ -7,9 +7,12 @@ public class DIntArray {
 
     private int[] array = new int[]{};
 
-    public DIntArray(int[] array) {
-        this.array = array;
+    public DIntArray(){
     }
+
+/*    public DIntArray(int[] array) {
+        this.array = array;
+    }*/
 
     int arrayLenght = array.length + 1;
 
