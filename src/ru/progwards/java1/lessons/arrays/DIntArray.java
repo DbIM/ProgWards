@@ -6,8 +6,11 @@ public class DIntArray {
 
     private int[] array;
 
-    public DIntArray(int[] array) {
+/*    public DIntArray(int[] array) {
         this.array = array;
+    }*/
+
+    public DIntArray() {
     }
 
     public void add(int num) {
