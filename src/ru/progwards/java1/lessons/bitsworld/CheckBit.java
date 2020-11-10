@@ -2,7 +2,7 @@ package ru.progwards.java1.lessons.bitsworld;
 
 public class CheckBit {
     public static int checkBit(byte value, int bitNumber){
-        int[] result = new int[7];
+        int[] result = new int[8];
         int test;
         for (int i = 0; i < 8; i++) {
             test = value & 0x1;
