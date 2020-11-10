@@ -4,10 +4,35 @@ import java.util.Arrays;
 
 public class Test1 {
     public static void main(String[] args) {
-
+        System.out.println(intToGrade(4));
     }
 
+    public enum Grade {
+        VERYBAD,
+        BAD,
+        SATISFACTORILY,
+        GOOD,
+        EXCELLENT,
+        NOTDEFINED
+    }
 
+    static Grade intToGrade(int grade) {
+        switch (grade) {
+            case 1: return Grade.VERYBAD;
+            case 2: return Grade.BAD;
+            case 3: return Grade.SATISFACTORILY;
+            case 4: return Grade.GOOD;
+            case 5: return Grade.EXCELLENT;
+            default: return Grade.NOTDEFINED;
+        }
+    }
+
+    ;
+//Вы правильно выбрали 2.
+//Правильные ответы:
+// Перечисление (enum) можно использовать в конструкции switch case,
+// Использование перечислений (enum) повышает наглядность кода,
+// При написании элементов enum желательно использовать стиль для констант
 
     public static void reverse(int[] a) {
         for (int i = 0; i < a.length; i++) {
@@ -22,7 +47,7 @@ public class Test1 {
         }
     }
 
-    public static int arrayMax(int[] a){
+    public static int arrayMax(int[] a) {
         if (a.length == 0) {
             return 0;
         }
@@ -31,10 +56,10 @@ public class Test1 {
         return a[x];
     }
 
-    public int sumArrayItems(int[] a){
+    public int sumArrayItems(int[] a) {
         int k = 0;
-        for(int i=0;i<a.length;i++){
-            k+=a[i];
+        for (int i = 0; i < a.length; i++) {
+            k += a[i];
         }
         return k;
     }
@@ -70,7 +95,7 @@ public class Test1 {
         }
     }
 
-    static int addAsStrings(int n1, int n2){
+    static int addAsStrings(int n1, int n2) {
         return Integer.parseInt((String.valueOf(n1) + String.valueOf(n2)));
     }
 
