@@ -4,10 +4,12 @@ import java.util.Arrays;
 
 public class Test1 {
     public static void main(String[] args) {
-        System.out.println(intToGrade(4));
+        Object a = new Object();
+        System.out.println(a.equals(null));
+        }
     }
 
-    public enum Grade {
+/*    public enum Grade {
         VERYBAD,
         BAD,
         SATISFACTORILY,
@@ -25,7 +27,7 @@ public class Test1 {
             case 5: return Grade.EXCELLENT;
             default: return Grade.NOTDEFINED;
         }
-    }
+    }*/
 
     ;
 //Вы правильно выбрали 2.
@@ -34,6 +36,7 @@ public class Test1 {
 // Использование перечислений (enum) повышает наглядность кода,
 // При написании элементов enum желательно использовать стиль для констант
 
+/*
     public static void reverse(int[] a) {
         for (int i = 0; i < a.length; i++) {
             for (int j = i + 1; j < a.length; j++) {
@@ -100,6 +103,7 @@ public class Test1 {
     }
 
 }
+*/
 
 // int a[];,
 // int []a = new int[10];,
