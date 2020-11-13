@@ -8,10 +8,36 @@ public class Animal {
     }
 
     public boolean equals(Object anObject) {
-        if(this.weight > weight){
-            return false;
+        if (this == anObject) return true;
+        if (anObject == null || getClass() != anObject.getClass()) return false;
+        Animal animal = (Animal) anObject;
+        return Double.compare(animal.weight, weight) == 0;
+    }
+
+    public double getFood1kgPrice() {
+        switch (food) {
+            case HAY: return 20d;
+            case CORN: return 50d;
         }
-        return true;
+        return 0d;
+    }
+
+    public double getFoodPrice(){
+        return calculateFoodWeight() * getFood1kgPrice();
+    }
+
+    public int compareFoodPrice(Animal aminal){
+        return Double.compare(this.getFoodPrice(), aminal.getFoodPrice());
+    }
+
+    public CompareWeight.CompareResult compareWeight(Double weight){
+        if(this.weight < weight){
+            return CompareWeight.CompareResult.LESS;
+        }
+        if(this.weight == weight){
+            return CompareWeight.CompareResult.EQUAL;
+        }
+        return CompareWeight.CompareResult.GREATER;
     }
 
     public double getWeight() {
