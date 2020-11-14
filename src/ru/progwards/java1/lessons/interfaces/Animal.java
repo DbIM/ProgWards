@@ -15,7 +15,7 @@ public class Animal {
     }
 
     public double getFood1kgPrice() {
-        switch (food) {
+        switch (getFoodKind()) {
             case HAY: return 20d;
             case CORN: return 50d;
         }
