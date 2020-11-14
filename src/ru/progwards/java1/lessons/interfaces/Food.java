@@ -22,10 +22,10 @@ public class Food {
     }
 
     public static void sort(CompareWeight[] a){
-        int x;
+        CompareWeight x;
         for (int i = 0; i < a.length; i++) {
             for (int j = i + 1; j < a.length; j++) {
-                if (a[i] > a[j]) {
+                if (a[i].hashCode() > a[j].hashCode()) {
                     x = a[i];
                     a[i] = a[j];
                     a[j] = x;
