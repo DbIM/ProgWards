@@ -21,11 +21,11 @@ public class Food {
         return CompareWeight.CompareResult.GREATER;
     }
 
-    public static void sort(CompareWeight[] a){
-        CompareWeight x;
+    public static void sort(Comparable<Animal>[] a){
+        Comparable x;
         for (int i = 0; i < a.length; i++) {
             for (int j = i + 1; j < a.length; j++) {
-                if (a[i].hashCode() > a[j].hashCode()) {
+                if (a[i].compareTo((Animal) a[j]) >0) {
                     x = a[i];
                     a[i] = a[j];
                     a[j] = x;
