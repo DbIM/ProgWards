@@ -27,7 +27,7 @@ public class Animal {
     }
 
     public int compareFoodPrice(Animal aminal){
-        return Double.compare(this.getFoodPrice(), aminal.getFoodPrice());
+        return Double.compare(getFoodPrice(), aminal.getFoodPrice());
     }
 
     public CompareWeight.CompareResult compareWeight(Double weight){
