@@ -1,10 +1,10 @@
 package ru.progwards.java1.lessons.interfaces;
 
-public class Animal {
+public class Animal implements CompareWeight{
     double weight;
 
-    public Animal(double weight) {
-        this.weight = weight;
+    public Animal(double weight1) {
+        weight = weight1;
     }
 
     public boolean equals(Object anObject) {
@@ -30,18 +30,19 @@ public class Animal {
         return Double.compare(getFoodPrice(), aminal.getFoodPrice());
     }
 
-    public CompareWeight.CompareResult compareWeight(Double weight){
-        if(this.weight < weight){
+    public double getWeight() {
+        return weight;
+    }
+
+    @Override
+    public CompareResult compareWeight(CompareWeight smthHasWeigt) {
+        if(weight < smthHasWeigt.getWeight()){
             return CompareWeight.CompareResult.LESS;
         }
-        if(this.weight == weight){
+        if(weight == smthHasWeigt.getWeight()){
             return CompareWeight.CompareResult.EQUAL;
         }
         return CompareWeight.CompareResult.GREATER;
-    }
-
-    public double getWeight() {
-        return weight;
     }
 
     public double getFoodCoeff() {
@@ -49,11 +50,11 @@ public class Animal {
     }
 
     public AnimalKind getKind() {
-        return animal;
+        return AnimalKind.ANIMAL;
     }
 
     public FoodKind getFoodKind() {
-        return food;
+        return FoodKind.UNKNOWN;
     }
 
     public double calculateFoodWeight() {
