@@ -1,14 +1,14 @@
 package ru.progwards.java1.lessons.interfaces;
 
 public class ArraySort {
-    public static void sort(Comparable<Food>[] a) {
-        Comparable x;
-        for (int i = 0; i < a.length; i++) {
-            for (int j = i + 1; j < a.length; j++) {
-                if (a[i].compareTo((Food) a[j]) > 0) {
-                    x = a[i];
+    public static void sort(CompareWeight[] a) {
+        CompareWeight tmp;
+        for (int i = 0, n = a.length; i < n - 1; ++i) {
+            for (int j = i + 1; j < n; ++j) {
+                if (a[i].compareWeight(a[j]) == CompareWeight.CompareResult.GREATER) {
+                    tmp = a[i];
                     a[i] = a[j];
-                    a[j] = x;
+                    a[j] = tmp;
                 }
             }
         }
