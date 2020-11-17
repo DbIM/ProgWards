@@ -24,7 +24,6 @@ public class Food implements CompareWeight {
         return CompareWeight.CompareResult.GREATER;
     }
 
-
     public static void sort(Comparable<Food>[] a) {
         Comparable x;
         for (int i = 0; i < a.length; i++) {
