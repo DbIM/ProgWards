@@ -18,3 +18,36 @@ public class Goat implements Speaking, Eating {
         return "Сено";
     }
 }
+
+
+
+//class Circle {
+//   private double radius;
+//}
+//
+//по параметру radius;
+//
+//public boolean equals(Object o) {
+//[if (this == o) return true;]
+//[if (o == null) return false;]
+//[if( GetClass != o.GteClass()) return false;]
+//[double radius = ((Circle)o).radius;]
+//return [Double.compareTo(this,radius, radius) == 0;]
+//}
+
+//Ваш ответ верный.
+//Правильный ответ: public final class Number {
+//...
+//} → у этого класса не может быть потомков,
+// public abstract class Number {
+//...
+//} → нельзя создать экземпляр этого класса,
+// public class Number implements Comparable {
+//...
+//} → этот класс обязан реализовать все методы из Comparable,
+// public abstract final class Number {
+//...
+//} → так нельзя, компилятор выдаст ошибку,
+// public class Number implements ICompare {
+//...
+//} → можно написать ICompare i = new Number();
