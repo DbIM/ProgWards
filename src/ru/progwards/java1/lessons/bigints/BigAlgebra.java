@@ -1,7 +1,10 @@
 package ru.progwards.java1.lessons.bigints;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
+//Реализовать алгоритм быстрого возведения в степень pow
+// числа num в BigDecimal
 public class BigAlgebra {
     BigDecimal fastPow(BigDecimal num, int pow){
         BigDecimal k1 = num;
@@ -22,10 +25,12 @@ public class BigAlgebra {
         return k2;
     }
 
-    public static void main(String[] args) {
-        BigDecimal x = new BigDecimal("2");
-       // System.out.println(fastPow(x,11));
+    //Реализовать алгоритм вычисления n-го числа фибоначчи в BigInteger.
+    BigInteger fibonacci(int n){
+        if (n == 1 || n == 2) {
+            return BigInteger.valueOf(1);
+        }
+            return BigInteger.valueOf(((n - 1) + (n - 2)));
     }
 }
-//Реализовать алгоритм быстрого возведения в степень pow
-// числа num в BigDecimal
+
