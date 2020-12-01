@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 public class Test1 {
     public static void main(String[] args) {
-        Object a = new Object();
-        System.out.println(a.equals(null));
+        int i = 9 ;
+        System.out.println(i%2);
         }
     }
 
