@@ -30,13 +30,13 @@ public class BigAlgebra {
         if (n == 1 || n == 2) {
             return BigInteger.valueOf(1);
         }
-        return BigInteger.valueOf(((n - 1) + (n - 2)));
+        return fibonacci(n -1).add(fibonacci(n - 2));
     }
 
     public static void main(String[] args) {
         BigDecimal x = new BigDecimal("2");
-        System.out.println(fastPow(x, 11));
-        System.out.println(fibonacci(25));
+       // System.out.println(fastPow(x, 11));
+        System.out.println(fibonacci(20));
     }
 }
 

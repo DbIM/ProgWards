@@ -41,7 +41,6 @@ class ByteInteger extends AbsInteger {
     byte value;
     ByteInteger(byte value) {
         this.value = value;
-        num = 1;
     }
     @Override
     public String toString() {
@@ -69,7 +68,6 @@ class ShortInteger extends AbsInteger {
     short value;
     ShortInteger(short value) {
         this.value = value;
-        num = 2;
     }
     @Override
     public String toString() {
@@ -92,7 +90,6 @@ class IntInteger extends AbsInteger {
     int value;
     IntInteger(int value) {
         this.value = value;
-        num = 4;
     }
     @Override
     public String toString() {
