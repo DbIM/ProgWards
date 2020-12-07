@@ -89,11 +89,11 @@ public class ArrayInteger {
     }
 
     public static void main(String[] args) {
-        ArrayInteger a = new ArrayInteger("999");
+/*        ArrayInteger a = new ArrayInteger("999");
         ArrayInteger b = new ArrayInteger("99");
         System.out.print(a + " + " + b + " = ");
         a.add(b);
-        System.out.println(a);
+        System.out.println(a);*/
 
     }
 }

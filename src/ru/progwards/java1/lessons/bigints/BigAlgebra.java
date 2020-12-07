@@ -30,7 +30,7 @@ public class BigAlgebra {
         if (n == 1 || n == 2) {
             return BigInteger.valueOf(1);
         }
-        return fibonacci(n -1).add(fibonacci(n - 2));
+        return fibonacci(n -2).add(fibonacci(n - 1));
     }
 
     public static void main(String[] args) {
