@@ -1,9 +1,9 @@
 package ru.progwards.java1.lessons.bigints;
 
 public class AbsInteger {
-    protected int bytes;
+    protected int number;
     static AbsInteger add(AbsInteger num1, AbsInteger num2) {
-        return num1.bytes >= num2.bytes ? num1.add2(num2) : num2.add2(num1);
+        return num1.number >= num2.number ? num1.add2(num2) : num2.add2(num1);
     }
     protected AbsInteger add2(AbsInteger num1) {
         return null;
@@ -29,7 +29,7 @@ class ByteInteger extends AbsInteger {
     byte value;
     ByteInteger(byte value) {
         this.value = value;
-        bytes = 1;
+        number = 1;
     }
     @Override
     public String toString() {
@@ -57,7 +57,7 @@ class ShortInteger extends AbsInteger {
     short value;
     ShortInteger(short value) {
         this.value = value;
-        bytes = 2;
+        number = 2;
     }
     @Override
     public String toString() {
@@ -81,7 +81,7 @@ class IntInteger extends AbsInteger {
     int value;
     IntInteger(int value) {
         this.value = value;
-        bytes = 4;
+        number = 4;
     }
     @Override
     public String toString() {
