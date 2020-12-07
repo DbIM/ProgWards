@@ -1,7 +1,7 @@
 package ru.progwards.java1.lessons.bigints;
 
 //2.1 Реализовать класс AbsInteger - абстрактное целое число
-public class AbsInteger {
+public abstract class AbsInteger {
     public int num;
 
     //2.3 У класса AbsInteger реализовать метод
@@ -12,9 +12,9 @@ public class AbsInteger {
 
     //Привести результат к наиболее подходящему типу, т.е. -128..127 это ByteInteger и т.д.
     static AbsInteger add(AbsInteger num1, AbsInteger num2) {
-        return num1.num >= num2.num ? num1.add2(num2) : num2.add2(num1);
+        return num1.num >= num2.num ? num1.addPlus(num2) : num2.addPlus(num1);
     }
-    AbsInteger add2(AbsInteger num1) {
+    AbsInteger addPlus(AbsInteger num1) {
         return null;
     }
 
@@ -29,6 +29,7 @@ public class AbsInteger {
     int toInt() {
         return 0;
     }
+
 }
 
 //2.2 Реализовать потомков ByteInteger, ShortInteger, IntInteger, хранящих значение целого числа соответствующего типа.
