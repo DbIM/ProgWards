@@ -27,16 +27,18 @@ public class BigAlgebra {
 
     //Реализовать алгоритм вычисления n-го числа фибоначчи в BigInteger.
     static BigInteger fibonacci(int n) {
-        if (n == 1 || n == 2) {
-            return BigInteger.valueOf(1);
+        if (n < 3) {
+            return BigInteger.ONE;
         }
         return fibonacci(n -2).add(fibonacci(n - 1));
     }
 
-    public static void main(String[] args) {
+/*       public static void main(String[] args) {
         BigDecimal x = new BigDecimal("2");
-       // System.out.println(fastPow(x, 11));
-        System.out.println(fibonacci(20));
-    }
+        System.out.println(fastPow(x, 11));
+        for (int i = 1; i<30;i++) {
+            System.out.println(fibonacci(i));
+        }
+    }*/
 }
 
