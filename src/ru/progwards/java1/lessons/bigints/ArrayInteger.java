@@ -38,6 +38,7 @@ public class ArrayInteger {
             digits[i] = arr[0].byteValue();
         }
     }
+
     //3.3 BigInteger toInt() - привести свое значение к BigInteger (преобразовать из массива в BigInteger)
     BigInteger toInt(){
         int i = 0;
@@ -56,12 +57,13 @@ public class ArrayInteger {
     }
 
     //3.4 boolean add(ArrayInteger num) - сложить 2 числа, не используя BigInteger,
-// а  используя массив digits, результат поместить в экземпляр ArrayInteger,
-// у которого был вызван метод. При переполнении вернуть false, при этом само число сбросить в 0
+// а  используя массив digits, результат поместить в экземпляр ArrayInteger, у которого был вызван метод.
+// При переполнении вернуть false, при этом само число сбросить в 0
     boolean add(ArrayInteger num){
         int x = digits.length;
         int y = num.digits.length;
         if (y > x) {
+            num = null;
             return false;
         }
         int[] c = new int[x];
@@ -70,6 +72,7 @@ public class ArrayInteger {
         }
         int z = c.length;
         if (z > x) {
+            num = null;
             return false;
         }
         int i = 0;
@@ -86,7 +89,11 @@ public class ArrayInteger {
     }
 
     public static void main(String[] args) {
-        BigInteger x = new BigInteger("123");
+        ArrayInteger a = new ArrayInteger("999");
+        ArrayInteger b = new ArrayInteger("99");
+        System.out.print(a + " + " + b + " = ");
+        a.add(b);
+        System.out.println(a);
 
     }
 }
