@@ -12,10 +12,9 @@ public class AbsInteger {
 
     //Привести результат к наиболее подходящему типу, т.е. -128..127 это ByteInteger и т.д.
     static AbsInteger add(AbsInteger num1, AbsInteger num2) {
-        return num1.addPlus(num2);
+        return num1.num >= num2.num ? num1.add2(num2) : num2.add2(num1);
     }
-
-    AbsInteger addPlus(AbsInteger num1){
+    AbsInteger add2(AbsInteger num1) {
         return null;
     }
 
