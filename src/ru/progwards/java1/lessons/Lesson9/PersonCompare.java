@@ -51,3 +51,15 @@ abstract class PersonCompare {
 //Правильный ответ: Integer[] number = {1, 2, 13, 66};
 //someFunction(number); → someFunction сможет изменить значение в number, Integer number = 22;
 //someFunction(number); → someFunction не сможет изменить значение в number
+
+//    Правильный ответ: Integer number = 22;
+//        someFunction(number); → someFunction не сможет изменить значение в number, Integer[] number = {1, 2, 13, 66};
+//        someFunction(number); → someFunction сможет изменить значение в number
+
+//Правильный ответ: MathContext mathContext = new MathContext(3);
+//BigDecimal result = new BigDecimal("3.3333", mathContext); → 3.33,
+//BigDecimal bigDec1 = BigDecimal.valueOf(10);
+//BigDecimal bigDec2 = BigDecimal.valueOf(3);
+//BigDecimal result = bigDec1.divide(bigDec2); → Так нельзя, будет ошибка во время выполнения, BigDecimal bigDec1 = BigDecimal.valueOf(10);
+//BigDecimal bigDec2 = BigDecimal.valueOf(3);
+//BigDecimal result = bigDec1.divide(bigDec2, 5, RoundingMode.HALF_UP); → 3.33333
