@@ -39,11 +39,13 @@ public class Coder {
         }
         finally {
             try {
+                assert fileIn != null;
                 fileIn.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
             try {
+                assert outFile != null;
                 outFile.close();
             } catch (IOException e) {
                 e.printStackTrace();
