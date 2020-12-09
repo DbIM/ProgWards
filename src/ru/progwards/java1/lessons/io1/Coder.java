@@ -22,7 +22,7 @@ public class Coder {
             try {
                 fileIn = new FileInputStream(inFileName);
                 byte[] bytes = fileIn.readAllBytes();
-                byte[] newCode = new byte[bytes.length];
+                byte[] newCode = new byte[code.length];
                 for (int i = 0; i < newCode.length; i++) {
                     newCode[i] = (byte) code[i];
                 }
