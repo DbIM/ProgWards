@@ -5,8 +5,9 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class LineCount {
-    public static int calcEmpty(String fileName) throws IOException{
+    public static int calcEmpty(String fileName) throws IOException {
         int quantity = 0;
+        String nothing = "";
         FileReader reader = null;
         try {
             reader = new FileReader(fileName);
@@ -14,9 +15,7 @@ public class LineCount {
                 Scanner scanner = new Scanner(reader);
                 while (scanner.hasNextLine()) {
                     String strFromFile = scanner.nextLine();
-                    if (strFromFile.equals("")){
-                        quantity++;
-                    }
+                    if (strFromFile.compareTo(nothing) == 0) quantity++;
                 }
             } finally {
                 reader.close();
