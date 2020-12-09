@@ -13,7 +13,7 @@ public class Coder {
     // соответствует символ code[(int)symbol] выходного файла.
     // В случае ошибок, в файл с именем logName вывести название ошибки
     // через метод класса Exception - getMessage()
-    public static void codeFile(String inFileName, String outFileName, char[] code, String logName) {
+    public static void codeFile(String inFileName, String outFileName, char[] code, String logName){
         FileInputStream fileIn = null;
         FileOutputStream outFile = null;
         FileWriter logFile = null;
@@ -26,6 +26,7 @@ public class Coder {
                 for (int i = 0; i < bytes.length; i++) {
                     newCode[i] = (byte) code[i];
                 }
+                outFile = new FileOutputStream(outFileName);
                 outFile.write(newCode);
 
             } catch (IOException e) {
@@ -33,6 +34,7 @@ public class Coder {
             } finally {
                 logFile.close();
                 fileIn.close();
+                outFile.close();
             }
         } catch (IOException e) {
             e.printStackTrace();
