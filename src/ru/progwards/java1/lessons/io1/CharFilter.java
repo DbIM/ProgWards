@@ -25,11 +25,11 @@ public class CharFilter {
             fileOut = new FileOutputStream(outFileName);
             byte[] bytes = fileIn.readAllBytes();
             byte[] newCode = new byte[filter.length()];
-            for (int i=0; i<filter.length(); i++){
-                newCode[i] = (byte)filter.charAt(i);
+            for (int i = 0; i < filter.length(); i++) {
+                newCode[i] = (byte) filter.charAt(i);
             }
-            for (int i = 0; i<newCode.length; i++){
-                for (int i2 = 0; i< bytes.length; i2++){
+            for (int i = 0; i < newCode.length; i++) {
+                for (int i2 = 0; i < bytes.length; i2++) {
                     if (bytes[i2] == newCode[i]) {
                         bytes[i2] = 0;
                     }
@@ -39,11 +39,9 @@ public class CharFilter {
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             fileIn.close();
             fileOut.close();
         }
-
     }
 }
