@@ -24,14 +24,12 @@ public class Coder {
                 byte[] bytes = fileIn.readAllBytes();
                 byte[] newCode = new byte[code.length];
                 for (int i = 0; i < newCode.length; i++) {
-                    byte val = bytes[i];
-                    byte valNew = (byte) code[i];
-                    newCode[val] = valNew;
+                    newCode[i] = (byte) code[bytes[i]];
                 }
                 outFile = new FileOutputStream(outFileName);
                 outFile.write(newCode);
 
-            } catch (IOException e) {
+            } catch (IOException | ArrayIndexOutOfBoundsException e) {
                 logFile.write(e.getMessage());
             } finally {
                 logFile.close();
