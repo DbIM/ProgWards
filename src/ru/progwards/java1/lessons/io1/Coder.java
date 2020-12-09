@@ -33,23 +33,11 @@ public class Coder {
                 logFile.write(e.getMessage());
             } finally {
                 logFile.close();
+                if (fileIn != null) fileIn.close();
+                if (outFile != null) outFile.close();
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        finally {
-            try {
-                assert fileIn != null;
-                fileIn.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            try {
-                assert outFile != null;
-                outFile.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 
