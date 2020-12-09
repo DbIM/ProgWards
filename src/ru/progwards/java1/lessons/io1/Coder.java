@@ -24,7 +24,9 @@ public class Coder {
                 byte[] bytes = fileIn.readAllBytes();
                 byte[] newCode = new byte[code.length];
                 for (int i = 0; i < newCode.length; i++) {
-                    newCode[i] = (byte) code[(int) i];
+                    byte val = bytes[i];
+                    byte valNew = (byte) code[i];
+                    newCode[val] = valNew;
                 }
                 outFile = new FileOutputStream(outFileName);
                 outFile.write(newCode);
@@ -46,3 +48,4 @@ public class Coder {
 
     }
 }
+
