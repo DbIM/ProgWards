@@ -23,9 +23,14 @@ public class Coder {
                 fileIn = new FileInputStream(inFileName);
                 byte[] bytes = fileIn.readAllBytes();
                 byte[] newCode = new byte[bytes.length];
-                for (int i = 0; i < newCode.length; i++) {
-                    newCode[i] = (byte) code[i];
+                int i = 0;
+                while (bytes[i] != -1) {
+                    newCode[i] = bytes[i];
+                    i++;
                 }
+/*                for (int i = 0; i < newCode.length; i++) {
+                    newCode[i] = (byte) code[i];
+                }*/
                 outFile = new FileOutputStream(outFileName);
                 outFile.write(newCode);
 
