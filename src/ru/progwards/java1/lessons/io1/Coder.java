@@ -33,11 +33,26 @@ public class Coder {
                 logFile.write(e.getMessage());
             } finally {
                 logFile.close();
-                fileIn.close();
-                outFile.close();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+        finally {
+            try {
+                fileIn.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                outFile.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        String filename = "src\\ru\\progwards\\java1\\lessons\\io1\\file1111.txt";
+
     }
 }
