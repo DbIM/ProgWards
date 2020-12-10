@@ -29,7 +29,7 @@ public class CharFilter {
                 newCode[i] = (byte) filter.charAt(i);
             }
             for (int i = 0; i < newCode.length; i++) {
-                for (int i2 = 0; i < bytes.length; i2++) {
+                for (int i2 = 0; i2 < bytes.length; i2++) {
                     if (bytes[i2] == newCode[i]) {
                         bytes[i2] = 0;
                     }
@@ -43,5 +43,11 @@ public class CharFilter {
             fileIn.close();
             fileOut.close();
         }
+    }
+
+    public static void main(String[] args) throws IOException {
+        String filename = "src\\ru\\progwards\\java1\\lessons\\io1\\file2.txt";
+        String outFile = "src\\ru\\progwards\\java1\\lessons\\io1\\outFile.txt";
+        filterFile(filename, outFile, " ");
     }
 }

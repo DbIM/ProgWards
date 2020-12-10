@@ -19,16 +19,12 @@ public class Coder {
         {
             FileInputStream reader = new FileInputStream(inFileName);
             FileOutputStream writer = new FileOutputStream(outFileName);
-
             try
             {
                 byte[] bytes = reader.readAllBytes();
-
                 for (int i = 0; i < bytes.length; i++)
                     bytes[i] = (byte) code[bytes[i]];
-
                 writer.write(bytes);
-
             } finally
             {
                 writer.close();
@@ -46,7 +42,6 @@ public class Coder {
         try
         {
             FileWriter log = new FileWriter(logName, true);
-//
             try
             {
                 log.write(msg + "\n");
