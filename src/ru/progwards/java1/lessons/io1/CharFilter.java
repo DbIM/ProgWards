@@ -24,10 +24,8 @@ public class CharFilter {
             fileIn = new FileInputStream(inFileName);
             fileOut = new FileOutputStream(outFileName);
             byte[] bytes = fileIn.readAllBytes();
-            byte[] newCode = new byte[filter.length()];
-            for (int i = 0; i < filter.length(); i++) {
-                newCode[i] = (byte) filter.charAt(i);
-            }
+            FileInputStream filterz = new FileInputStream(filter);
+            byte[] newCode = filterz.readAllBytes();
             for (int i = 0; i < newCode.length; i++) {
                 for (int i2 = 0; i2 < bytes.length; i2++) {
                     if (bytes[i2] == newCode[i]) {
@@ -48,6 +46,7 @@ public class CharFilter {
     public static void main(String[] args) throws IOException {
         String filename = "src\\ru\\progwards\\java1\\lessons\\io1\\file2.txt";
         String outFile = "src\\ru\\progwards\\java1\\lessons\\io1\\outFile.txt";
-        filterFile(filename, outFile, " ");
+        String filter = "src\\ru\\progwards\\java1\\lessons\\io1\\filter.txt";
+        filterFile(filename, outFile, filter);
     }
 }
