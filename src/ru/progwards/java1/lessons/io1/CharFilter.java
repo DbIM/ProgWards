@@ -1,12 +1,12 @@
 package ru.progwards.java1.lessons.io1;
 
 import java.io.*;
+import java.util.Scanner;
 
 public class CharFilter {
     public static void filterFile(String inFileName, String outFileName, String filter) throws IOException {
         FileReader fileIn = null;
         FileWriter fileOut = null;
-        FileInputStream fileInputSize = null;
 
         try {
             fileIn = new FileReader(inFileName);
@@ -14,17 +14,17 @@ public class CharFilter {
 
             char[] charFilter = new char[filter.length()];
             for (int i = 0; i < charFilter.length; i++) {
-                charFilter[i] = (char) filter.charAt(i);
+                charFilter[i] = filter.charAt(i);
             }
 
-            fileInputSize = new FileInputStream(inFileName);
-            byte[] thisIsFileInputSize = fileInputSize.readAllBytes();
-            char[] charInputFile = new char[thisIsFileInputSize.length];
-            for (int i = 0; i < thisIsFileInputSize.length; i++) {
-                    charInputFile[i] = (char) fileIn.read();
-                    if (charInputFile[i] == 65535) {
-                        charInputFile[i] = 0;
-                    }
+            Scanner scanner = new Scanner(fileIn);
+            String inFileString = "";
+            while (scanner.hasNextLine()){
+                inFileString = scanner.nextLine();
+            }
+            char[] charInputFile = new char[inFileString.length()];
+            for (int i = 0; i < charInputFile.length; i++) {
+                    charInputFile[i] = inFileString.charAt(i);
             }
 
             for (int i = 0; i < charFilter.length; i++) {
@@ -46,9 +46,6 @@ public class CharFilter {
             }
             if (fileOut != null) {
                 fileOut.close();
-            }
-            if (fileInputSize != null) {
-                fileInputSize.close();
             }
         }
     }
