@@ -55,9 +55,15 @@ public class CharFilter {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } finally {
-            fileIn.close();
-            fileOut.close();
-            filterz.close();
+            if (fileIn != null) {
+                fileIn.close();
+            }
+            if (fileOut != null) {
+                fileOut.close();
+            }
+            if (filterz != null) {
+                filterz.close();
+            }
         }
     }
 
