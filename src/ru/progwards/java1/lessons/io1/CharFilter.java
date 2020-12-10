@@ -1,9 +1,7 @@
 package ru.progwards.java1.lessons.io1;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import javax.print.DocFlavor;
+import java.io.*;
 
 public class CharFilter {
     //прочитать файл inFileName и удалить символы, содержащиеся в String filter,
@@ -18,28 +16,48 @@ public class CharFilter {
     //JavaстроготипизированныйобъектноориентированныйязыкпрограммированияразработанныйкомпаниейSunMicrosystemsвпоследующемприобретённойкомпаниейOracle
 
     public static void filterFile(String inFileName, String outFileName, String filter) throws IOException {
-        FileInputStream fileIn = null;
-        FileOutputStream fileOut = null;
+        FileReader fileIn = null;
+        FileWriter fileOut = null;
+        FileReader filterz = null;
         try {
-            fileIn = new FileInputStream(inFileName);
-            fileOut = new FileOutputStream(outFileName);
-            byte[] bytes = fileIn.readAllBytes();
-            FileInputStream filterz = new FileInputStream(filter);
-            byte[] newCode = filterz.readAllBytes();
-            for (int i = 0; i < newCode.length; i++) {
-                for (int i2 = 0; i2 < bytes.length; i2++) {
-                    if (bytes[i2] == newCode[i]) {
-                        bytes[i2] = 0;
+            fileIn = new FileReader(inFileName);
+            filterz = new FileReader(filter);
+            fileOut = new FileWriter(outFileName);
+
+            FileInputStream filterSize = new FileInputStream(filter);
+            byte[] thisIsFilterSize = filterSize.readAllBytes();
+            char[] charFilter = new char[thisIsFilterSize.length];
+
+            FileInputStream fileInputSize = new FileInputStream(inFileName);
+            byte[] thisIsFileInputSize = fileInputSize.readAllBytes();
+            char[] charInputFile = new char[thisIsFileInputSize.length];
+
+            for (int i = 0; i < thisIsFilterSize.length; i++) {
+                charFilter[i] = (char) filterz.read();
+            }
+            for (int i2 = 0; i2 < thisIsFileInputSize.length; i2++){
+                charInputFile[i2] = (char) fileIn.read();
+            }
+
+            for (int i = 0; i < charFilter.length; i++) {
+                for (int i2 = 0; i2 < charInputFile.length; i2++){
+                    if (charInputFile[i2] == charFilter[i]) {
+                        charInputFile[i2] = 0;
                     }
                 }
             }
-            fileOut.write(bytes);
+
+            for (int i3=0; i3<charInputFile.length;i3++){
+                fileOut.write(charInputFile[i3]);
+            }
+
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } finally {
             fileIn.close();
             fileOut.close();
+            filterz.close();
         }
     }
 
