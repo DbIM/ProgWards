@@ -6,10 +6,10 @@ public class CharFilter {
     public static void filterFile(String inFileName, String outFileName, String filter) throws IOException {
         FileReader fileIn = null;
         FileWriter fileOut = null;
-        FileReader filterz = null;
+        FileReader filters = null;
         try {
             fileIn = new FileReader(inFileName);
-            filterz = new FileReader(filter);
+            filters = new FileReader(filter);
             fileOut = new FileWriter(outFileName);
 
             FileInputStream filterSize = new FileInputStream(filter);
@@ -21,10 +21,10 @@ public class CharFilter {
             char[] charInputFile = new char[thisIsFileInputSize.length];
 
             for (int i = 0; i < thisIsFilterSize.length; i++) {
-                charFilter[i] = (char) filterz.read();
+                charFilter[i] = (char) filters.read();
             }
-            for (int i2 = 0; i2 < thisIsFileInputSize.length; i2++) {
-                charInputFile[i2] = (char) fileIn.read();
+            for (int i = 0; i < thisIsFileInputSize.length; i++) {
+                charInputFile[i] = (char) fileIn.read();
             }
 
             for (int i = 0; i < charFilter.length; i++) {
@@ -38,8 +38,6 @@ public class CharFilter {
             for (int i3 = 0; i3 < charInputFile.length; i3++) {
                 fileOut.write(charInputFile[i3]);
             }
-
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } finally {
@@ -49,8 +47,8 @@ public class CharFilter {
             if (fileOut != null) {
                 fileOut.close();
             }
-            if (filterz != null) {
-                filterz.close();
+            if (filters != null) {
+                filters.close();
             }
         }
     }
