@@ -6,25 +6,25 @@ public class CharFilter {
     public static void filterFile(String inFileName, String outFileName, String filter) throws IOException {
         FileReader fileIn = null;
         FileWriter fileOut = null;
-        FileReader filters = null;
+        FileInputStream fileInputSize = null;
+
         try {
             fileIn = new FileReader(inFileName);
-            filters = new FileReader(filter);
             fileOut = new FileWriter(outFileName);
 
-            FileInputStream filterSize = new FileInputStream(filter);
-            byte[] thisIsFilterSize = filterSize.readAllBytes();
-            char[] charFilter = new char[thisIsFilterSize.length];
+            char[] charFilter = new char[filter.length()];
+            for (int i = 0; i < charFilter.length; i++) {
+                charFilter[i] = (char) filter.charAt(i);
+            }
 
-            FileInputStream fileInputSize = new FileInputStream(inFileName);
+            fileInputSize = new FileInputStream(inFileName);
             byte[] thisIsFileInputSize = fileInputSize.readAllBytes();
             char[] charInputFile = new char[thisIsFileInputSize.length];
-
-            for (int i = 0; i < thisIsFilterSize.length; i++) {
-                charFilter[i] = (char) filters.read();
-            }
             for (int i = 0; i < thisIsFileInputSize.length; i++) {
-                charInputFile[i] = (char) fileIn.read();
+                    charInputFile[i] = (char) fileIn.read();
+                    if (charInputFile[i] == 65535) {
+                        charInputFile[i] = 0;
+                    }
             }
 
             for (int i = 0; i < charFilter.length; i++) {
@@ -47,16 +47,17 @@ public class CharFilter {
             if (fileOut != null) {
                 fileOut.close();
             }
-            if (filters != null) {
-                filters.close();
+            if (fileInputSize != null) {
+                fileInputSize.close();
             }
         }
     }
 
-/*    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
         String filename = "src\\ru\\progwards\\java1\\lessons\\io1\\file2.txt";
         String outFile = "src\\ru\\progwards\\java1\\lessons\\io1\\outFile.txt";
-        String filter = "src\\ru\\progwards\\java1\\lessons\\io1\\filter.txt";
+        //String filter = "src\\ru\\progwards\\java1\\lessons\\io1\\filter.txt";
+        String filter = "- —,.()";
         filterFile(filename, outFile, filter);
-    }*/
+    }
 }

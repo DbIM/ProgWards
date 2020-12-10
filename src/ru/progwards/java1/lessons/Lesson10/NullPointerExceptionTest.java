@@ -7,13 +7,13 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class NullPointerExceptionTest {
-/*    public Integer sqr(Integer n) {
+    public Integer sqr(Integer n) {
         try {
             return n * n;
         } catch (NullPointerException e) {
             return -1;
         }
-    }*/
+    }
 
     public String test(String filename) throws IOException {
         if (filename == null) {
@@ -93,3 +93,7 @@ public class NullPointerExceptionTest {
 // Символьное чтение из файла → FileReader,
 // Бинарная запись в файл  → FileOutputStream,
 // Бинарное чтение из файла  → FileInputStream
+
+//Правильные ответы:
+// Тип String неизменяемый (immutable) объект,
+// Тип StringBuilder работает быстрее чем String при массовой конкатенации строк
