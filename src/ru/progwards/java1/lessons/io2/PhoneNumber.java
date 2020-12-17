@@ -21,7 +21,7 @@ public class PhoneNumber {
             }
         //- проверить что цифр в номере 11 или 10, в противном случае выбросить исключение
         if (stringBuilder.length() < 10 || stringBuilder.length() > 11) {
-            throw new IOException("недостаточно цифр в номере");
+            throw new IOException("неверное количество цифр в номере");
         }
         if (stringBuilder.length() == 10){
             stringBuilder.insert(0, '+');
@@ -45,6 +45,6 @@ public class PhoneNumber {
 
 
     public static void main(String[] args) throws IOException {
-        System.out.println(format("+8911 928-51-26"));
+        System.out.println(format("+81911 928-51-26"));
     }
 }
