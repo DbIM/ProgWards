@@ -45,6 +45,6 @@ public class PhoneNumber {
 
 
     public static void main(String[] args) throws IOException {
-        System.out.println(format("+81911 928-51-26"));
+        System.out.println(format("8911 928-51-26"));
     }
 }
