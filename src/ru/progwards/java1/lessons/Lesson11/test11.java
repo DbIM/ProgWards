@@ -60,6 +60,16 @@ public class test11 {
         //System.out.println(invertWords("Буря мглою небо кроет"));
         String filename = "src\\ru\\progwards\\java1\\lessons\\Lesson11\\test111.txt";
         System.out.println(setStars(filename));
+
+        String [] boolArray = new String[]{null, String.valueOf('a'), null, null};
+        for (int i=0; i<boolArray.length; i++){
+            if(boolArray[i]!=null){
+                System.out.println(boolArray[i]);
+            }
+            else {
+                System.out.println("null");
+            }
+        }
     }
 
 }
