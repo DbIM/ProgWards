@@ -52,6 +52,7 @@ public class Censor {
         for (String s : inputFile) {
             stringBuilder2.append(s).append(' ');
         }
+        stringBuilder2.setLength(stringBuilder2.length() - 1);
         reader.close();
 
         FileWriter outFile = new FileWriter(inoutFileName);
@@ -61,7 +62,7 @@ public class Censor {
 
     public static void main(String[] args) throws IOException {
         String filename = "src\\ru\\progwards\\java1\\lessons\\io2\\test.txt";
-        String[] obscene = {"Java", "Oracle", "Sun", "Microsystems"};
+        String[] obscene = {"day", "count", "two", "storey", "write"};
         censorFile(filename, obscene);
     }
 }
