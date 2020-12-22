@@ -47,7 +47,7 @@ public class Telebot extends ProgwardsTelegramBot {
 
         Telebot bot = new Telebot();
         bot.username = "telealprobot";
-
+        bot.token = "";
 
         bot.addTags("привет", "привет, здрасьте, здравствуй, добр, день, вечер, утро, hi, hello");
 
