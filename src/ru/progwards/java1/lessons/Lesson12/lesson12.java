@@ -3,6 +3,7 @@ package ru.progwards.java1.lessons.Lesson12;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.ListIterator;
 
 public class lesson12 {
     public static List<Integer> listAction(List<Integer> list) {
@@ -30,6 +31,16 @@ public class lesson12 {
         }
         //возвращает результирующий список
         return result;
+    }
+
+    public void iterator3(ListIterator<Integer> iterator){
+        //который заменяет значение каждого элемента, которое кратно 3 на значение его индекса.
+        while (iterator.hasNext()){
+            Integer test = iterator.next();
+            if(test % 3 == 0){
+                iterator.set(iterator.nextIndex() - 1);
+            }
+        }
     }
 
     public static void main(String[] args) {
@@ -68,3 +79,24 @@ public class lesson12 {
 //Правильный ответ:
 // ArrayList организован на основе → массива,
 // LinkedList организован на основе  → двунаправленного списка
+
+//Правильные ответы:
+// ListIterator позволяет добавлять, удалять и менять элементы списка,
+// ListIterator позволяет двигаться по списку в обе стороны,
+// ListIterator отличается от Iterator расширенным набором функций
+
+//Правильный ответ:
+//        for (ListIterator<integer> listIterator = linkedList.listIterator(); listIterator.hasNext(); ) {
+//            Integer n = listIterator.next();
+//            if ( n%2 != 0)
+//                listIterator.remove();
+//            else
+//                listIterator.add(n*2);
+////---------------------------------------
+//→ 0 0 2 4 4 8,
+//        for (ListIterator<integer> listIterator = linkedList.listIterator(); listIterator.hasNext(); ) {
+//            Integer n = listIterator.next();
+//            if ( n%2 != 0)
+//                listIterator.set(n*2);
+////---------------------------------------
+//→ 0 2 2 6 4
