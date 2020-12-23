@@ -46,13 +46,13 @@ public class Telebot extends ProgwardsTelegramBot {
         //alpro
 
         Telebot bot = new Telebot();
-        bot.username = "telealprobot";
+        bot.username = "";
         bot.token = "";
 
         bot.addTags("привет", "привет, здрасьте, здравствуй, добр, день, вечер, утро, hi, hello");
 
         String photo1= "https://static.tildacdn.com/tild3531-3437-4062-a266-613234626332/photo.jpg";
-        URL url = null;
+/*        URL url = null;
         try {
             url = new URL(photo1);
         } catch (MalformedURLException e) {
@@ -63,11 +63,11 @@ public class Telebot extends ProgwardsTelegramBot {
             image = ImageIO.read(url);
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
 
 
-        String [] boolArray = new String[10];
+/*        String [] boolArray = new String[10];
         boolArray = new String[Integer.parseInt("a")];
         for (int i=0; i<boolArray.length; i++){
             if(boolArray[i]!=null){
@@ -84,9 +84,9 @@ public class Telebot extends ProgwardsTelegramBot {
             message = new SendPhoto().setPhoto("SomeText", new FileInputStream(photo1));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }
+        }*/
 
-        bot.addTags(String.valueOf(image), "pizza");
+        bot.addTags(photo1, "pizza");
         
         bot.addTags("Пицца гавайская", "гавайск, пицц, ананас, куриц");
         bot.addTags("Пицца маргарита", "маргарит, пицц, моцарелла, сыр, кетчуп, помидор");
