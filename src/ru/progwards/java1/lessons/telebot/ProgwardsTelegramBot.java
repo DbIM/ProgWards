@@ -136,7 +136,7 @@ public class ProgwardsTelegramBot extends TelegramLongPollingBot {
                     }
                 }
 
-               if(name.contains("https")){
+               if(name.contains("https") || name.contains("http")){
                    SendMessage outMessage = new SendMessage();
                    outMessage.setChatId(inMessage.getChatId());
                    SendPhoto photo = new SendPhoto();
