@@ -22,6 +22,8 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
 
 public class ProgwardsTelegramBot extends TelegramLongPollingBot {
+    String desc = "";
+
     String clientName = "";
     public String returnClientName(){
         return clientName;
@@ -144,7 +146,7 @@ public class ProgwardsTelegramBot extends TelegramLongPollingBot {
                 clientName = inMessage.getChat().getFirstName();
                 String text = inMessage.getText();
                 String name = "";
-                String desc = "";
+
                 BigDecimal price = BigDecimal.valueOf(0);
 
                 for(int i=0; i< associations.size(); i++){
@@ -165,19 +167,24 @@ public class ProgwardsTelegramBot extends TelegramLongPollingBot {
                    photo.setChatId(inMessage.getChatId());
                    photo.setPhoto(name);
                        this.execute(photo);
-                       outMessage.setText(desc);
+                       outMessage.setText(processMessage(answerBot()));
                        this.execute(outMessage);
                 }
                 else {
                         SendMessage outMessage = new SendMessage();
                         outMessage.setChatId(inMessage.getChatId());
-                        outMessage.setText(this.processMessage(text));
+                        //outMessage.setText(this.processMessage(text));
+                        outMessage.setText(processMessage(answerBot()));
                         this.execute(outMessage);
                 }
             }
         } catch (TelegramApiException var5) {
             var5.printStackTrace();
         }
+    }
+
+    public String answerBot() {
+        return desc;
     }
 
     public String processMessage(String text) {
