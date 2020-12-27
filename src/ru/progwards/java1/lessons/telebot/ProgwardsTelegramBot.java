@@ -6,6 +6,8 @@
 package ru.progwards.java1.lessons.telebot;
 
 import com.google.common.collect.TreeMultimap;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -20,6 +22,20 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
 
 public class ProgwardsTelegramBot extends TelegramLongPollingBot {
+    String clientName = "";
+    public String returnClientName(){
+        return clientName;
+    }
+
+    List<BigDecimal> result = new ArrayList<BigDecimal>();
+    public BigDecimal myOrder(){
+        BigDecimal summ = BigDecimal.valueOf(0);
+        for (int i = 0; i<result.size(); i++){
+            summ = summ.add(result.get(i));
+        }
+        return summ;
+    }
+
     public String username;
     public String token;
     private List<ProgwardsTelegramBot.Association> associations = new ArrayList();
@@ -33,8 +49,8 @@ public class ProgwardsTelegramBot extends TelegramLongPollingBot {
         return this.found;
     }
 
-    public void addTags(String name, String tags, String description) {
-        this.associations.add(new ProgwardsTelegramBot.Association(name, tags, description));
+    public void addTags(String picture, String tags, String description, BigDecimal price) {
+        this.associations.add(new ProgwardsTelegramBot.Association(picture, tags, description, price));
     }
 
     public void checkTags(String text) {
@@ -80,7 +96,7 @@ public class ProgwardsTelegramBot extends TelegramLongPollingBot {
 
     private int findAssociation(ProgwardsTelegramBot.Association ass, String text) {
         int weight = 0;
-        if (text.toLowerCase().contains(ass.name.toLowerCase())) {
+        if (text.toLowerCase().contains(ass.picture.toLowerCase())) {
             weight += 10;
         }
 
@@ -106,7 +122,7 @@ public class ProgwardsTelegramBot extends TelegramLongPollingBot {
             ProgwardsTelegramBot.Association ass = (ProgwardsTelegramBot.Association)var4.next();
             int weight = this.findAssociation(ass, text);
             if (weight > 0) {
-                result.put(weight, ass.name);
+                result.put(weight, ass.picture);
             }
         }
 
@@ -125,16 +141,22 @@ public class ProgwardsTelegramBot extends TelegramLongPollingBot {
         try {
             if (update.hasMessage() && update.getMessage().hasText()) {
                 Message inMessage = update.getMessage();
+                clientName = inMessage.getChat().getFirstName();
                 String text = inMessage.getText();
                 String name = "";
                 String desc = "";
+                BigDecimal price = BigDecimal.valueOf(0);
+
                 for(int i=0; i< associations.size(); i++){
                     String img = String.valueOf(associations.get(i).tags);
                     if (text.equals(img)){
-                        name = associations.get(i).name;
+                        name = associations.get(i).picture;
                         desc = associations.get(i).description;
+                        price = associations.get(i).price;
+                        break;
                     }
                 }
+                this.result.add(price);
 
                if(name.contains("https") || name.contains("http")){
                    SendMessage outMessage = new SendMessage();
@@ -142,15 +164,15 @@ public class ProgwardsTelegramBot extends TelegramLongPollingBot {
                    SendPhoto photo = new SendPhoto();
                    photo.setChatId(inMessage.getChatId());
                    photo.setPhoto(name);
-                   outMessage.setText(desc);
-                   this.execute(photo);
-                   this.execute(outMessage);
+                       this.execute(photo);
+                       outMessage.setText(desc);
+                       this.execute(outMessage);
                 }
                 else {
-                    SendMessage outMessage = new SendMessage();
-                    outMessage.setChatId(inMessage.getChatId());
-                    outMessage.setText(this.processMessage(text));
-                    this.execute(outMessage);
+                        SendMessage outMessage = new SendMessage();
+                        outMessage.setChatId(inMessage.getChatId());
+                        outMessage.setText(this.processMessage(text));
+                        this.execute(outMessage);
                 }
             }
         } catch (TelegramApiException var5) {
@@ -174,14 +196,16 @@ public class ProgwardsTelegramBot extends TelegramLongPollingBot {
     }
 
     static class Association {
-        public String name;
+        public String picture;
         public String tags;
         public String description;
+        public BigDecimal price;
 
-        public Association(String name, String tags, String description) {
-            this.name = name;
+        public Association(String picture, String tags, String description, BigDecimal price) {
+            this.picture = picture;
             this.tags = tags;
             this.description = description;
+            this.price = price;
         }
     }
 }
