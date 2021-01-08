@@ -9,7 +9,7 @@ public class Creator {
     // возрастающих чисел начиная с 2,
     // количество элементов в коллекции n
     public static Collection<Integer> fillEven(int n){
-        Collection<Integer> result = new ArrayList<>();
+        Collection<Integer> result = new ArrayList();
         int x = 2;
         for (int i = n; i > 0; i--, x += 2) result.add(x);
         return result;
@@ -17,7 +17,7 @@ public class Creator {
 //создать коллекцию и заполнить последовательностью нечетных убывающих чисел,
 // минимальное число в коллекции 1, количество элементов в коллекции n
     public static Collection<Integer> fillOdd(int n){
-        Collection<Integer> result = new ArrayList<>();
+        Collection<Integer> result = new ArrayList();
         int x =  n * 2 - 1;
         for (int i = n; i > 0; i--, x -= 2) result.add(x);
         return result;
@@ -27,9 +27,9 @@ public class Creator {
 // второе - тот же индекс в квадрате,
 // третье - тот же индекс в кубе, количество элементов в коллекции n*3
     public static Collection<Integer> fill3(int n){
-        Collection<Integer> result = new ArrayList<>();
+        Collection<Integer> result = new ArrayList();
         int x2;
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n * 3; i++) {
             result.add(i);
             x2 = i * i;
             result.add(x2);

@@ -8,28 +8,29 @@ public class Finder {
     // вернуть коллекцию, содержащую индексы этих чисел
     public static Collection<Integer> findMinSumPair(Collection<Integer> numbers){
         if (numbers == null) return null;
-
-        int prev = 0;
-        int index = 0;
+        int index1 = 0;
+        int index2 = 0;
         int sum;
-        int minIndex = 0;
-        int minSum = Integer.MAX_VALUE;
+        int sum2 = 0;
 
-        for (int num : numbers) {
-            if (index > 0) {
-                sum = num + prev;
-                if (sum < minSum) {
-                    minSum = sum;
-                    minIndex = index;
+        for(Integer i : numbers) {
+            for (Integer i2 : numbers) {
+                sum = i + i2;
+                if (sum2 > sum){
+                   sum = i + i2;
+                   index1 = i;
+                   index2 = i2;
+                }
+                else {
+                    sum2 = i + i2;
+                    index1 = i;
+                    index2 = i2;
                 }
             }
-            prev = num;
-            index++;
         }
-
         Collection<Integer> result = new ArrayList<>();
-        if (minIndex >= 1) result.add(minIndex - 1);
-        if (minIndex >= 0) result.add(minIndex);
+        result.add(0, index1);
+        result.add(1, index2);
         return result;
     }
 }

@@ -166,9 +166,10 @@ public class ProgwardsTelegramBot extends TelegramLongPollingBot {
                    SendPhoto photo = new SendPhoto();
                    photo.setChatId(inMessage.getChatId());
                    photo.setPhoto(name);
-                       this.execute(photo);
-                       outMessage.setText(processMessage(answerBot()));
-                       this.execute(outMessage);
+                   this.execute(photo);
+                   outMessage.setText(processMessage(answerBot()));
+                   this.execute(outMessage);
+
                 }
                 else {
                         SendMessage outMessage = new SendMessage();
