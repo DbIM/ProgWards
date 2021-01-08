@@ -47,8 +47,8 @@ public class Telebot extends ProgwardsTelegramBot {
         //alpro
 
         Telebot bot = new Telebot();
-        bot.username = "telealprobot";
-        bot.token = "823655880:AAFARjiubmOB-yWIdLAIZTeDIwtI22hxlnE";
+        bot.username = "";
+        bot.token = "";
 
         bot.addTags("привет", "привет, здрасьте, здравствуй, добр, день, вечер, утро, hi, hello", "Текстовое описание позиции", BigDecimal.valueOf(0));
 
