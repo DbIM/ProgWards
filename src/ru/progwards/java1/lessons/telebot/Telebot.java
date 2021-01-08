@@ -11,12 +11,12 @@ import java.awt.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.net.MalformedURLException;
 
-
 public class Telebot extends ProgwardsTelegramBot {
-    private final String menu = "\n У нас есть пицца";
+    private final String menu = "\n Есть: маргарита \n Есть:  пеперони";
 
     @Override
     public String processMessage(String text) {
@@ -24,18 +24,19 @@ public class Telebot extends ProgwardsTelegramBot {
 
         if (foundCount() == 1) {
             if (checkLastFound("привет"))
-                return "Приветствую тебя, о мой повелитель!\n Что желаешь? " + menu;
+                return "Здарова " + returnClientName() + "\n Решил пожрать? " + menu;
             if (checkLastFound("конец"))
-                return "Спасибо за заказ.";
+                return returnClientName() + "Рахмет за заказ.";
             if (checkLastFound("дурак"))
-                return "Не надоругаться. Я не волшебник, я только учусь";
+                return returnClientName() + " ты на себя-то посмотри, умник. С машиной общаешься. Ща пришлю к тебе терминатора с дилдой вместо дробовика, тогда увидим, кто из нас это самое.";
+            if (checkLastFound("заказ"))
+                return "Итого: " + myOrder();
 
-            return "Отлично, добавляю в заказ " + getLastFound() + "\n Желаешь что-то еще?" + menu;
+            return "Отлично. Кидаю в заказ: \n " + answerBot() + "\n Итого набежало: " + myOrder() +"\n Еще чего-то?" + menu;
         }
-        String photo1= "https://static.tildacdn.com/tild3531-3437-4062-a266-613234626332/photo.jpg";
         if (foundCount() > 1)
-            return  "\n" + extract() + "\n Выбери что-то одно, и я добавлю это в заказ.";
-        return "Я не понял, возможно у нас этого нет, попробуй сказать по другому. " + menu;
+            return  "\n" + extract() + "\n Выбери что-то уже, и я добавлю это в заказ.";
+        return "Не понял. Тебе что, выбрать по человечески сложно? " + menu;
 
 
     }
@@ -46,20 +47,22 @@ public class Telebot extends ProgwardsTelegramBot {
         //alpro
 
         Telebot bot = new Telebot();
+        bot.username = "telealprobot";
+        bot.token = "823655880:AAFARjiubmOB-yWIdLAIZTeDIwtI22hxlnE";
 
+        bot.addTags("привет", "привет, здрасьте, здравствуй, добр, день, вечер, утро, hi, hello", "Текстовое описание позиции", BigDecimal.valueOf(0));
 
-        bot.addTags("привет", "привет, здрасьте, здравствуй, добр, день, вечер, утро, hi, hello", "Текстовое описание позиции");
+        String pizzaMargarita= "https://attuale.ru/wp-content/uploads/2018/11/margarita.jpg";
+        bot.addTags(pizzaMargarita, "маргарита", "Пицца Маргарита, на тонком тесте. Цена:900 EUR", BigDecimal.valueOf(900));
 
-        String photo1= "https://static.tildacdn.com/tild3531-3437-4062-a266-613234626332/photo.jpg";
-        bot.addTags(photo1, "pizza", "Текстовое описание позиции");
-        
-        bot.addTags("Пицца гавайская", "гавайск, пицц, ананас, куриц", "Текстовое описание позиции");
-        bot.addTags("Пицца маргарита", "маргарит, пицц, моцарелла, сыр, кетчуп, помидор", "Текстовое описание позиции");
-        bot.addTags("Пицца пеперони", "пеперони, пицц, салями, колбас, сыр, кетчуп, помидор", "Текстовое описание позиции");
+        String pizzaPeperoni= "https://matreshka-rnd.ru/img/catalog/81.jpg";
+        bot.addTags(pizzaPeperoni, "пеперони", "Пицца Пеперони. Просто бомбическая. С колбасками. Сожрешь пока несешь до дома. Цена: всего 800 EUR", BigDecimal.valueOf(800));
 
-        bot.addTags("конец", "конец, все, стоп, нет", "Текстовое описание позиции");
+        bot.addTags("конец", "конец, все, стоп, нет", "Текстовое описание позиции", BigDecimal.valueOf(0));
 
-        bot.addTags("дурак", "дурак, придурок, идиот, тупой", "Текстовое описание позиции");
+        bot.addTags("дурак", "дурак, придурок, идиот, тупой", "Текстовое описание позиции", BigDecimal.valueOf(0));
+
+        bot.addTags("заказ", "заказ", "Текстовое описание позиции", BigDecimal.valueOf(0));
 
         bot.start();
     }
