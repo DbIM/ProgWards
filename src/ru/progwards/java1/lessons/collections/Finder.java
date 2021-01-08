@@ -33,7 +33,7 @@ public class Finder {
     }
 
     public static void main(String[] args) {
-        System.out.println(findMinSumPair());
+     //   System.out.println(findMinSumPair());
     }
 
 
