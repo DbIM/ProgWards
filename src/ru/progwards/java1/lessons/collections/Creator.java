@@ -31,7 +31,7 @@ public class Creator {
     public static Collection<Integer> fill3(int n) {
         Collection<Integer> result = new ArrayList();
         for (int i = 0; i <  n; i++) {
-            int x = n * i;
+            int x = i * 3;
             result.add(x);
             result.add(x * x);
             result.add(x * x * x);
@@ -40,7 +40,7 @@ public class Creator {
     }
 
     public static void main(String[] args) {
-        Collection<Integer> t = fill3(3);
+        Collection<Integer> t = fill3(4);
     }
 
 }
