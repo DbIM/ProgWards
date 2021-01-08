@@ -31,11 +31,16 @@ public class Creator {
     public static Collection<Integer> fill3(int n) {
         Collection<Integer> result = new ArrayList();
         for (int i = 0; i <  n; i++) {
-            result.add(n);
-            result.add(n * n);
-            result.add(n * n * n);
+            int x = n * i;
+            result.add(x);
+            result.add(x * x);
+            result.add(x * x * x);
         }
         return result;
+    }
+
+    public static void main(String[] args) {
+        Collection<Integer> t = fill3(3);
     }
 
 }
