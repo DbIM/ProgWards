@@ -30,12 +30,18 @@ public class Creator {
 // третье - тот же индекс в кубе, количество элементов в коллекции n*3
     public static Collection<Integer> fill3(int n) {
         Collection<Integer> result = new ArrayList<>();
-        int i2;
         for (int i = 0; i < n; i++) {
-            result.add(i);
-            i2 = i * i;
-            result.add(i2);
-            result.add(i2 * i);
+            switch (i % 3) {
+                case 0:
+                    result.add(i);
+                    break;
+                case 1:
+                    result.add(i * i);
+                    break;
+                case 2:
+                    result.add(i * i * i);
+                    break;
+            }
         }
         return result;
     }
