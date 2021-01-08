@@ -2,6 +2,7 @@ package ru.progwards.java1.lessons.collections;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 public class Finder {
     //найти 2 соседних числа в коллекции сумма которых минимальна,
@@ -32,7 +33,7 @@ public class Finder {
     }
 
     public static void main(String[] args) {
-
+        System.out.println(findMinSumPair());
     }
 
 

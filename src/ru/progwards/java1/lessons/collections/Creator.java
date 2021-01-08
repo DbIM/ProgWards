@@ -25,16 +25,16 @@ public class Creator {
     }
 
     //создать коллекцию и заполнить ее тройками чисел.
-// Каждая тройка создается по алгоритму: первое число тройки - индекс числа в коллекции,
-// второе - тот же индекс в квадрате,
-// третье - тот же индекс в кубе, количество элементов в коллекции n*3
+    // Каждая тройка создается по алгоритму:
+    // первое число тройки - индекс числа в коллекции,
+    // второе - тот же индекс в квадрате,
+    // третье - тот же индекс в кубе,
+    // количество элементов в коллекции n*3
     public static Collection<Integer> fill3(int n) {
-        Collection<Integer> result = new ArrayList<>();
-        for (int i = 0; i < n * 3; i++) {
-            result.add(i);
-            result.add(i * i);
-            result.add(i * i * i);
-        }
+        Collection<Integer> result = new ArrayList();
+        result.add(n);
+        result.add(n * n);
+        result.add(n * n * n);
         return result;
     }
 
