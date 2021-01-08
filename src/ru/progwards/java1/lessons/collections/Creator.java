@@ -30,7 +30,7 @@ public class Creator {
     // количество элементов в коллекции n*3
     public static Collection<Integer> fill3(int n) {
         Collection<Integer> result = new ArrayList();
-        for (int i = 0; i <  3; i++) {
+        for (int i = 0; i <  n; i++) {
             result.add(n);
             result.add(n * n);
             result.add(n * n * n);
