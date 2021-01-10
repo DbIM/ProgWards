@@ -9,16 +9,18 @@ public class Finder {
     // вернуть коллекцию, содержащую индексы этих чисел
     public static Collection<Integer> findMinSumPair(Collection<Integer> numbers) {
         if (numbers == null) return null;
-        int index1 = 0;
-        int index2 = 0;
 
         ArrayList<Integer> middle = new ArrayList(numbers);
-        int sum2 = middle.size() + (middle.size() - 1);
+        int index1 = middle.indexOf(middle.get(0));
+        int index2 = middle.indexOf(middle.get(1));
+        int num1 = middle.get(0);
+        int num2 = middle.get(1);
+        int sum2 = num1 + num2;
         for (int i = 0 ; i < middle.size() - 1; i++) {
             int sum = middle.get(i) + middle.get(i + 1);
             if (sum < sum2) {
-                index1 = middle.get(i);
-                index2 = middle.get(i + 1);
+                index1 = middle.indexOf(middle.get(i));
+                index2 = middle.indexOf(middle.get(i + 1));
                 sum2 = sum;
             }
         }
@@ -30,7 +32,17 @@ public class Finder {
 
     public static void main(String[] args) {
         Collection<Integer> s = new ArrayList<>();
-        for (int i = 1; i < 1000; i++) s.add(i);
+        s.add(17);
+        s.add(86);
+        s.add(69);
+        s.add(-29);
+        s.add(6);
+        s.add(42);
+        s.add(82);
+        s.add(81);
+        s.add(1);
+        s.add(-99);
+
         System.out.println(findMinSumPair(s));
     }
 
