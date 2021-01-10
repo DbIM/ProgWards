@@ -30,6 +30,26 @@ public class Finder {
         return result;
     }
 
+
+    //найти локальные максимумы - числа, которые больше соседа справа и слева.
+// Первый и последний элемент коллекции не может являться локальным  максимумом,
+// вернуть коллекцию, содержащую значения этих максимумов
+    public static Collection<Integer> findLocalMax(Collection<Integer> numbers) {
+        if (numbers == null) return null;
+        int prev;
+        int next;
+        ArrayList<Integer> middle = new ArrayList(numbers);
+        Collection<Integer> result = new ArrayList();
+        for (int i = 1; i < middle.size() - 1; i++) {
+            prev = middle.get(i - 1);
+            next = middle.get(i + 1);
+            if (middle.get(i) > prev && middle.get(i) > next) {
+                result.add(middle.get(i));
+            }
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
         Collection<Integer> s = new ArrayList<>();
         s.add(17);
@@ -42,28 +62,7 @@ public class Finder {
         s.add(81);
         s.add(1);
         s.add(-99);
-
-        System.out.println(findMinSumPair(s));
-    }
-
-
-    //найти локальные максимумы - числа, которые больше соседа справа и слева.
-// Первый и последний элемент коллекции не может являться локальным  максимумом,
-// вернуть коллекцию, содержащую значения этих максимумов
-    public static Collection<Integer> findLocalMax(Collection<Integer> numbers) {
-        if (numbers == null) return null;
-        int prev;
-        int next;
-        ArrayList<Integer> middle = new ArrayList(numbers);
-        Collection<Integer> result = new ArrayList();
-        for (int i = 1; i < middle.size(); i++) {
-            prev = middle.get(i - 1);
-            next = middle.get(i + 1);
-            if (middle.get(i) > prev && middle.get(i) > next) {
-                result.add(middle.get(i));
-            }
-        }
-        return result;
+        System.out.println(findLocalMax(s));
     }
 
     //проверить, содержит ли коллекция все числа от 1 до size(), порядок может быть произвольный
