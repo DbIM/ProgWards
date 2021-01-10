@@ -11,19 +11,15 @@ public class Finder {
         if (numbers == null) return null;
         int index1 = 0;
         int index2 = 0;
-        int sum;
-        int sum2 = 0;
 
         ArrayList<Integer> middle = new ArrayList(numbers);
-        for (int i = 0; i < middle.size(); i++) {
-            sum = middle.get(i) + middle.get(i + 1);
-            if (sum2 > sum) {
+        int sum2 = middle.size() + (middle.size() - 1);
+        for (int i = 0 ; i < middle.size() - 1; i++) {
+            int sum = middle.get(i) + middle.get(i + 1);
+            if (sum < sum2) {
                 index1 = middle.get(i);
                 index2 = middle.get(i + 1);
-            } else {
-                sum2 = middle.get(i) + middle.get(i + 1);
-                index1 = middle.get(i);
-                index2 = middle.get(i + 1);
+                sum2 = sum;
             }
         }
         Collection<Integer> result = new ArrayList();
@@ -33,7 +29,9 @@ public class Finder {
     }
 
     public static void main(String[] args) {
-     //   System.out.println(findMinSumPair());
+        Collection<Integer> s = new ArrayList<>();
+        for (int i = 1; i < 1000; i++) s.add(i);
+        System.out.println(findMinSumPair(s));
     }
 
 
@@ -80,8 +78,8 @@ public class Finder {
         String testName2 = "";
         int x = 0;
         int x2 = 0;
-        for (int i = 0; i< middle.size(); i++){
-            for ( int i2 = 1; i2< middle.size(); i2++){
+        for (int i = 0; i < middle.size(); i++) {
+            for (int i2 = 1; i2 < middle.size(); i2++) {
                 if (testName2.equals(middle.get(i2))) {
                     x2++;
                 }
