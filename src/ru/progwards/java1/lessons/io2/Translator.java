@@ -30,7 +30,7 @@ public class Translator {
     // При этом надо соблюсти заглавные буквы, если они были в оригинальном тексте.
     // В inLang и outLang все слова хранятся в нижнем регистре.
 
-   private Translator(String[] inLang, String[] outLang){
+    Translator(String[] inLang, String[] outLang){
     }
 
     public String translateWord(String word) {
