@@ -50,21 +50,6 @@ public class Finder {
         return result;
     }
 
-    public static void main(String[] args) {
-        Collection<Integer> s = new ArrayList<>();
-        s.add(17);
-        s.add(86);
-        s.add(69);
-        s.add(-29);
-        s.add(6);
-        s.add(42);
-        s.add(82);
-        s.add(81);
-        s.add(1);
-        s.add(-99);
-        System.out.println(findLocalMax(s));
-    }
-
     //проверить, содержит ли коллекция все числа от 1 до size(), порядок может быть произвольный
     public static boolean findSequence(Collection<Integer> numbers) {
         int x = 0;
@@ -84,23 +69,36 @@ public class Finder {
 // вернуть результат для элемента, повторяющаяся последовательность которого началась с наименьшего индекса.
     public static String findSimilar(Collection<String> names) {
         ArrayList<String> middle = new ArrayList(names);
-        middle.sort(null);
-        String testName = "";
+        String testName = middle.get(0);
         String testName2 = "";
         int x = 0;
         int x2 = 0;
-        for (int i = 0; i < middle.size(); i++) {
-            for (int i2 = 1; i2 < middle.size(); i2++) {
-                if (testName2.equals(middle.get(i2))) {
-                    x2++;
-                }
-                if (middle.get(i2).equals(middle.get(i))) {
-                    testName = middle.get(i);
-                    x++;
-                }
-                testName2 = middle.get(i2);
+        for (int i = 1; i < middle.size(); i++) {
+            if (testName.equals(middle.get(i))) {
+                x++;
+                testName2 = testName;
+            }
+            else {
+                testName = middle.get(i);
             }
         }
         return testName + ": " + x;
+    }
+
+    public static void main(String[] args) {
+        Collection<String> s = new ArrayList<>();
+        s.add("Борис");
+        s.add("Борис");
+        s.add("Василий");
+        s.add("Александр");
+        s.add("Александр");
+        s.add("Василий");
+        s.add("Василий");
+        s.add("Борис");
+        s.add("Дмитрий");
+        s.add("Борис");
+        s.add("Борис");
+        s.add("Григорий");
+        System.out.println(findSimilar(s));
     }
 }

@@ -33,17 +33,35 @@ public class Translator {
    private Translator(String[] inLang, String[] outLang){
     }
 
-    public String translate(String sentence) throws FileNotFoundException {
-        FileReader reader = new FileReader(sentence);
-        Scanner scanner = new Scanner(reader);
-        String str = "";
-        while (scanner.hasNextLine()) {
-            str = scanner.nextLine();
+    public String translateWord(String word) {
+        String result = word.toLowerCase();
+        if (result == null) return word;
+        if (Character.isUpperCase(word.charAt(0))) {
+            return Character.toUpperCase(result.charAt(0)) + (result.length() > 1 ? result.substring(1) : "");
         }
-        String[] sentenceFile = str.split(" ");
-        for (int i = 0; i<sentenceFile.length; i++){
+        return result;
+    }
 
+    public String translate(String sentence) {
+        StringBuilder result = new StringBuilder(128);
+        int wordBeginIndex = -1;
+        int len = sentence.length();
+
+        for(int i = 0; i < len; i++) {
+            char c = sentence.charAt(i);
+            if (Character.isLetter(c)) {
+                if (wordBeginIndex < 0) wordBeginIndex = i;
+            } else {
+                if (wordBeginIndex >= 0) {
+                    result.append(translateWord(sentence.substring(wordBeginIndex, i)));
+                    wordBeginIndex = -1;
+                }
+                result.append(c);
+            }
         }
-        return null;
+        if (wordBeginIndex >= 0) {
+            result.append(translateWord(sentence.substring(wordBeginIndex)));
+        }
+        return result.toString();
     }
 }
