@@ -9,23 +9,27 @@ public class LettersInFile {
         FileReader fileIn = new FileReader(fileName);
         Scanner scanner = new Scanner(fileIn);
         String inFileString = "";
+        TreeSet<Character> treeSet = new TreeSet<>();
+
         while (scanner.hasNextLine()) {
-            inFileString = inFileString + scanner.nextLine();
-        }
-        TreeSet<Character> result = new TreeSet<>();
-        char[] wordSet = new char[inFileString.length()];
-        for (int i = 0; i < inFileString.length(); i++) {
-            if (Character.isLetter(inFileString.charAt(i))) {
-                result.add(inFileString.charAt(i));
+            String str = scanner.nextLine();
+            str.toCharArray();
+            char[] charArray = str.toCharArray();
+            for (char aChar : charArray) {
+                if (Character.isLetter(aChar)) treeSet.add(aChar);
             }
         }
-        int x = 0;
-        for (char c : result) {
-            wordSet[x] = c;
-            x++;
+        scanner.close();
+        fileIn.close();
+
+        List<Character> list = new ArrayList<>(treeSet);
+        Collections.sort(list);
+        StringBuilder sb = new StringBuilder();
+        for (Character aChar : list) {
+            sb.append(aChar);
         }
-        Arrays.sort(wordSet);
-        return String.valueOf(wordSet);
+        return sb.toString();
+
     }
 
     public static void main(String[] args) throws IOException {
