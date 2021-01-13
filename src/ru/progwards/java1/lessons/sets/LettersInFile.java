@@ -8,7 +8,6 @@ public class LettersInFile {
     public static String process(String fileName) throws IOException {
         FileReader fileIn = new FileReader(fileName);
         Scanner scanner = new Scanner(fileIn);
-        String inFileString = "";
         TreeSet<Character> treeSet = new TreeSet<>();
 
         while (scanner.hasNextLine()) {
@@ -29,7 +28,6 @@ public class LettersInFile {
             sb.append(aChar);
         }
         return sb.toString();
-
     }
 
     public static void main(String[] args) throws IOException {

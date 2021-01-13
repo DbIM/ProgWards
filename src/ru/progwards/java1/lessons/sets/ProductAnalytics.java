@@ -1,43 +1,61 @@
 package ru.progwards.java1.lessons.sets;
 
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-public class ProductAnalytics {
+/*
+2.1 Создать класс Product - товар,
+2.2 Создать private String code - уникальный артикул товара
+2.3 Создать конструктор public Product(String code)
+2.4 Метод public String getCode()
+*/
+class Product {
+    private String code; //уникальный артикул товара
 
-    private List<Shop> shops;
-    private List<ProductAnalytics.Product> products;
+    public Product(String code) {
+        this.code = code;
+    }
 
-    public ProductAnalytics(List<Product> products, List<Shop> shops) {
-        this.shops = shops;
+    public String getCode() {
+        return code;
+    }
+}
+
+/*
+2.5 Создать класс Shop - магазин
+2.6 Создать private List<Product> products - товары имеющиеся в магазине
+2.7 Создать конструктор public Shop(List<Product> products)
+2.8 Создать метод public List<Product> getProducts()
+*/
+class Shop {
+    private List<Product> products;
+
+    public Shop(List<Product> products) {
         this.products = products;
     }
 
-    public Set<Product> existInAll() {
-        return null;
+    public List<Product> getProducts() {
+        return products;
+    }
+}
+
+
+public class ProductAnalytics {
+/*
+2.10 Создать private List<Shop> shops - список магазинов
+2.11 Создать private List<Product> allProducts - список всех товаров
+2.12 Создать конструктор  public ProductAnalytics(List<Product> products, List<Shop> shops)
+2.13 Создать функцию public Set<Product> existInAll() - товары из products, которые имеются во всех магазинах
+2.14 Создать функцию public Set<Product> existAtListInOne() - товары из products, которые имеются хотя бы в одном магазине
+2.15 Создать функцию public Set<Product> notExistInShops() - товары из products, которых нет ни в одном магазине
+2.16 Создать функцию public Set<Product> existOnlyInOne() - товары из products, которые есть только в одном магазине
+*/
+
+    private List<Shop> shops; //список магазинов
+    private List<Product> allProducts; //список всех товаров
+
+    public ProductAnalytics(List<Product> products, List<Shop> shops) {
+        this.shops = shops;
+        this.allProducts = products;
     }
 
-    public Set<Product> existAtListInOne() {
-        return null;
-    }
-
-    public Set<Product> notExistInShops() {
-        return null;
-    }
-
-    public Set<Product> existOnlyInOne() {
-        return null;
-    }
-
-    public class Product {
-        private String code;
-
-        public Product(String code) {
-            this.code = code;
-        }
-
-        public String getCode() {
-            return code;
-        }
-    }
 }
