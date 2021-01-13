@@ -12,18 +12,25 @@ public class LettersInFile {
         while (scanner.hasNextLine()) {
             inFileString = inFileString + scanner.nextLine();
         }
+        TreeSet<Character> result = new TreeSet<>();
         char[] wordSet = new char[inFileString.length()];
         for (int i = 0; i < inFileString.length(); i++) {
             if (Character.isLetter(inFileString.charAt(i))) {
-                wordSet[i] = inFileString.charAt(i);
+                result.add(inFileString.charAt(i));
+                //wordSet[i] = inFileString.charAt(i);
             }
+        }
+        int x = 0;
+        for (char c : result) {
+            wordSet[x] = c;
+            x++;
         }
         Arrays.sort(wordSet);
         return String.valueOf(wordSet);
     }
 
-/*    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
         String filename = "src\\ru\\progwards\\java1\\lessons\\sets\\test.txt";
         System.out.println(process(filename));
-    }*/
+    }
 }
