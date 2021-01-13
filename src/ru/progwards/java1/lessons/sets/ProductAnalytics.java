@@ -5,30 +5,6 @@ import java.util.Set;
 
 public class ProductAnalytics {
 
-    class Product {
-        private String code;
-
-        public Product(String code) {
-            this.code = code;
-        }
-
-        public String getCode() {
-            return code;
-        }
-    }
-
-    class Shop {
-        private List<Product> products;
-
-        public Shop(List<Product> products) {
-            this.products = products;
-        }
-
-        public List<Product> getProducts() {
-            return products;
-        }
-    }
-
     private List<Shop> shops;
     private List<ProductAnalytics.Product> products;
 
@@ -51,5 +27,17 @@ public class ProductAnalytics {
 
     public Set<Product> existOnlyInOne() {
         return null;
+    }
+
+    public class Product {
+        private String code;
+
+        public Product(String code) {
+            this.code = code;
+        }
+
+        public String getCode() {
+            return code;
+        }
     }
 }

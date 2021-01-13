@@ -17,7 +17,6 @@ public class LettersInFile {
         for (int i = 0; i < inFileString.length(); i++) {
             if (Character.isLetter(inFileString.charAt(i))) {
                 result.add(inFileString.charAt(i));
-                //wordSet[i] = inFileString.charAt(i);
             }
         }
         int x = 0;
