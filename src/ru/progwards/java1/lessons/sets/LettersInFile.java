@@ -22,8 +22,8 @@ public class LettersInFile {
         return String.valueOf(wordSet);
     }
 
-    public static void main(String[] args) throws IOException {
+/*    public static void main(String[] args) throws IOException {
         String filename = "src\\ru\\progwards\\java1\\lessons\\sets\\test.txt";
         System.out.println(process(filename));
-    }
+    }*/
 }
