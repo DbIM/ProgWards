@@ -27,9 +27,8 @@ public class CollectionsSort {
                 Integer y = iterator.next();
                 z++;
                 if (x.compareTo(y) > 0) {
-                    //Collections.swap((List) data, ((List<Integer>) data).indexOf(x), ((List<Integer>) data).indexOf(y));
                     Collections.swap((List) data, k2, z);
-                    k2 = z;
+                    x = y;
                 }
             }
             i = k;
@@ -103,6 +102,7 @@ public class CollectionsSort {
     public static void main(String[] args) {
         List<Integer> list = new ArrayList<>();
         Collections.addAll(list, 51,95,4,12,60,51);
+     //   Collections.addAll(list, 21,65,66,83,78,64,18,96,78);
         mySort(list);
         //minSort(list);
         //collSort(list);

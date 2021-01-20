@@ -52,4 +52,37 @@ public class OrderQueue {
     public Order get(){
         return priorityQueue.poll();
     }
+
+
+    public static void main(String[] args) {
+        OrderQueue oq = new OrderQueue();
+        oq.add(new Order(11100.0));
+        oq.add(new Order(26206.0));
+        oq.add(new Order(11274.0));
+        oq.add(new Order(1892.0));
+        oq.add(new Order(25531.0));
+        oq.add(new Order(6996.0));
+        oq.add(new Order(1135.0));
+        oq.add(new Order(12454.0));
+        oq.add(new Order(8186.0));
+        oq.add(new Order(16585.0));
+        oq.add(new Order(15326.0));
+        oq.add(new Order(23366.0));
+        oq.add(new Order(17812.0));
+        oq.add(new Order(20811.0));
+        oq.add(new Order(19808.0));
+        oq.add(new Order(12714.0));
+        oq.add(new Order(10281.0));
+        oq.add(new Order(14527.0));
+        oq.add(new Order(27423.0));
+        oq.add(new Order(12659.0));
+        oq.add(new Order(23425.0));
+        oq.add(new Order(22312.0));
+        oq.add(new Order(5979.0));
+        Order o = oq.get();
+        while (o != null) {
+            System.out.println(o);
+            o = oq.get();
+        }
+    }
 }
