@@ -31,7 +31,7 @@ public class OrderQueue {
         }
 
         @Override
-        public int compareTo(@NotNull Order o) {
+        public int compareTo(Order o) {
             return Integer.compare(priority, o.priority);
         }
     }
