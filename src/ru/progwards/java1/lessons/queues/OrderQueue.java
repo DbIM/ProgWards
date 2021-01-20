@@ -1,6 +1,5 @@
 package ru.progwards.java1.lessons.queues;
 
-import javax.validation.constraints.NotNull;
 import java.util.PriorityQueue;
 
 public class OrderQueue {
