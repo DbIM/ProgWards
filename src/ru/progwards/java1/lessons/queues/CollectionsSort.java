@@ -6,15 +6,33 @@ public class CollectionsSort {
     //1.1 Реализовать метод public static void mySort(Collection<Integer> data) -
     // переделать алгоритм из класса ArraySort из ДЗ про массивы, на коллекции.
     // Не использовать встроенные методы сортировок
+
+
     public static void mySort(Collection<Integer> data) {
+        int k;
         for (int i = 0; i < data.size(); i++) {
+            int z = 0;
+            k = i;
+            int k2 = k;
             Iterator<Integer> iterator = data.iterator();
             Integer x = iterator.next();
-            for (int j = i + 1; j < data.size(); j++) {
-                Integer y = iterator.next();
-                if (x.compareTo(y) > 0)
-                    Collections.swap((List) data, ((List<Integer>) data).indexOf(x), ((List<Integer>) data).indexOf(y));
+            if (i > 0) {
+                while (i > 0) {
+                    x = iterator.next();
+                    z++;
+                    i--;
+                }
             }
+            while (iterator.hasNext()) {
+                Integer y = iterator.next();
+                z++;
+                if (x.compareTo(y) > 0) {
+                    //Collections.swap((List) data, ((List<Integer>) data).indexOf(x), ((List<Integer>) data).indexOf(y));
+                    Collections.swap((List) data, k2, z);
+                    k2 = z;
+                }
+            }
+            i = k;
         }
     }
 
@@ -84,11 +102,11 @@ public class CollectionsSort {
 
     public static void main(String[] args) {
         List<Integer> list = new ArrayList<>();
-        Collections.addAll(list, 5, 4, 3, 2, 1, 6, 8, 9);
-        //mySort(list);
+        Collections.addAll(list, 51,95,4,12,60,51);
+        mySort(list);
         //minSort(list);
         //collSort(list);
-        //System.out.println(list);
-        System.out.println(compareSort());
+        System.out.println(list);
+        //System.out.println(compareSort());
     }
 }
