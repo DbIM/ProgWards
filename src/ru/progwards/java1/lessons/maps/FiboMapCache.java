@@ -77,11 +77,11 @@ public class FiboMapCache {
         BigDecimal t;
         int i;
 
-        if (lastFibo_n < n) { // используем кеш
+        if (lastFibo_n < n) {
             f1 = lastFibo_f1;
             f2 = lastFibo_f2;
             i = lastFibo_n;
-        } else { // считаем сначала
+        } else {
             f1 = BigDecimal.ZERO;
             f2 = BigDecimal.ONE;
             i = 1;
@@ -101,7 +101,7 @@ public class FiboMapCache {
 
 
     public BigDecimal fiboNoCache(int n) {
-        try { Thread.sleep(1);
+        try { Thread.sleep(10);
         } catch (InterruptedException ex) {
         }
         BigDecimal f1 = BigDecimal.ZERO;
