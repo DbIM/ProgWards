@@ -101,7 +101,7 @@ public class FiboMapCache {
 
 
     public BigDecimal fiboNoCache(int n) {
-        try { Thread.sleep(10);
+        try { Thread.sleep(100);
         } catch (InterruptedException ex) {
         }
         BigDecimal f1 = BigDecimal.ZERO;
