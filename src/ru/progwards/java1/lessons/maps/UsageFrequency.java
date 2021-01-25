@@ -11,17 +11,15 @@ public class UsageFrequency {
     static Map<Character, Integer> letters;
     static Map<String, Integer> words;
 
-    public static void processFile(String fileName) throws IOException {
+    public static void processFile(String fileName) {
         letters = new HashMap<Character, Integer>(500);
         words = new HashMap<String, Integer>(5000);
-        FileReader fileIn = new FileReader(fileName);
-        try {
-            Scanner scanner = new Scanner(fileIn);
-            while (scanner.hasNextLine()) {
-                solve(scanner.nextLine());
+        try (FileReader r = new FileReader(fileName); Scanner s = new Scanner(r)) {
+            while (s.hasNext()) {
+                solve(s.nextLine());
             }
-        } finally {
-            fileIn.close();
+        } catch (IOException e) {
+            throw new RuntimeException(fileName + ":\n" + e.getMessage());
         }
     }
 
