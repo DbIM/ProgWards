@@ -106,7 +106,8 @@ public class lesson {
 //Правильный ответ:
 // Возвращает голову словаря до toKey → SortedMap<K,V> headMap(K toKey),
 // Возвращает компаратор или null → Comparator<? super K> comparator(),
-// Возвращает последний ключ → K lastKey(), Возвращает хвост словаря от fromKey → SortedMap<K,V> tailMap(K fromKey),
+// Возвращает последний ключ → K lastKey(),
+// Возвращает хвост словаря от fromKey → SortedMap<K,V> tailMap(K fromKey),
 //Возвращает часть отсортированного словаря от fromKey до toKey → SortedMap<K,V> subMap(K fromKey, K toKey),
 // Возвращает первый ключ → K firstKey()
 
