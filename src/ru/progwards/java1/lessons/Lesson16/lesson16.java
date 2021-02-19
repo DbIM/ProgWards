@@ -84,3 +84,5 @@ public class lesson16 {
 //"'От''езд' - EEEE dd MMMM 'в' ha"
 
 //"yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS'Z'"
+
+//Понедельник в Календаре это 2
