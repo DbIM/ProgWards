@@ -18,30 +18,33 @@ import java.util.List;
 public class FindDuplicates {
     public static List<Path> fileList = new ArrayList<>();
     public static List<String> resultList = new ArrayList<>();
-    static int k = 0;
 
-    static int checkFiles(String path) throws IOException {
-        File[] listFiles = new File[fileList.size()];
-        for (int k = 0; k<fileList.size(); k++) {
-            listFiles[k] = fileList.get(k).toFile();
-        }
-        for(int i1 = 0; i1 < listFiles.length-1; i1++){
-            File file1 = listFiles[i1];
-            for (int i2 = i1 + 1; i2 < listFiles.length; i2++){
-                File file2 = listFiles[i2];
-                if (i2++ >= listFiles.length) break;
-                if (file1.getName().equals(file2.getName())
-                        && file1.length() == file2.length()
-                        && file1.lastModified() == file2.lastModified()) {
-                    String fileName = file1.toString();
-                    resultList.add(fileName);
-                    System.out.println("File " + fileName + " equals!");
-                    System.out.println("file 1 length: " + file1.length() + " file2 length: " + file2.length());
-                    System.out.println("file 1 lastModified: " + file1.lastModified() + " file2 lastModified: " + file2.lastModified());
+    static String checkFiles(String path) throws IOException {
+        try {
+            File[] listFiles = new File[fileList.size()];
+            for (int k = 0; k<fileList.size(); k++) {
+                listFiles[k] = fileList.get(k).toFile();
+            }
+            for(int i1 = 0; i1 < listFiles.length-1; i1++){
+                File file1 = listFiles[i1];
+                for (int i2 = i1 + 1; i2 < listFiles.length; i2++){
+                    File file2 = listFiles[i2];
+                    if (i2++ >= listFiles.length) break;
+                    if (file1.getName().equals(file2.getName())
+                            && file1.length() == file2.length()
+                            && file1.lastModified() == file2.lastModified()) {
+                        String fileName = file1.toString();
+                        resultList.add(fileName);
+                        System.out.println("File " + fileName + " equals!");
+                        System.out.println("file 1 length: " + file1.length() + " file2 length: " + file2.length());
+                        System.out.println("file 1 lastModified: " + file1.lastModified() + " file2 lastModified: " + file2.lastModified());
+                    }
                 }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return k;
+        return "Done!";
     }
 
     public List<List<String>> findDuplicates(String startPath) throws IOException {
@@ -69,7 +72,7 @@ public class FindDuplicates {
 
     public static void main(String[] args) throws IOException {
         FindDuplicates findDuplicates = new FindDuplicates();
-        findDuplicates.findDuplicates("C:\\Users\\rudnpro\\IdeaProjects\\Progwards\\src\\ru\\progwards\\java1\\lessons\\Lesson17");
+        findDuplicates.findDuplicates("C:\\Users\\rudnpro\\IdeaProjects\\Progwards\\src\\ru\\progwards\\java1\\lessons");
     }
 }
 
