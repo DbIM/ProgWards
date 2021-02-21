@@ -1,7 +1,6 @@
 package ru.progwards.java1.lessons.files;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Arrays;
@@ -25,22 +24,37 @@ import static ru.progwards.java1.lessons.files.FindDuplicates.fileList;
 
 public class FilesSelect {
     public void selectFiles(String inFolder, String outFolder, List<String> keys) {
+
+        String pattern = "glob:**/*.txt";
         for (String key : keys) {
-            String pattern = "glob:**/{" + key + "}.txt";
             PathMatcher pathMatcher = FileSystems.getDefault().getPathMatcher(pattern);
             try {
                 Files.walkFileTree(Paths.get(inFolder), new SimpleFileVisitor<Path>() {
                     @Override
                     public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) throws IOException {
                         if (pathMatcher.matches(path)) {
-                            File matchedFile = path.getFileName().toFile();
-                            String newDirFromFileName = matchedFile.toString().replaceAll(".txt", "");
-                            String newDirCreate = outFolder + "\\" + newDirFromFileName;
-                            Files.createDirectories(Paths.get(newDirCreate));
-                            Path srcFile = path.toAbsolutePath();
-                            Path destFile = Paths.get(newDirCreate).resolve(matchedFile.toString());
-                            Files.copy(srcFile,destFile,StandardCopyOption.REPLACE_EXISTING);
-                            System.out.println("File copied");
+                            try {
+                                File file = path.toFile();
+                                FileReader fr = new FileReader(file);
+                                BufferedReader reader = new BufferedReader(fr);
+                                String line = reader.readLine();
+                                while (line != null) {
+                                    if (line.equals(key)) {
+                                        File matchedFile = path.getFileName().toFile();
+                                        String newDirFromFileName = matchedFile.toString().replaceAll(".txt", "");
+                                        //String newDirCreate = outFolder + "\\" + newDirFromFileName;
+                                        String newDirCreate = newDirFromFileName;
+                                        Files.createDirectories(Paths.get(newDirCreate));
+                                        Path srcFile = path.toAbsolutePath();
+                                        Path destFile = Paths.get(newDirCreate).resolve(matchedFile.toString());
+                                        Files.copy(srcFile, destFile, StandardCopyOption.REPLACE_EXISTING);
+                                        System.out.println("File copied");
+                                    }
+                                    line = reader.readLine();
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }
                         return FileVisitResult.CONTINUE;
                     }
