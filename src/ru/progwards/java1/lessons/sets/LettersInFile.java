@@ -31,7 +31,7 @@ public class LettersInFile {
     }
 
     public static void main(String[] args) throws IOException {
-        String filename = "src\\ru\\progwards\\java1\\lessons\\sets\\test.txt";
+        String filename = "src\\ru\\progwards\\java1\\lessons\\sets\\testjustForFun.txt";
         System.out.println(process(filename));
     }
 }

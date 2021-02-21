@@ -50,7 +50,7 @@ public class Censor {
     }
 
     public static void main(String[] args) throws IOException {
-        String filename = "src\\ru\\progwards\\java1\\lessons\\io2\\test.txt";
+        String filename = "src\\ru\\progwards\\java1\\lessons\\io2\\testjustForFun.txt";
         String[] obscene = {"write", "day", "two", "storey", "count"};
         censorFile(filename, obscene);
     }

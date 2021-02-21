@@ -24,31 +24,29 @@ import static ru.progwards.java1.lessons.files.FindDuplicates.fileList;
 
 public class FilesSelect {
     public void selectFiles(String inFolder, String outFolder, List<String> keys) {
-
-        String pattern = "glob:**/*.txt";
-        for (String key : keys) {
+        String pattern = "glob:**/*.txt"; //проверяем только текстовые файлы
+        for (String key : keys ) { //проверяем каждый "ключ"
             PathMatcher pathMatcher = FileSystems.getDefault().getPathMatcher(pattern);
             try {
                 Files.walkFileTree(Paths.get(inFolder), new SimpleFileVisitor<Path>() {
                     @Override
                     public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) throws IOException {
-                        if (pathMatcher.matches(path)) {
+                        if (pathMatcher.matches(path)) { //если файл текстовый то...
                             try {
                                 File file = path.toFile();
                                 FileReader fr = new FileReader(file);
                                 BufferedReader reader = new BufferedReader(fr);
-                                String line = reader.readLine();
+                                String line = reader.readLine(); //читаем его построчно
                                 while (line != null) {
-                                    if (line.equals(key)) {
+                                    if (line.equals(key)) { //если файл содержит "ключевую" строку
                                         File matchedFile = path.getFileName().toFile();
-                                        String newDirFromFileName = matchedFile.toString().replaceAll(".txt", "");
                                         String newDirCreate = outFolder + "\\" + key;
-                                        //String newDirCreate = newDirFromFileName;
                                         Files.createDirectories(Paths.get(newDirCreate));
+                                        System.out.println("Folder created."); //создаем папку для совпадения
                                         Path srcFile = path.toAbsolutePath();
                                         Path destFile = Paths.get(newDirCreate).resolve(matchedFile.toString());
                                         Files.copy(srcFile, destFile, StandardCopyOption.REPLACE_EXISTING);
-                                        System.out.println("File copied");
+                                        System.out.println("File copied."); // копируем в созданную папку подходящий файл
                                     }
                                     line = reader.readLine();
                                 }
@@ -58,7 +56,6 @@ public class FilesSelect {
                         }
                         return FileVisitResult.CONTINUE;
                     }
-
                     @Override
                     public FileVisitResult visitFileFailed(Path file, IOException e) {
                         return FileVisitResult.CONTINUE;
@@ -73,7 +70,7 @@ public class FilesSelect {
     public static void main(String[] args) {
         String inFolder = "C:\\Users\\rudnpro\\IdeaProjects\\Progwards\\src\\ru\\progwards\\java1\\lessons\\Lesson17";
         String outFolder = "C:\\Users\\rudnpro\\IdeaProjects\\Progwards\\src\\ru\\progwards\\java1\\lessons\\Lesson17\\temp";
-        List<String> keys = Arrays.asList("aaa", "bbb");
+        List<String> keys = Arrays.asList("111", "222", "333", "123");
         FilesSelect filesSelect = new FilesSelect();
         filesSelect.selectFiles(inFolder, outFolder, keys);
     }
