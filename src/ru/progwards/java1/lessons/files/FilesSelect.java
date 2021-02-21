@@ -42,8 +42,8 @@ public class FilesSelect {
                                     if (line.equals(key)) {
                                         File matchedFile = path.getFileName().toFile();
                                         String newDirFromFileName = matchedFile.toString().replaceAll(".txt", "");
-                                        //String newDirCreate = outFolder + "\\" + newDirFromFileName;
-                                        String newDirCreate = newDirFromFileName;
+                                        String newDirCreate = outFolder + "\\" + newDirFromFileName;
+                                        //String newDirCreate = newDirFromFileName;
                                         Files.createDirectories(Paths.get(newDirCreate));
                                         Path srcFile = path.toAbsolutePath();
                                         Path destFile = Paths.get(newDirCreate).resolve(matchedFile.toString());
