@@ -46,9 +46,9 @@ public class OrderProcessor {
     // При наличии хотя бы одной ошибке в формате файла, файл полностью игнорируется, т.е.
     // Не поступает в обработку. Метод возвращает количество файлов с ошибками.
     // При этом, если в классе содержалась информация, ее надо удалить
-    public int loadOrders(LocalDate start, LocalDate finish, String shopId){
+/*    public int loadOrders(LocalDate start, LocalDate finish, String shopId){
 
-    }
+    }*/
 
 
 
