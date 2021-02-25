@@ -38,7 +38,7 @@ public class FilesSelect {
                                 BufferedReader reader = new BufferedReader(fr);
                                 String line = reader.readLine(); //читаем его построчно
                                 while (line != null) {
-                                    if (line.equals(key)) { //если файл содержит "ключевую" строку
+                                    if (line.contains(key)) { //если файл содержит "ключевую" строку
                                         File matchedFile = path.getFileName().toFile();
                                         String newDirCreate = outFolder + "\\" + key;
                                         Files.createDirectories(Paths.get(newDirCreate));

@@ -15,6 +15,10 @@ import java.util.List;
 // Сигнатура метода public List<List<String>> findDuplicates(String startPath),
 // результат - список, содержащий списки строк с именами и полными путями совпадающих файлов.
 
+
+//Задача 1, класс FindDuplicates:
+//Ошибка 1: unreported exception java.io.IOException; must be caught or declared to be thrown
+
 public class FindDuplicates {
     public static List<Path> fileList = new ArrayList<>();
     public static List<String> resultList = new ArrayList<>();
