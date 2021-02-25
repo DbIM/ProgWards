@@ -40,7 +40,7 @@ public class FilesSelect {
                                 while (line != null) {
                                     if (line.contains(key)) { //если файл содержит "ключевую" строку
                                         File matchedFile = path.getFileName().toFile();
-                                        String newDirCreate = outFolder + "\\" + key;
+                                        String newDirCreate = outFolder + "/" + key;
                                         Files.createDirectories(Paths.get(newDirCreate));
                                         System.out.println("Folder created."); //создаем папку для совпадения
                                         Path srcFile = path.toAbsolutePath();
@@ -75,3 +75,17 @@ public class FilesSelect {
         filesSelect.selectFiles(inFolder, outFolder, keys);
     }
 }
+
+
+//Задача 2, класс FilesSelect: не пройдено, оценка: 0.0
+//Комментарий:
+//ERROR: Тест "Метод selectFiles(String inFolder, String outFolder, List<String> keys)" не пройден. Метод работает неправльно.
+//В метод передан список ключевых слов, содержащий: 111, 222, 333, 123.
+//В каталоге inFolder располагается структура файлов (в скобках указаны содержащиеся в файлах ключевые слова):
+//dir1/file1.txt(111), dir1/file2.txt(111), dir1/file3.txt(123), dir2/dir3/file1.txt(111), dir2/dir3/file3.txt(123), dir2/file1.txt(222), dir2/file2.txt(111), file2.txt(111)
+//В каталоге outFolder обнаружена структура файлов:
+//
+//Ожидалось:
+//111/file1.txt, 111/file2.txt, 123/file3.txt, 222/file1.txt
+//предполагаю что temp/111/file1.txt
+//По данной задаче в целом не зачет, решение возвращено на доработку. Задача выполнена на 0.00%%
