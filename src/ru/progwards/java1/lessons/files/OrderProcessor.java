@@ -63,11 +63,8 @@ public class OrderProcessor {
         List<Path> paths = null;
         loadedShopId = shopId;
 
-        // список файлов с информацией о заказах
-        // плохо, что имена папок "не имеют значения". В имя папки или файла обязательно надо было сделать привязку к дате. Как процессинг будет работать через 10 лет!?
         String shopFilter = shopId==null ? "???" : shopId;
-        String pattern = "glob:**/" + shopFilter + "-??????-????.csv"; // tester not passed
-        //String pattern = "glob:**/" + shopFilter + "-*-*.csv"; // tester changed his mind )
+        String pattern = "glob:**/" + shopFilter + "-??????-????.csv";
         PathMatcher pathMatcher1 = FileSystems.getDefault().getPathMatcher(pattern);
         try {
             paths = Files.walk(startPath)
@@ -86,7 +83,6 @@ public class OrderProcessor {
             e.printStackTrace();
         }
         if (paths == null) return 0;
-        //System.out.println(paths);
 
         for (Path path : paths) {
             if (!loadOrderFromFile(path)) {
@@ -94,8 +90,7 @@ public class OrderProcessor {
                 System.out.println("Processing failed: "+path);
             } else { System.out.println("Ok: "+path); }
         }
-        //System.out.println(orders);
-        //sortOrders(); // отсортируем orders // отсортировали файлы ранее, потому это не надо
+
 
         return failedFiles;
     }
