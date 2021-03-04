@@ -81,3 +81,18 @@ public class Lesson17 {
 // Что угодно в рамках текущего каталога и всех его подкаталогов → **
 
 //Правильный ответ: 8
+
+//Правильный ответ:
+// Вычисление относительного пути к other → Path relativize(Path other),
+// Реальный путь по символической ссылке → Path toRealPath(LinkOption... options),
+// Абсолютный путь → Path toAbsolutePath(), Нормализация пути → Path normalize(),
+// Добавить элемент или переопределить путь → Path resolve(String other)
+
+//Правильный ответ:
+// Корневой элемент пути → Path getRoot(),
+// Создать путь по строке → Path Paths.get(String first, String... more),
+// Крайний правый элемент пути → Path getFileName(),
+// Родительский элемент пути → Path getParent(),
+// Элемент пути по индексу → Path getName(int index),
+// Подпуть от элемента beginIndex до endIndex → Path subpath(int beginIndex, int endIndex),
+// Количество элементов (без корневого) → int getNameCount()
