@@ -70,7 +70,7 @@ public class DigitalDesignTest {
     }
 
     private static void add(int repeatCount, String s) {
-        //на случай если счетчик нулевой то выполним цикл один раз
+        //выполняем цикл минимум 1 раз
         if (repeatCount < 1) {
             repeatCount = 1;
         }
