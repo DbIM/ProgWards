@@ -25,27 +25,27 @@ public class DigitalDesignTest {
 
     public static void main(String[] args) {
         //объявление переменной для проверки входной строки на предмет окончания
-        int inputString = -1;
+        int inputChar = -1;
         // cчетчик повторов
         int repeatCount = 0;
         //бесконечный цикл программы
         while (true) {
             //проверка консольной строки посимвольно
             try {
-                inputString = System.in.read();
+                inputChar = System.in.read();
             } catch (IOException e) {
                 System.exit(1);
             }
             //если строка завершилась то прерываем цикл
-            if (inputString == -1) {
+            if (inputChar == -1) {
                 break;
             }
             //если следующий символ: цифра
-            if (Character.isDigit(inputString)) {
+            if (Character.isDigit(inputChar)) {
                 //в счетчик повторов заносим цифру и проверяем следующий символ.
-                repeatCount = 10 * repeatCount + Character.getNumericValue(inputString);
+                repeatCount = 10 * repeatCount + Character.getNumericValue(inputChar);
                 //если следующий символ: открывающая скобка
-            } else if (inputString == '[') {
+            } else if (inputChar == '[') {
                 //то помещаем в стек экземпляр класса Unit
                 //c хранящимся значением переменной счетчика повторов
                 stack.push(new Unit(repeatCount));
@@ -53,7 +53,7 @@ public class DigitalDesignTest {
                 //на случай если внутри скобок тоже будут какие-то цифры
                 repeatCount = 0;
                 //если следующий символ: закрывающая скобка
-            } else if (inputString == ']') {
+            } else if (inputChar == ']') {
                 //извлекаем из стека верхний экземпляр класса Unit с содержащимися в нем значениями
                 Unit unit = stack.pop();
                 //формируем строку
@@ -63,7 +63,7 @@ public class DigitalDesignTest {
                 //вновь обнуляем счетчик
                 repeatCount = 0;
             } else {
-                add(repeatCount, Character.toString((char) inputString));
+                add(repeatCount, Character.toString((char) inputChar));
                 repeatCount = 0;
             }
         }
