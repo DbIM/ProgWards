@@ -93,7 +93,5 @@ public class DigitalDesignTest {
             count = inputCount;
             sb = new StringBuilder();
         }
-    }
-
-    ;
+    };
 }
