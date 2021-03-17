@@ -89,9 +89,10 @@ public class DigitalDesignTest {
     public static class Unit {
         public int count;
         public StringBuilder sb;
+
         public Unit(int inputCount) {
             count = inputCount;
             sb = new StringBuilder();
         }
-    };
+    }
 }
