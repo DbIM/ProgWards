@@ -1,9 +1,24 @@
-package DigitalTest;
+package ru.progwards.java1.lessons.RAM;
+
+//Условие:
+//Написать на Java программу распаковывания строки.
+// На вход поступает строка вида число[строка],
+// на выход - строка, содержащая повторяющиеся подстроки.
+//
+//Пример:
+//Вход: 3[xyz]4[xy]z
+//Выход: xyzxyzxyzxyxyxyxyz
+//
+//Ограничения:
+//- одно повторение может содержать другое. Например: 2[3[x]y]  = xxxyxxxy
+//- допустимые символы на вход: латинские буквы, числа и скобки []
+//- числа означают только число повторений
+//- скобки только для обозначения повторяющихся подстрок
+//- входная строка всегда валидна.
 
 
-
-public class DigitalDesignTest3 {
-    public class Unit{
+public class DigitalDesignTest4 {
+    public static class Unit{
         String content;
         int repeatNum;
         Unit(String inputString, int repeatCount){
@@ -19,6 +34,7 @@ public class DigitalDesignTest3 {
     public static String stringAfterBrackets = "";
     public static int firstCounter = 0;
     public static int secondCounter = 0;
+    public static int simpleCounter = 0;
 
     public static String createNewString(char[] inputCharArray) {
         int repeatCount = 0;
@@ -31,6 +47,9 @@ public class DigitalDesignTest3 {
                 isThereAnyDigits = true;
                 if (repeatCount == 0) {
                     repeatCount = Integer.parseInt(String.valueOf(inputCharArray[i]));
+                    if (simpleCounter == 0){
+                        simpleCounter = repeatCount;
+                    }
                 }
             }
             if (inputCharArray[i] == '[') {
@@ -45,6 +64,7 @@ public class DigitalDesignTest3 {
         }
         if (isThereAnyDigits) {
             String stringInBrackets = resultString.substring(openBracketsIndex + 1, closeBracketsIndex);
+            Unit unit = new Unit(stringInBrackets, simpleCounter);
             stringAfterBrackets = resultString.substring(closeBracketsIndex + 1);
             if (firstCounter > 0) {
                 secondCounter = repeatCount;
@@ -52,7 +72,8 @@ public class DigitalDesignTest3 {
             if (firstCounter == 0) {
                 firstCounter = repeatCount;
             }
-            String result = createNewString(stringInBrackets.toCharArray());
+
+            String result = createNewString(unit.content.toCharArray());
             return result;
         }
         if (!isThereAnyDigits) {
