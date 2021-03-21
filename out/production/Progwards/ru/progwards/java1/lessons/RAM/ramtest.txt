@@ -1,0 +1,19 @@
+<input> 25 2
+; load
+read 1 ; some text here
+read 2
+
+do:
+load =0
+store 3 ; result
+
+loop:
+load 3
+add 1
+store 3
+load 2
+sub =1
+store 2
+jgtz loop
+write 3
+halt
