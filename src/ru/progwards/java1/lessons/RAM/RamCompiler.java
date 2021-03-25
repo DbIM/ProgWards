@@ -20,6 +20,8 @@ public class RamCompiler {
     List<Integer> outputStream = new ArrayList<Integer>();
     List<Integer> registers = new ArrayList<Integer>();
 
+    ArrayList<String> list = new ArrayList<String>();
+
     void readRAM(int input, int counter) {
         if (input == 0) {
             registers.remove(0);
@@ -85,90 +87,10 @@ public class RamCompiler {
             registers.add(null);
         }
         registers.add(0, 0);
-
-        int labelIndex = 1;
-        int inputStreamCounter = 0;
         FileReader fileIn = new FileReader(fileName);
         Scanner scanner = new Scanner(fileIn);
-        ArrayList<String> list = new ArrayList<String>();
         while (scanner.hasNextLine()) {
             list.add(scanner.nextLine());
-        }
-
-        for (int c = 0; c < list.size(); c++) {
-            String[] commands = list.get(c).toString().split(" ");
-            for (int i = 0; i < commands.length; i++) {
-                if (commands[i].toLowerCase().equals("halt")) {
-                    return;
-                }
-                else if (commands[i].equals(";")) {
-                    break;
-                }
-                if (commands[i].contains(":")) {
-                    labelIndex = c;
-                    break;
-                }
-                if (commands[i].toLowerCase().equals("jmp")) {
-                    c = labelIndex;
-                    break;
-                }
-                if (commands[i].toLowerCase().equals("jgtz")) {
-                    if (registers.get(0) > 0) {
-                        c = labelIndex;
-                        break;
-                    }
-                }
-                if (commands[i].toLowerCase().equals("jz")) {
-                    if (registers.get(0) == 0) {
-                        c = labelIndex;
-                        break;
-                    }
-                }
-                if (commands[0].toLowerCase().contains("<input>")) {
-                    for (int i1 = 1; i1 < commands.length; i1++) {
-                        inputStream.add(Integer.parseInt(commands[i1]));
-                    }
-                    break;
-                }
-                if (commands[i].toLowerCase().contains("read")) {
-                    readRAM(Integer.parseInt(commands[i + 1]), inputStreamCounter);
-                    inputStreamCounter++;
-                    break;
-                }
-                if (commands[i].toLowerCase().contains("write")) {
-                    writeRAM(Integer.parseInt(commands[i + 1]));
-                    break;
-                }
-                if (commands[i].toLowerCase().contains("load")) {
-                    if (commands[i + 1].contains("=")) {
-                        int input = delEqual(commands[i + 1]);
-                        loadRAMeq(input);
-                        break;
-                    } else {
-                        loadRAM(Integer.parseInt(commands[i + 1]));
-                        break;
-                    }
-                }
-                if (commands[i].toLowerCase().contains("store")) {
-                    storeRAM(Integer.parseInt(commands[i + 1]));
-                    break;
-                }
-                if (commands[i].toLowerCase().contains("add")) {
-                    addRAM(Integer.parseInt(commands[i + 1]));
-                    break;
-                }
-                if (commands[i].toLowerCase().contains("sub")) {
-                    int x = i + 1;
-                    if (commands[x].contains("=")) {
-                        int input = delEqual(commands[i + 1]);
-                        subRAMeq(input);
-                        break;
-                    } else {
-                        subRAM(Integer.parseInt(commands[i + 1]));
-                        break;
-                    }
-                }
-            }
         }
     }
 
@@ -184,20 +106,93 @@ public class RamCompiler {
         return registers;
     }
 
-    static void execute(String fileName){
-        try {
-            new RamCompiler(fileName);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+    void execute(){
+            int labelIndex = 1;
+            int inputStreamCounter = 0;
+            for (int c = 0; c < list.size(); c++) {
+                String[] commands = list.get(c).toString().split(" ");
+                for (int i = 0; i < commands.length; i++) {
+                    if (commands[i].toLowerCase().equals("halt")) {
+                        return;
+                    }
+                    else if (commands[i].equals(";")) {
+                        break;
+                    }
+                    if (commands[i].contains(":")) {
+                        labelIndex = c;
+                        break;
+                    }
+                    if (commands[i].toLowerCase().equals("jmp")) {
+                        c = labelIndex;
+                        break;
+                    }
+                    if (commands[i].toLowerCase().equals("jgtz")) {
+                        if (registers.get(0) > 0) {
+                            c = labelIndex;
+                            break;
+                        }
+                    }
+                    if (commands[i].toLowerCase().equals("jz")) {
+                        if (registers.get(0) == 0) {
+                            c = labelIndex;
+                            break;
+                        }
+                    }
+                    if (commands[0].toLowerCase().contains("<input>")) {
+                        for (int i1 = 1; i1 < commands.length; i1++) {
+                            inputStream.add(Integer.parseInt(commands[i1]));
+                        }
+                        break;
+                    }
+                    if (commands[i].toLowerCase().contains("read")) {
+                        readRAM(Integer.parseInt(commands[i + 1]), inputStreamCounter);
+                        inputStreamCounter++;
+                        break;
+                    }
+                    if (commands[i].toLowerCase().contains("write")) {
+                        writeRAM(Integer.parseInt(commands[i + 1]));
+                        break;
+                    }
+                    if (commands[i].toLowerCase().contains("load")) {
+                        if (commands[i + 1].contains("=")) {
+                            int input = delEqual(commands[i + 1]);
+                            loadRAMeq(input);
+                            break;
+                        } else {
+                            loadRAM(Integer.parseInt(commands[i + 1]));
+                            break;
+                        }
+                    }
+                    if (commands[i].toLowerCase().contains("store")) {
+                        storeRAM(Integer.parseInt(commands[i + 1]));
+                        break;
+                    }
+                    if (commands[i].toLowerCase().contains("add")) {
+                        addRAM(Integer.parseInt(commands[i + 1]));
+                        break;
+                    }
+                    if (commands[i].toLowerCase().contains("sub")) {
+                        int x = i + 1;
+                        if (commands[x].contains("=")) {
+                            int input = delEqual(commands[i + 1]);
+                            subRAMeq(input);
+                            break;
+                        } else {
+                            subRAM(Integer.parseInt(commands[i + 1]));
+                            break;
+                        }
+                    }
+                }
+            }
         }
-    }
 
     public static void main(String[] args) throws FileNotFoundException {
         String filename = "src\\ru\\progwards\\java1\\lessons\\RAM\\ramtest.txt";
         String filename2 = "src\\ru\\progwards\\java1\\lessons\\RAM\\ramtest2.txt";
         RamCompiler ramCompiler = new RamCompiler(filename);
         RamCompiler ramCompiler2 = new RamCompiler(filename2);
-        //RamCompiler.execute(filename);
+        ramCompiler.execute();
+        ramCompiler2.execute();
         System.out.println("Входящая лента: " + ramCompiler.input());
         System.out.println("Задействованные регистры: " + ramCompiler.registers());
         System.out.println("Выходной поток: " + ramCompiler.output() + "\n");
