@@ -158,6 +158,7 @@ public class RamCompiler {
                     break;
                 }
                 if (commands[i].toLowerCase().contains("sub")) {
+                    int x = i + 1;
                     if (commands[x].contains("=")) {
                         int input = delEqual(commands[i + 1]);
                         subRAMeq(input);
@@ -193,11 +194,17 @@ public class RamCompiler {
 
     public static void main(String[] args) throws FileNotFoundException {
         String filename = "src\\ru\\progwards\\java1\\lessons\\RAM\\ramtest.txt";
+        String filename2 = "src\\ru\\progwards\\java1\\lessons\\RAM\\ramtest2.txt";
         RamCompiler ramCompiler = new RamCompiler(filename);
-        RamCompiler.execute(filename);
+        RamCompiler ramCompiler2 = new RamCompiler(filename2);
+        //RamCompiler.execute(filename);
         System.out.println("Входящая лента: " + ramCompiler.input());
         System.out.println("Задействованные регистры: " + ramCompiler.registers());
-        System.out.println("Выходной поток: " + ramCompiler.output());
+        System.out.println("Выходной поток: " + ramCompiler.output() + "\n");
+
+        System.out.println("Входящая лента 2: " + ramCompiler2.input());
+        System.out.println("Задействованные регистры 2: " + ramCompiler2.registers());
+        System.out.println("Выходной поток 2: " + ramCompiler2.output());
     }
 }
 
