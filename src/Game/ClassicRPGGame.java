@@ -15,23 +15,34 @@ public class ClassicRPGGame implements ActionListener {
 
     public ClassicRPGGame() throws IOException {
         frame = new JFrame("Classic RPG");
-        frame.setSize(1038,678);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(1024,640);
+        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setUndecorated(true);
 
         panel = new JPanel();
         frame.add(panel);
         panel.setLayout(null);
 
         ActionListener bowButtonActionListener = new bowButtonActionListener();
+        ActionListener exitButtonActionListener = new exitButtonActionListener();
 
-        BufferedImage buttonIcon = ImageIO.read(new File("src/Game/img/buttons/bowbutton2.JPG"));
-        JButton button = new JButton(new ImageIcon(buttonIcon));
-        button.setBorder(BorderFactory.createEmptyBorder());
-        button.setFocusPainted(false);
-        button.setContentAreaFilled(false);
-        button.setBounds(740,230,97,82);
-        button.addActionListener(bowButtonActionListener);
-        panel.add(button);
+        BufferedImage bowButtonIcon = ImageIO.read(new File("src/Game/img/buttons/bowbutton2.JPG"));
+        JButton bowButton = new JButton(new ImageIcon(bowButtonIcon));
+        bowButton.setBorder(BorderFactory.createEmptyBorder());
+        bowButton.setFocusPainted(false);
+        bowButton.setContentAreaFilled(false);
+        bowButton.setBounds(740,230,97,82);
+        bowButton.addActionListener(bowButtonActionListener);
+        panel.add(bowButton);
+
+        BufferedImage exitButtonIcon = ImageIO.read(new File("src/Game/img/buttons/exit.JPG"));
+        JButton exitButton = new JButton(new ImageIcon(exitButtonIcon));
+        exitButton.setBorder(BorderFactory.createEmptyBorder());
+        exitButton.setFocusPainted(false);
+        exitButton.setContentAreaFilled(false);
+        exitButton.setBounds(826,305,86,70);
+        exitButton.addActionListener(exitButtonActionListener);
+        panel.add(exitButton);
 
         BufferedImage upleftbuttonicon = ImageIO.read(new File("src/Game/img/buttons/upleft.JPG"));
         JButton upleftbutton = new JButton(new ImageIcon(upleftbuttonicon));
@@ -96,6 +107,12 @@ public class ClassicRPGGame implements ActionListener {
     }
 
     public class bowButtonActionListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("Bow button pressed");
+        }
+    }
+
+    public class exitButtonActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             frame.dispose();
         }
