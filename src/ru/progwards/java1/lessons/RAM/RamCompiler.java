@@ -57,6 +57,13 @@ public class RamCompiler {
         registers.add(0, y);
     }
 
+    void addRAMeq(int input) {
+        int x = registers.get(0);
+        int y = x + input;
+        registers.remove(0);
+        registers.add(0, y);
+    }
+
     void subRAMeq(int input) {
         int x = registers.get(0);
         int y = x - input;
@@ -71,6 +78,17 @@ public class RamCompiler {
         registers.add(0, y);
     }
 
+    int delPoint(String input) {
+        String resultString = "";
+        for (int i = 0; i < input.toCharArray().length; i++) {
+            if (input.toCharArray()[i] != '*') {
+                resultString = resultString + input.toCharArray()[i];
+            }
+        }
+        int result = Integer.parseInt(resultString);
+        return result;
+    }
+
     int delEqual(String input) {
         String resultString = "";
         for (int i = 0; i < input.toCharArray().length; i++) {
@@ -80,6 +98,12 @@ public class RamCompiler {
         }
         int result = Integer.parseInt(resultString);
         return result;
+    }
+
+    int loop(String input, int stringCount){
+        int stringNum = stringCount;
+
+        return stringNum;
     }
 
     RamCompiler(String fileName) throws FileNotFoundException {
@@ -145,40 +169,58 @@ public class RamCompiler {
                         break;
                     }
                     if (commands[i].toLowerCase().contains("read")) {
-                        readRAM(Integer.parseInt(commands[i + 1]), inputStreamCounter);
+                        int x = i + 1;
+                        if (commands[x].contains("*")){
+                            int input = delPoint(commands[x]);
+                            readRAM(input, inputStreamCounter);
+                        }
+                        else {
+                            readRAM(Integer.parseInt(commands[x]), inputStreamCounter);
+                        }
                         inputStreamCounter++;
                         break;
                     }
                     if (commands[i].toLowerCase().contains("write")) {
-                        writeRAM(Integer.parseInt(commands[i + 1]));
+                        int x = i + 1;
+                        writeRAM(Integer.parseInt(commands[x]));
                         break;
                     }
                     if (commands[i].toLowerCase().contains("load")) {
-                        if (commands[i + 1].contains("=")) {
-                            int input = delEqual(commands[i + 1]);
+                        int x = i + 1;
+                        if (commands[x].contains("=")) {
+                            int input = delEqual(commands[x]);
                             loadRAMeq(input);
                             break;
                         } else {
-                            loadRAM(Integer.parseInt(commands[i + 1]));
+                            loadRAM(Integer.parseInt(commands[x]));
                             break;
                         }
                     }
                     if (commands[i].toLowerCase().contains("store")) {
-                        storeRAM(Integer.parseInt(commands[i + 1]));
+                        int x = i + 1;
+                        storeRAM(Integer.parseInt(commands[x]));
                         break;
                     }
                     if (commands[i].toLowerCase().contains("add")) {
-                        addRAM(Integer.parseInt(commands[i + 1]));
-                        break;
+                        int x = i + 1;
+                        if (commands[x].contains("=")){
+                            int input = delEqual(commands[x]);
+                            addRAMeq(input);
+                            break;
+                        }
+                        else {
+                            addRAM(Integer.parseInt(commands[x]));
+                            break;
+                        }
                     }
                     if (commands[i].toLowerCase().contains("sub")) {
                         int x = i + 1;
                         if (commands[x].contains("=")) {
-                            int input = delEqual(commands[i + 1]);
+                            int input = delEqual(commands[x]);
                             subRAMeq(input);
                             break;
                         } else {
-                            subRAM(Integer.parseInt(commands[i + 1]));
+                            subRAM(Integer.parseInt(commands[x]));
                             break;
                         }
                     }
@@ -187,19 +229,26 @@ public class RamCompiler {
         }
 
     public static void main(String[] args) throws FileNotFoundException {
-        String filename = "src\\ru\\progwards\\java1\\lessons\\RAM\\ramtest.txt";
-        String filename2 = "src\\ru\\progwards\\java1\\lessons\\RAM\\ramtest2.txt";
-        RamCompiler ramCompiler = new RamCompiler(filename);
-        RamCompiler ramCompiler2 = new RamCompiler(filename2);
-        ramCompiler.execute();
-        ramCompiler2.execute();
-        System.out.println("Входящая лента: " + ramCompiler.input());
+/*        String filename = "src\\ru\\progwards\\java1\\lessons\\RAM\\ramtest.txt";
+        String filename2 = "src\\ru\\progwards\\java1\\lessons\\RAM\\ramtest2.txt";*/
+        String filename3 = "src\\ru\\progwards\\java1\\lessons\\RAM\\sort.ram";
+/*        RamCompiler ramCompiler = new RamCompiler(filename);
+        RamCompiler ramCompiler2 = new RamCompiler(filename2);*/
+        RamCompiler ramCompiler3 = new RamCompiler(filename3);
+/*        ramCompiler.execute();
+        ramCompiler2.execute();*/
+        ramCompiler3.execute();
+/*        System.out.println("Входящая лента: " + ramCompiler.input());
         System.out.println("Задействованные регистры: " + ramCompiler.registers());
         System.out.println("Выходной поток: " + ramCompiler.output() + "\n");
 
         System.out.println("Входящая лента 2: " + ramCompiler2.input());
         System.out.println("Задействованные регистры 2: " + ramCompiler2.registers());
-        System.out.println("Выходной поток 2: " + ramCompiler2.output());
+        System.out.println("Выходной поток 2: " + ramCompiler2.output());*/
+
+        System.out.println("Входящая лента 3: " + ramCompiler3.input());
+        System.out.println("Задействованные регистры 3: " + ramCompiler3.registers());
+        System.out.println("Выходной поток 3: " + ramCompiler3.output());
     }
 }
 

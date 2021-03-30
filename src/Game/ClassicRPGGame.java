@@ -11,6 +11,11 @@ import java.io.IOException;
 public class ClassicRPGGame implements ActionListener {
     private static JFrame frame;
     private static JPanel panel;
+    JLabel backgroundLabel;
+    BufferedImage playerArrowImage;
+    JLabel playerArrowLabel;
+    String wherePlayerLook = "";
+
     int counter = 0;
 
     public ClassicRPGGame() throws IOException {
@@ -25,8 +30,10 @@ public class ClassicRPGGame implements ActionListener {
 
         ActionListener bowButtonActionListener = new bowButtonActionListener();
         ActionListener exitButtonActionListener = new exitButtonActionListener();
+        ActionListener upLeftButtonActionListener = new upLeftButtonActionListener();
+        ActionListener upRightButtonActionListener = new upRightButtonActionListener();
 
-        BufferedImage bowButtonIcon = ImageIO.read(new File("src/Game/img/buttons/bowbutton2.JPG"));
+        BufferedImage bowButtonIcon = ImageIO.read(new File("src/Game/img/buttons/bowbutton.JPG"));
         JButton bowButton = new JButton(new ImageIcon(bowButtonIcon));
         bowButton.setBorder(BorderFactory.createEmptyBorder());
         bowButton.setFocusPainted(false);
@@ -50,7 +57,7 @@ public class ClassicRPGGame implements ActionListener {
         upleftbutton.setFocusPainted(false);
         upleftbutton.setContentAreaFilled(false);
         upleftbutton.setBounds(750,470,79,65);
-        upleftbutton.addActionListener(this);
+        upleftbutton.addActionListener(upLeftButtonActionListener);
         panel.add(upleftbutton);
 
         BufferedImage upbuttonicon = ImageIO.read(new File("src/Game/img/buttons/up.JPG"));
@@ -68,7 +75,7 @@ public class ClassicRPGGame implements ActionListener {
         uprightbutton.setFocusPainted(false);
         uprightbutton.setContentAreaFilled(false);
         uprightbutton.setBounds(910,470,82,70);
-        uprightbutton.addActionListener(this);
+        uprightbutton.addActionListener(upRightButtonActionListener);
         panel.add(uprightbutton);
 
         BufferedImage leftbuttonicon = ImageIO.read(new File("src/Game/img/buttons/left.JPG"));
@@ -98,12 +105,160 @@ public class ClassicRPGGame implements ActionListener {
         rightbutton.addActionListener(this);
         panel.add(rightbutton);
 
+        playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow1.JPG"));
+        wherePlayerLook = "south";
+        playerArrowLabel = new JLabel(new ImageIcon(playerArrowImage));
+        playerArrowLabel.setBounds(856,112,32,28);
+        panel.add(playerArrowLabel);
+
         BufferedImage backgroundImage = ImageIO.read(new File("src/Game/img/Newcastle.png"));
-        JLabel backgroundLabel = new JLabel(new ImageIcon(backgroundImage));
+        backgroundLabel = new JLabel(new ImageIcon(backgroundImage));
         backgroundLabel.setBounds(0,0,1024,640);
         panel.add(backgroundLabel);
 
         frame.setVisible(true);
+    }
+
+    public class upLeftButtonActionListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+           if (wherePlayerLook.equals("south")){
+               try {
+                   panel.remove(playerArrowLabel);
+                   panel.remove(backgroundLabel);
+                   playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow2.JPG"));
+                   playerArrowLabel = new JLabel(new ImageIcon(playerArrowImage));
+                   playerArrowLabel.setBounds(856,112,32,28);
+                   panel.add(playerArrowLabel);
+                   panel.add(backgroundLabel);
+                   panel.updateUI();
+                   wherePlayerLook = "east";
+                   System.out.println("Player look: " + wherePlayerLook);
+               } catch (IOException ioException) {
+                   ioException.printStackTrace();
+               }
+           }
+           else if (wherePlayerLook.equals("east")){
+                try {
+                    panel.remove(playerArrowLabel);
+                    panel.remove(backgroundLabel);
+                    playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow3.JPG"));
+                    playerArrowLabel = new JLabel(new ImageIcon(playerArrowImage));
+                    playerArrowLabel.setBounds(856,112,32,28);
+                    panel.add(playerArrowLabel);
+                    panel.add(backgroundLabel);
+                    panel.updateUI();
+                    wherePlayerLook = "north";
+                    System.out.println("Player look: " + wherePlayerLook);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            }
+           else if (wherePlayerLook.equals("north")){
+                try {
+                    panel.remove(playerArrowLabel);
+                    panel.remove(backgroundLabel);
+                    panel.updateUI();
+                    playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow4.JPG"));
+                    playerArrowLabel = new JLabel(new ImageIcon(playerArrowImage));
+                    playerArrowLabel.setBounds(856,112,32,28);
+                    panel.add(playerArrowLabel);
+                    panel.add(backgroundLabel);
+                    panel.updateUI();
+                    wherePlayerLook = "west";
+                    System.out.println("Player look: " + wherePlayerLook);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            }
+            else if (wherePlayerLook.equals("west")){
+                try {
+                    panel.remove(playerArrowLabel);
+                    panel.remove(backgroundLabel);
+                    panel.updateUI();
+                    playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow1.JPG"));
+                    playerArrowLabel = new JLabel(new ImageIcon(playerArrowImage));
+                    playerArrowLabel.setBounds(856,112,32,28);
+                    panel.add(playerArrowLabel);
+                    panel.add(backgroundLabel);
+                    panel.updateUI();
+                    wherePlayerLook = "south";
+                    System.out.println("Player look: " + wherePlayerLook);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public class upRightButtonActionListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            if (wherePlayerLook.equals("south")){
+                try {
+                    panel.remove(playerArrowLabel);
+                    panel.remove(backgroundLabel);
+                    playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow4.JPG"));
+                    playerArrowLabel = new JLabel(new ImageIcon(playerArrowImage));
+                    playerArrowLabel.setBounds(856,112,32,28);
+                    panel.add(playerArrowLabel);
+                    panel.add(backgroundLabel);
+                    panel.updateUI();
+                    wherePlayerLook = "west";
+                    System.out.println("Player look: " + wherePlayerLook);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            }
+            else if (wherePlayerLook.equals("west")){
+                try {
+                    panel.remove(playerArrowLabel);
+                    panel.remove(backgroundLabel);
+                    playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow3.JPG"));
+                    playerArrowLabel = new JLabel(new ImageIcon(playerArrowImage));
+                    playerArrowLabel.setBounds(856,112,32,28);
+                    panel.add(playerArrowLabel);
+                    panel.add(backgroundLabel);
+                    panel.updateUI();
+                    wherePlayerLook = "north";
+                    System.out.println("Player look: " + wherePlayerLook);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            }
+            else if (wherePlayerLook.equals("north")){
+                try {
+                    panel.remove(playerArrowLabel);
+                    panel.remove(backgroundLabel);
+                    panel.updateUI();
+                    playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow2.JPG"));
+                    playerArrowLabel = new JLabel(new ImageIcon(playerArrowImage));
+                    playerArrowLabel.setBounds(856,112,32,28);
+                    panel.add(playerArrowLabel);
+                    panel.add(backgroundLabel);
+                    panel.updateUI();
+                    wherePlayerLook = "east";
+                    System.out.println("Player look: " + wherePlayerLook);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            }
+            else if (wherePlayerLook.equals("east")){
+                try {
+                    panel.remove(playerArrowLabel);
+                    panel.remove(backgroundLabel);
+                    panel.updateUI();
+                    playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow1.JPG"));
+                    playerArrowLabel = new JLabel(new ImageIcon(playerArrowImage));
+                    playerArrowLabel.setBounds(856,112,32,28);
+                    panel.add(playerArrowLabel);
+                    panel.add(backgroundLabel);
+                    panel.updateUI();
+                    wherePlayerLook = "south";
+                    System.out.println("Player look: " + wherePlayerLook);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            }
+        }
     }
 
     public class bowButtonActionListener implements ActionListener {
