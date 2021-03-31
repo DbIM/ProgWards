@@ -359,12 +359,15 @@ public class RamCompiler {
         String filename = "src\\ru\\progwards\\java1\\lessons\\RAM\\ramtest.txt";
         String filename2 = "src\\ru\\progwards\\java1\\lessons\\RAM\\ramtest2.txt";
         String filename3 = "src\\ru\\progwards\\java1\\lessons\\RAM\\sort2.ram";
+
         RamCompiler ramCompiler = new RamCompiler(filename);
         RamCompiler ramCompiler2 = new RamCompiler(filename2);
         RamCompiler ramCompiler3 = new RamCompiler(filename3);
+
         ramCompiler.execute();
         ramCompiler2.execute();
         ramCompiler3.execute();
+
         System.out.println("Входящая лента: " + ramCompiler.input());
         System.out.println("Задействованные регистры: " + ramCompiler.registers());
         System.out.println("Выходной поток: " + ramCompiler.output() + "\n");
