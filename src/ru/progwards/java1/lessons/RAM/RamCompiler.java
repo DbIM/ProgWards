@@ -58,6 +58,7 @@ public class RamCompiler {
     }
 
     void writeRAM(int input) {
+        System.out.println("test");
         outputStream.add(registers.get(input));
     }
 
@@ -232,7 +233,7 @@ public class RamCompiler {
                 if (commands[i].toLowerCase().equals("halt")) {
                     return;
                 }
-                if (commands[i].equals(";")) {
+                if (commands[i].equals(";") || commands[i].contains(";")) {
                     break;
                 }
                 if (commands[i].contains(":")) {
@@ -355,23 +356,22 @@ public class RamCompiler {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-/*        String filename = "src\\ru\\progwards\\java1\\lessons\\RAM\\ramtest.txt";
-        String filename2 = "src\\ru\\progwards\\java1\\lessons\\RAM\\ramtest2.txt";*/
-        String filename3 = "src\\ru\\progwards\\java1\\lessons\\RAM\\sort.ram";
-       //     String filename3 = "src\\ru\\progwards\\java1\\lessons\\RAM\\ramtest.txt";
-/*        RamCompiler ramCompiler = new RamCompiler(filename);
-        RamCompiler ramCompiler2 = new RamCompiler(filename2);*/
+        String filename = "src\\ru\\progwards\\java1\\lessons\\RAM\\ramtest.txt";
+        String filename2 = "src\\ru\\progwards\\java1\\lessons\\RAM\\ramtest2.txt";
+        String filename3 = "src\\ru\\progwards\\java1\\lessons\\RAM\\sort2.ram";
+        RamCompiler ramCompiler = new RamCompiler(filename);
+        RamCompiler ramCompiler2 = new RamCompiler(filename2);
         RamCompiler ramCompiler3 = new RamCompiler(filename3);
-/*        ramCompiler.execute();
-        ramCompiler2.execute();*/
+        ramCompiler.execute();
+        ramCompiler2.execute();
         ramCompiler3.execute();
-/*        System.out.println("Входящая лента: " + ramCompiler.input());
+        System.out.println("Входящая лента: " + ramCompiler.input());
         System.out.println("Задействованные регистры: " + ramCompiler.registers());
         System.out.println("Выходной поток: " + ramCompiler.output() + "\n");
 
         System.out.println("Входящая лента 2: " + ramCompiler2.input());
         System.out.println("Задействованные регистры 2: " + ramCompiler2.registers());
-        System.out.println("Выходной поток 2: " + ramCompiler2.output());*/
+        System.out.println("Выходной поток 2: " + ramCompiler2.output() + "\n");
 
         System.out.println("Входящая лента 3: " + ramCompiler3.input());
         System.out.println("Задействованные регистры 3: " + ramCompiler3.registers());
