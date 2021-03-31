@@ -1,12 +1,9 @@
 <input> 7 6 11 4 19 1 99 2
-; считываем количество
 read 0
 add =10
-store 1 ; конец массива
-; инициализируем счетчик
+store 1
 load =10
-store 2 ; счетчик
-; считываем данные
+store 2
 getdata:
 read *2
 load 2
@@ -18,21 +15,16 @@ jgtz stop
 jmp getdata
 stop:
 load =10
-store 2 ; счетчик i
-; сортируем данные
+store 2
 sortext:
-;write 2 ;debug output
 load 2
 add =1
-store 3 ; счетчик k
+store 3
 sortint:
-;write 3 ;debug output
-; compare
 load *3
 sub *2
 jz next
 jgtz next
-; поменять местами элементы
 load *3
 store 4 ; tmp
 load *2
@@ -58,8 +50,7 @@ jgtz stopi
 jmp sortext
 stopi:
 load =10
-store 2 ; счетчик
-; выводим данные
+store 2
 outdata:
 write *2
 load 2

@@ -11,14 +11,13 @@ package ru.progwards.java1.lessons.RAM;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class RamCompiler {
     List<Integer> inputStream = new ArrayList<Integer>();
     List<Integer> outputStream = new ArrayList<Integer>();
     List<Integer> registers = new ArrayList<Integer>();
+    HashMap<String, Integer> labelz = new HashMap<>();
 
     ArrayList<String> list = new ArrayList<String>();
 
@@ -29,13 +28,54 @@ public class RamCompiler {
         registers.add(input, inputStream.get(counter));
     }
 
+    void readRAMpoint(int input, int counter) {
+        if (input == 0) {
+            registers.remove(0);
+        }
+        int x = registers.get(input);
+        if (x > registers.size()) {
+            List<Integer> registersTemp = new ArrayList<Integer>();
+            for (int i = 0; i <= x; i++) {
+                registersTemp.add(i, null);
+            }
+            for (int i = 0; i < registers.size(); i++) {
+                registersTemp.remove(i);
+                registersTemp.add(i, registers.get(i));
+            }
+            registersTemp.remove(x);
+            registersTemp.add(x, inputStream.get(counter));
+            registers.clear();
+            for (int i = 0; i < registersTemp.size(); i++) {
+                if (registersTemp.get(i) != null) {
+                    registers.add(i, registersTemp.get(i));
+                } else {
+                    registers.add(i, null);
+                }
+            }
+        } else {
+            registers.add(x, inputStream.get(counter));
+        }
+    }
+
     void writeRAM(int input) {
         outputStream.add(registers.get(input));
+    }
+
+    void writeRamPoint(int input) {
+        int x = registers.get(input);
+        outputStream.add(registers.get(x));
     }
 
     void loadRAMeq(int input) {
         registers.remove(0);
         registers.add(0, input);
+    }
+
+    void loadRamPoint(int input) {
+        int temp = registers.get(input);
+        int x = registers.get(temp);
+        registers.remove(0);
+        registers.add(0, x);
     }
 
     void loadRAM(int input) {
@@ -50,9 +90,24 @@ public class RamCompiler {
         registers.add(input, temp);
     }
 
+    void storeRAMPoint(int input) {
+        int temp = registers.get(0);
+        int x = registers.get(input);
+        registers.remove(x);
+        registers.add(x, temp);
+    }
+
     void addRAM(int input) {
         int x = registers.get(0);
         int y = x + registers.get(input);
+        registers.remove(0);
+        registers.add(0, y);
+    }
+
+    void addRamPoint(int input) {
+        int x = registers.get(0);
+        int temp = registers.get(input);
+        int y = x + registers.get(temp);
         registers.remove(0);
         registers.add(0, y);
     }
@@ -73,7 +128,15 @@ public class RamCompiler {
 
     void subRAM(int input) {
         int x = registers.get(0);
-        int y = x - inputStream.get(input);
+        int y = x - registers.get(input);
+        registers.remove(0);
+        registers.add(0, y);
+    }
+
+    void subRamPoint(int input) {
+        int x = registers.get(0);
+        int temp = registers.get(input);
+        int y = x - registers.get(temp);
         registers.remove(0);
         registers.add(0, y);
     }
@@ -100,11 +163,22 @@ public class RamCompiler {
         return result;
     }
 
-    int loop(String input, int stringCount){
-        int stringNum = stringCount;
-
+    int loop(String labelString) {
+        int stringNum = 0;
+        for (Map.Entry<String, Integer> entry : labelz.entrySet()) {
+            if (entry.getKey().equals(labelString)) {
+                stringNum = entry.getValue();
+            }
+        }
         return stringNum;
     }
+
+    String loopAddColon(String input) {
+        String result = input + ":";
+        return result;
+    }
+
+    ;
 
     RamCompiler(String fileName) throws FileNotFoundException {
         for (int reg = 0; reg < 3; reg++) {
@@ -116,6 +190,16 @@ public class RamCompiler {
         while (scanner.hasNextLine()) {
             list.add(scanner.nextLine());
         }
+        ArrayList<String> listTemp = new ArrayList<String>();
+        listTemp.add("0");
+        for (int i = 0; i < list.size(); i++) {
+            listTemp.add(list.get(i));
+        }
+        list.clear();
+        for (int i = 0; i < listTemp.size(); i++) {
+            list.add(listTemp.get(i));
+        }
+
     }
 
     List<Integer> input() {
@@ -130,108 +214,151 @@ public class RamCompiler {
         return registers;
     }
 
-    void execute(){
-            int labelIndex = 1;
-            int inputStreamCounter = 0;
-            for (int c = 0; c < list.size(); c++) {
-                String[] commands = list.get(c).toString().split(" ");
-                for (int i = 0; i < commands.length; i++) {
-                    if (commands[i].toLowerCase().equals("halt")) {
-                        return;
-                    }
-                    else if (commands[i].equals(";")) {
-                        break;
-                    }
-                    if (commands[i].contains(":")) {
-                        labelIndex = c;
-                        break;
-                    }
-                    if (commands[i].toLowerCase().equals("jmp")) {
-                        c = labelIndex;
-                        break;
-                    }
-                    if (commands[i].toLowerCase().equals("jgtz")) {
-                        if (registers.get(0) > 0) {
-                            c = labelIndex;
-                            break;
-                        }
-                    }
-                    if (commands[i].toLowerCase().equals("jz")) {
-                        if (registers.get(0) == 0) {
-                            c = labelIndex;
-                            break;
-                        }
-                    }
-                    if (commands[0].toLowerCase().contains("<input>")) {
-                        for (int i1 = 1; i1 < commands.length; i1++) {
-                            inputStream.add(Integer.parseInt(commands[i1]));
-                        }
-                        break;
-                    }
-                    if (commands[i].toLowerCase().contains("read")) {
+
+    void execute() {
+        int inputStreamCounter = 0;
+        for (int c = 1; c < list.size(); c++) {
+            String[] commands = list.get(c).trim().split(" ");
+            for (int i = 0; i < commands.length; i++) {
+                if (commands[i].contains(":")) {
+                    labelz.put(commands[i], c);
+                }
+            }
+        }
+
+        for (int c = 0; c < list.size(); c++) {
+            String[] commands = list.get(c).trim().split(" ");
+            for (int i = 0; i < commands.length; i++) {
+                if (commands[i].toLowerCase().equals("halt")) {
+                    return;
+                }
+                if (commands[i].equals(";")) {
+                    break;
+                }
+                if (commands[i].contains(":")) {
+                    break;
+                }
+                if (commands[i].toLowerCase().equals("jmp")) {
+                    int x = i + 1;
+                    c = loop(loopAddColon(commands[x]));
+                    break;
+                }
+                if (commands[i].toLowerCase().equals("jgtz")) {
+                    if (registers.get(0) > 0) {
                         int x = i + 1;
-                        if (commands[x].contains("*")){
-                            int input = delPoint(commands[x]);
-                            readRAM(input, inputStreamCounter);
-                        }
-                        else {
-                            readRAM(Integer.parseInt(commands[x]), inputStreamCounter);
-                        }
-                        inputStreamCounter++;
+                        c = loop(loopAddColon(commands[x]));
                         break;
                     }
-                    if (commands[i].toLowerCase().contains("write")) {
+                    else {
+                        break;
+                    }
+                }
+                if (commands[i].toLowerCase().equals("jz")) {
+                    if (registers.get(0) == 0) {
                         int x = i + 1;
+                        c = loop(loopAddColon(commands[x]));
+                        break;
+                    }
+                    else {
+                        break;
+                    }
+                }
+                if (commands[0].toLowerCase().contains("<input>")) {
+                    for (int i1 = 1; i1 < commands.length; i1++) {
+                        inputStream.add(Integer.parseInt(commands[i1]));
+                    }
+                    break;
+                }
+                if (commands[i].toLowerCase().contains("read")) {
+                    int x = i + 1;
+                    if (commands[x].contains("*")) {
+                        int input = delPoint(commands[x]);
+                        readRAMpoint(input, inputStreamCounter);
+                    } else {
+                        readRAM(Integer.parseInt(commands[x]), inputStreamCounter);
+                    }
+                    inputStreamCounter++;
+                    break;
+                }
+                if (commands[i].toLowerCase().contains("write")) {
+                    int x = i + 1;
+                    if (commands[x].contains("*")) {
+                        int input = delPoint(commands[x]);
+                        writeRamPoint(input);
+                        break;
+                    } else {
                         writeRAM(Integer.parseInt(commands[x]));
                         break;
                     }
-                    if (commands[i].toLowerCase().contains("load")) {
-                        int x = i + 1;
-                        if (commands[x].contains("=")) {
-                            int input = delEqual(commands[x]);
-                            loadRAMeq(input);
-                            break;
-                        } else {
-                            loadRAM(Integer.parseInt(commands[x]));
-                            break;
-                        }
+                }
+                if (commands[i].toLowerCase().contains("load")) {
+                    int x = i + 1;
+                    if (commands[x].contains("=")) {
+                        int input = delEqual(commands[x]);
+                        loadRAMeq(input);
+                        break;
                     }
-                    if (commands[i].toLowerCase().contains("store")) {
-                        int x = i + 1;
+                    if (commands[x].contains("*")) {
+                        int input = delPoint(commands[x]);
+                        loadRamPoint(input);
+                        break;
+                    } else {
+                        loadRAM(Integer.parseInt(commands[x]));
+                        break;
+                    }
+                }
+                if (commands[i].toLowerCase().contains("store")) {
+                    int x = i + 1;
+                    if (commands[x].contains("*")) {
+                        int input = delPoint(commands[x]);
+                        storeRAMPoint(input);
+                        break;
+                    } else {
                         storeRAM(Integer.parseInt(commands[x]));
                         break;
                     }
-                    if (commands[i].toLowerCase().contains("add")) {
-                        int x = i + 1;
-                        if (commands[x].contains("=")){
-                            int input = delEqual(commands[x]);
-                            addRAMeq(input);
-                            break;
-                        }
-                        else {
-                            addRAM(Integer.parseInt(commands[x]));
-                            break;
-                        }
+                }
+                if (commands[i].toLowerCase().contains("add")) {
+                    int x = i + 1;
+                    if (commands[x].contains("=")) {
+                        int input = delEqual(commands[x]);
+                        addRAMeq(input);
+                        break;
                     }
-                    if (commands[i].toLowerCase().contains("sub")) {
-                        int x = i + 1;
-                        if (commands[x].contains("=")) {
-                            int input = delEqual(commands[x]);
-                            subRAMeq(input);
-                            break;
-                        } else {
-                            subRAM(Integer.parseInt(commands[x]));
-                            break;
-                        }
+                    if (commands[x].contains("*")) {
+                        int input = delPoint(commands[x]);
+                        addRamPoint(input);
+                        break;
+                    } else {
+                        addRAM(Integer.parseInt(commands[x]));
+                        break;
+                    }
+                }
+                if (commands[i].toLowerCase().contains("sub")) {
+                    int x = i + 1;
+                    if (commands[x].contains("=")) {
+                        int input = delEqual(commands[x]);
+                        subRAMeq(input);
+                        break;
+                    }
+                    if (commands[x].contains("*")) {
+                        int input = delPoint(commands[x]);
+                        subRamPoint(input);
+                        break;
+                    } else {
+                        subRAM(Integer.parseInt(commands[x]));
+                        break;
                     }
                 }
             }
         }
+    }
 
     public static void main(String[] args) throws FileNotFoundException {
 /*        String filename = "src\\ru\\progwards\\java1\\lessons\\RAM\\ramtest.txt";
         String filename2 = "src\\ru\\progwards\\java1\\lessons\\RAM\\ramtest2.txt";*/
         String filename3 = "src\\ru\\progwards\\java1\\lessons\\RAM\\sort.ram";
+       //     String filename3 = "src\\ru\\progwards\\java1\\lessons\\RAM\\ramtest.txt";
 /*        RamCompiler ramCompiler = new RamCompiler(filename);
         RamCompiler ramCompiler2 = new RamCompiler(filename2);*/
         RamCompiler ramCompiler3 = new RamCompiler(filename3);
