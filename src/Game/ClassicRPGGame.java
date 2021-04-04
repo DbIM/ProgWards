@@ -19,6 +19,9 @@ public class ClassicRPGGame implements ActionListener {
     int counter = 0;
 
     public ClassicRPGGame() throws IOException {
+        MapLoader level = new MapLoader("src/Game/map.txt");
+        System.out.println(level.blockLetter(1,1));
+
         frame = new JFrame("Classic RPG");
         frame.setSize(1024,640);
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
