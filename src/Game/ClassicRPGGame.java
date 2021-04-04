@@ -12,9 +12,12 @@ public class ClassicRPGGame implements ActionListener {
     private static JFrame frame;
     private static JPanel panel;
     JLabel backgroundLabel;
+    JLabel mapLabel;
     BufferedImage playerArrowImage;
     JLabel playerArrowLabel;
     String wherePlayerLook = "";
+    int mapX = 538;
+    int mapY = -116;
 
     int counter = 0;
 
@@ -35,6 +38,10 @@ public class ClassicRPGGame implements ActionListener {
         ActionListener exitButtonActionListener = new exitButtonActionListener();
         ActionListener upLeftButtonActionListener = new upLeftButtonActionListener();
         ActionListener upRightButtonActionListener = new upRightButtonActionListener();
+        ActionListener downButtonActionListener = new downButtonActionListener();
+        ActionListener upButtonActionListener = new upButtonActionListener();
+        ActionListener leftButtonActionListener = new leftButtonActionListener();
+        ActionListener rightButtonActionListener = new rightButtonActionListener();
 
         BufferedImage bowButtonIcon = ImageIO.read(new File("src/Game/img/buttons/bowbutton.JPG"));
         JButton bowButton = new JButton(new ImageIcon(bowButtonIcon));
@@ -69,7 +76,7 @@ public class ClassicRPGGame implements ActionListener {
         upbutton.setFocusPainted(false);
         upbutton.setContentAreaFilled(false);
         upbutton.setBounds(825,470,88,71);
-        upbutton.addActionListener(this);
+        upbutton.addActionListener(upButtonActionListener);
         panel.add(upbutton);
 
         BufferedImage uprightbuttonicon = ImageIO.read(new File("src/Game/img/buttons/upright.JPG"));
@@ -87,7 +94,7 @@ public class ClassicRPGGame implements ActionListener {
         leftbutton.setFocusPainted(false);
         leftbutton.setContentAreaFilled(false);
         leftbutton.setBounds(746,538,83,67);
-        leftbutton.addActionListener(this);
+        leftbutton.addActionListener(leftButtonActionListener);
         panel.add(leftbutton);
 
         BufferedImage downbuttonicon = ImageIO.read(new File("src/Game/img/buttons/down.JPG"));
@@ -96,7 +103,7 @@ public class ClassicRPGGame implements ActionListener {
         downbutton.setFocusPainted(false);
         downbutton.setContentAreaFilled(false);
         downbutton.setBounds(828,538,82,68);
-        downbutton.addActionListener(this);
+        downbutton.addActionListener(downButtonActionListener);
         panel.add(downbutton);
 
         BufferedImage rightbuttonicon = ImageIO.read(new File("src/Game/img/buttons/right.JPG"));
@@ -105,19 +112,24 @@ public class ClassicRPGGame implements ActionListener {
         rightbutton.setFocusPainted(false);
         rightbutton.setContentAreaFilled(false);
         rightbutton.setBounds(910,538,82,68);
-        rightbutton.addActionListener(this);
+        rightbutton.addActionListener(rightButtonActionListener);
         panel.add(rightbutton);
 
-        playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow1.JPG"));
+        playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow1.png"));
         wherePlayerLook = "south";
         playerArrowLabel = new JLabel(new ImageIcon(playerArrowImage));
         playerArrowLabel.setBounds(856,112,32,28);
         panel.add(playerArrowLabel);
 
-        BufferedImage backgroundImage = ImageIO.read(new File("src/Game/img/Newcastle.png"));
+        BufferedImage backgroundImage = ImageIO.read(new File("src/Game/img/castleBlack.png"));
         backgroundLabel = new JLabel(new ImageIcon(backgroundImage));
         backgroundLabel.setBounds(0,0,1024,640);
         panel.add(backgroundLabel);
+
+        BufferedImage mapImage = ImageIO.read(new File("src/Game/img/map.png"));
+        mapLabel = new JLabel(new ImageIcon(mapImage));
+        mapLabel.setBounds(mapX,mapY,667,532);
+        panel.add(mapLabel);
 
         frame.setVisible(true);
     }
@@ -128,11 +140,13 @@ public class ClassicRPGGame implements ActionListener {
                try {
                    panel.remove(playerArrowLabel);
                    panel.remove(backgroundLabel);
-                   playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow2.JPG"));
+                   panel.remove(mapLabel);
+                   playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow2.png"));
                    playerArrowLabel = new JLabel(new ImageIcon(playerArrowImage));
                    playerArrowLabel.setBounds(856,112,32,28);
                    panel.add(playerArrowLabel);
                    panel.add(backgroundLabel);
+                   panel.add(mapLabel);
                    panel.updateUI();
                    wherePlayerLook = "east";
                    System.out.println("Player look: " + wherePlayerLook);
@@ -144,11 +158,13 @@ public class ClassicRPGGame implements ActionListener {
                 try {
                     panel.remove(playerArrowLabel);
                     panel.remove(backgroundLabel);
-                    playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow3.JPG"));
+                    panel.remove(mapLabel);
+                    playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow3.png"));
                     playerArrowLabel = new JLabel(new ImageIcon(playerArrowImage));
                     playerArrowLabel.setBounds(856,112,32,28);
                     panel.add(playerArrowLabel);
                     panel.add(backgroundLabel);
+                    panel.add(mapLabel);
                     panel.updateUI();
                     wherePlayerLook = "north";
                     System.out.println("Player look: " + wherePlayerLook);
@@ -160,12 +176,14 @@ public class ClassicRPGGame implements ActionListener {
                 try {
                     panel.remove(playerArrowLabel);
                     panel.remove(backgroundLabel);
+                    panel.remove(mapLabel);
                     panel.updateUI();
-                    playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow4.JPG"));
+                    playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow4.png"));
                     playerArrowLabel = new JLabel(new ImageIcon(playerArrowImage));
                     playerArrowLabel.setBounds(856,112,32,28);
                     panel.add(playerArrowLabel);
                     panel.add(backgroundLabel);
+                    panel.add(mapLabel);
                     panel.updateUI();
                     wherePlayerLook = "west";
                     System.out.println("Player look: " + wherePlayerLook);
@@ -177,12 +195,14 @@ public class ClassicRPGGame implements ActionListener {
                 try {
                     panel.remove(playerArrowLabel);
                     panel.remove(backgroundLabel);
+                    panel.remove(mapLabel);
                     panel.updateUI();
-                    playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow1.JPG"));
+                    playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow1.png"));
                     playerArrowLabel = new JLabel(new ImageIcon(playerArrowImage));
                     playerArrowLabel.setBounds(856,112,32,28);
                     panel.add(playerArrowLabel);
                     panel.add(backgroundLabel);
+                    panel.add(mapLabel);
                     panel.updateUI();
                     wherePlayerLook = "south";
                     System.out.println("Player look: " + wherePlayerLook);
@@ -199,11 +219,13 @@ public class ClassicRPGGame implements ActionListener {
                 try {
                     panel.remove(playerArrowLabel);
                     panel.remove(backgroundLabel);
-                    playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow4.JPG"));
+                    panel.remove(mapLabel);
+                    playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow4.png"));
                     playerArrowLabel = new JLabel(new ImageIcon(playerArrowImage));
                     playerArrowLabel.setBounds(856,112,32,28);
                     panel.add(playerArrowLabel);
                     panel.add(backgroundLabel);
+                    panel.add(mapLabel);
                     panel.updateUI();
                     wherePlayerLook = "west";
                     System.out.println("Player look: " + wherePlayerLook);
@@ -215,11 +237,13 @@ public class ClassicRPGGame implements ActionListener {
                 try {
                     panel.remove(playerArrowLabel);
                     panel.remove(backgroundLabel);
-                    playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow3.JPG"));
+                    panel.remove(mapLabel);
+                    playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow3.png"));
                     playerArrowLabel = new JLabel(new ImageIcon(playerArrowImage));
                     playerArrowLabel.setBounds(856,112,32,28);
                     panel.add(playerArrowLabel);
                     panel.add(backgroundLabel);
+                    panel.add(mapLabel);
                     panel.updateUI();
                     wherePlayerLook = "north";
                     System.out.println("Player look: " + wherePlayerLook);
@@ -231,12 +255,14 @@ public class ClassicRPGGame implements ActionListener {
                 try {
                     panel.remove(playerArrowLabel);
                     panel.remove(backgroundLabel);
+                    panel.remove(mapLabel);
                     panel.updateUI();
-                    playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow2.JPG"));
+                    playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow2.png"));
                     playerArrowLabel = new JLabel(new ImageIcon(playerArrowImage));
                     playerArrowLabel.setBounds(856,112,32,28);
                     panel.add(playerArrowLabel);
                     panel.add(backgroundLabel);
+                    panel.add(mapLabel);
                     panel.updateUI();
                     wherePlayerLook = "east";
                     System.out.println("Player look: " + wherePlayerLook);
@@ -248,12 +274,14 @@ public class ClassicRPGGame implements ActionListener {
                 try {
                     panel.remove(playerArrowLabel);
                     panel.remove(backgroundLabel);
+                    panel.remove(mapLabel);
                     panel.updateUI();
-                    playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow1.JPG"));
+                    playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow1.png"));
                     playerArrowLabel = new JLabel(new ImageIcon(playerArrowImage));
                     playerArrowLabel.setBounds(856,112,32,28);
                     panel.add(playerArrowLabel);
                     panel.add(backgroundLabel);
+                    panel.add(mapLabel);
                     panel.updateUI();
                     wherePlayerLook = "south";
                     System.out.println("Player look: " + wherePlayerLook);
@@ -261,6 +289,58 @@ public class ClassicRPGGame implements ActionListener {
                     ioException.printStackTrace();
                 }
             }
+        }
+    }
+
+    public class downButtonActionListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            panel.remove(backgroundLabel);
+            panel.remove(mapLabel);
+            panel.updateUI();
+            mapY = mapY - 20;
+            mapLabel.setBounds(mapX,mapY,667,532);
+            panel.add(backgroundLabel);
+            panel.add(mapLabel);
+            panel.updateUI();
+        }
+    }
+
+    public class upButtonActionListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            panel.remove(backgroundLabel);
+            panel.remove(mapLabel);
+            panel.updateUI();
+            mapY = mapY + 20;
+            mapLabel.setBounds(mapX,mapY,667,532);
+            panel.add(backgroundLabel);
+            panel.add(mapLabel);
+            panel.updateUI();
+        }
+    }
+
+    public class leftButtonActionListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            panel.remove(backgroundLabel);
+            panel.remove(mapLabel);
+            panel.updateUI();
+            mapX = mapX + 31;
+            mapLabel.setBounds(mapX,mapY,667,532);
+            panel.add(backgroundLabel);
+            panel.add(mapLabel);
+            panel.updateUI();
+        }
+    }
+
+    public class rightButtonActionListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            panel.remove(backgroundLabel);
+            panel.remove(mapLabel);
+            panel.updateUI();
+            mapX = mapX - 31;
+            mapLabel.setBounds(mapX,mapY,667,532);
+            panel.add(backgroundLabel);
+            panel.add(mapLabel);
+            panel.updateUI();
         }
     }
 

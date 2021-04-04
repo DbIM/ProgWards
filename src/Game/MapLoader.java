@@ -35,12 +35,22 @@ public class MapLoader {
                     mapBlock.setPic("src/Game/img/onlyRoad.png");
                     mapBlock.setName("Road");
                 }
+                else if (letter == 'C') {
+                    mapBlock.setBlock(true);
+                    mapBlock.setPic("src/Game/img/castleBlack.png");
+                    mapBlock.setName("Castle");
+                }
+                else if (letter == 'T') {
+                    mapBlock.setBlock(true);
+                    mapBlock.setPic("src/Game/img/tipaForest.png");
+                    mapBlock.setName("Castle");
+                }
                 blocks.put(counter, mapBlock);
                 counter++;
             }
             posX++;
         }
-        System.out.println("test mapBlocks");
+      //  System.out.println("test mapBlocks");
     }
 
     public Character blockLetter(int posX, int posY){
