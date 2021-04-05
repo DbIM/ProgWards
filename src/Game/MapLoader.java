@@ -32,25 +32,29 @@ public class MapLoader {
                 }
                 else if (letter == 'R') {
                     mapBlock.setBlock(false);
-                    mapBlock.setPic("src/Game/img/onlyRoad.png");
+                    mapBlock.setPic("src/Game/img/road.png");
                     mapBlock.setName("Road");
                 }
                 else if (letter == 'C') {
                     mapBlock.setBlock(true);
-                    mapBlock.setPic("src/Game/img/castleBlack.png");
+                    mapBlock.setPic("src/Game/img/castle.png");
                     mapBlock.setName("Castle");
                 }
                 else if (letter == 'T') {
                     mapBlock.setBlock(true);
-                    mapBlock.setPic("src/Game/img/tipaForest.png");
-                    mapBlock.setName("Castle");
+                    mapBlock.setPic("src/Game/img/forest.png");
+                    mapBlock.setName("Tree");
+                }
+                else if (letter == 'S') {
+                    mapBlock.setBlock(false);
+                    mapBlock.setPic("src/Game/img/sand.png");
+                    mapBlock.setName("Sand");
                 }
                 blocks.put(counter, mapBlock);
                 counter++;
             }
             posX++;
         }
-      //  System.out.println("test mapBlocks");
     }
 
     public Character blockLetter(int posX, int posY){
@@ -63,6 +67,42 @@ public class MapLoader {
            }
         }
         return null;
+    }
+
+    public String blockName(int posX, int posY){
+        String blockname;
+        for (int i = 0; i<blocks.size(); i++){
+            mapBlock = blocks.get(i);
+            if (mapBlock.getPositionX() == posX && mapBlock.getPositionY() == posY){
+                blockname = mapBlock.getName();
+                return blockname;
+            }
+        }
+        return null;
+    }
+
+    public String blockPicture(int posX, int posY){
+        String blockPicture;
+        for (int i = 0; i<blocks.size(); i++){
+            mapBlock = blocks.get(i);
+            if (mapBlock.getPositionX() == posX && mapBlock.getPositionY() == posY){
+                blockPicture = mapBlock.getPic();
+                return blockPicture;
+            }
+        }
+        return null;
+    }
+
+    public boolean blockIsBlocked(int posX, int posY){
+        boolean blockIsBlocked = false;
+        for (int i = 0; i<blocks.size(); i++){
+            mapBlock = blocks.get(i);
+            if (mapBlock.getPositionX() == posX && mapBlock.getPositionY() == posY){
+                blockIsBlocked = mapBlock.isBlock();
+                return blockIsBlocked;
+            }
+        }
+        return blockIsBlocked;
     }
 
 }

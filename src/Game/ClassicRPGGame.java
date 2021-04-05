@@ -13,20 +13,22 @@ public class ClassicRPGGame implements ActionListener {
     private static JPanel panel;
     JLabel backgroundLabel;
     JLabel mapLabel;
+    JLabel eyeView;
     BufferedImage playerArrowImage;
     JLabel playerArrowLabel;
     String wherePlayerLook = "";
     int mapX = 538;
     int mapY = -116;
+    int playerXPosition = 9;
+    int playerYPosition = 10;
 
     int counter = 0;
+    MapLoader level = new MapLoader("src/Game/map.txt");
 
     public ClassicRPGGame() throws IOException {
-        MapLoader level = new MapLoader("src/Game/map.txt");
-        System.out.println(level.blockLetter(1,1));
 
         frame = new JFrame("Classic RPG");
-        frame.setSize(1024,640);
+        frame.setSize(1024, 640);
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setUndecorated(true);
 
@@ -48,7 +50,7 @@ public class ClassicRPGGame implements ActionListener {
         bowButton.setBorder(BorderFactory.createEmptyBorder());
         bowButton.setFocusPainted(false);
         bowButton.setContentAreaFilled(false);
-        bowButton.setBounds(740,230,97,82);
+        bowButton.setBounds(740, 230, 97, 82);
         bowButton.addActionListener(bowButtonActionListener);
         panel.add(bowButton);
 
@@ -57,7 +59,7 @@ public class ClassicRPGGame implements ActionListener {
         exitButton.setBorder(BorderFactory.createEmptyBorder());
         exitButton.setFocusPainted(false);
         exitButton.setContentAreaFilled(false);
-        exitButton.setBounds(826,305,86,70);
+        exitButton.setBounds(826, 305, 86, 70);
         exitButton.addActionListener(exitButtonActionListener);
         panel.add(exitButton);
 
@@ -66,7 +68,7 @@ public class ClassicRPGGame implements ActionListener {
         upleftbutton.setBorder(BorderFactory.createEmptyBorder());
         upleftbutton.setFocusPainted(false);
         upleftbutton.setContentAreaFilled(false);
-        upleftbutton.setBounds(750,470,79,65);
+        upleftbutton.setBounds(750, 470, 79, 65);
         upleftbutton.addActionListener(upLeftButtonActionListener);
         panel.add(upleftbutton);
 
@@ -75,7 +77,7 @@ public class ClassicRPGGame implements ActionListener {
         upbutton.setBorder(BorderFactory.createEmptyBorder());
         upbutton.setFocusPainted(false);
         upbutton.setContentAreaFilled(false);
-        upbutton.setBounds(825,470,88,71);
+        upbutton.setBounds(825, 470, 88, 71);
         upbutton.addActionListener(upButtonActionListener);
         panel.add(upbutton);
 
@@ -84,7 +86,7 @@ public class ClassicRPGGame implements ActionListener {
         uprightbutton.setBorder(BorderFactory.createEmptyBorder());
         uprightbutton.setFocusPainted(false);
         uprightbutton.setContentAreaFilled(false);
-        uprightbutton.setBounds(910,470,82,70);
+        uprightbutton.setBounds(910, 470, 82, 70);
         uprightbutton.addActionListener(upRightButtonActionListener);
         panel.add(uprightbutton);
 
@@ -93,7 +95,7 @@ public class ClassicRPGGame implements ActionListener {
         leftbutton.setBorder(BorderFactory.createEmptyBorder());
         leftbutton.setFocusPainted(false);
         leftbutton.setContentAreaFilled(false);
-        leftbutton.setBounds(746,538,83,67);
+        leftbutton.setBounds(746, 538, 83, 67);
         leftbutton.addActionListener(leftButtonActionListener);
         panel.add(leftbutton);
 
@@ -102,7 +104,7 @@ public class ClassicRPGGame implements ActionListener {
         downbutton.setBorder(BorderFactory.createEmptyBorder());
         downbutton.setFocusPainted(false);
         downbutton.setContentAreaFilled(false);
-        downbutton.setBounds(828,538,82,68);
+        downbutton.setBounds(828, 538, 82, 68);
         downbutton.addActionListener(downButtonActionListener);
         panel.add(downbutton);
 
@@ -111,24 +113,29 @@ public class ClassicRPGGame implements ActionListener {
         rightbutton.setBorder(BorderFactory.createEmptyBorder());
         rightbutton.setFocusPainted(false);
         rightbutton.setContentAreaFilled(false);
-        rightbutton.setBounds(910,538,82,68);
+        rightbutton.setBounds(910, 538, 82, 68);
         rightbutton.addActionListener(rightButtonActionListener);
         panel.add(rightbutton);
 
         playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow1.png"));
         wherePlayerLook = "south";
         playerArrowLabel = new JLabel(new ImageIcon(playerArrowImage));
-        playerArrowLabel.setBounds(856,112,32,28);
+        playerArrowLabel.setBounds(856, 112, 32, 28);
         panel.add(playerArrowLabel);
 
-        BufferedImage backgroundImage = ImageIO.read(new File("src/Game/img/castleBlack.png"));
+        BufferedImage backgroundImage = ImageIO.read(new File("src/Game/img/mainWindowBlanc.png"));
         backgroundLabel = new JLabel(new ImageIcon(backgroundImage));
-        backgroundLabel.setBounds(0,0,1024,640);
+        backgroundLabel.setBounds(0, 0, 1024, 640);
         panel.add(backgroundLabel);
 
-        BufferedImage mapImage = ImageIO.read(new File("src/Game/img/map.png"));
+        BufferedImage eyeViewImage = ImageIO.read(new File("src/Game/img/castle.png"));
+        eyeView = new JLabel(new ImageIcon(eyeViewImage));
+        eyeView.setBounds(1, 25, 720, 421);
+        panel.add(eyeView);
+
+        BufferedImage mapImage = ImageIO.read(new File("src/Game/img/map504.png"));
         mapLabel = new JLabel(new ImageIcon(mapImage));
-        mapLabel.setBounds(mapX,mapY,667,532);
+        mapLabel.setBounds(mapX, mapY, 667, 532);
         panel.add(mapLabel);
 
         frame.setVisible(true);
@@ -136,34 +143,50 @@ public class ClassicRPGGame implements ActionListener {
 
     public class upLeftButtonActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-           if (wherePlayerLook.equals("south")){
-               try {
-                   panel.remove(playerArrowLabel);
-                   panel.remove(backgroundLabel);
-                   panel.remove(mapLabel);
-                   playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow2.png"));
-                   playerArrowLabel = new JLabel(new ImageIcon(playerArrowImage));
-                   playerArrowLabel.setBounds(856,112,32,28);
-                   panel.add(playerArrowLabel);
-                   panel.add(backgroundLabel);
-                   panel.add(mapLabel);
-                   panel.updateUI();
-                   wherePlayerLook = "east";
-                   System.out.println("Player look: " + wherePlayerLook);
-               } catch (IOException ioException) {
-                   ioException.printStackTrace();
-               }
-           }
-           else if (wherePlayerLook.equals("east")){
+            if (wherePlayerLook.equals("south")) {
                 try {
                     panel.remove(playerArrowLabel);
                     panel.remove(backgroundLabel);
                     panel.remove(mapLabel);
-                    playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow3.png"));
+                    panel.remove(eyeView);
+                    playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow2.png"));
+                    wherePlayerLook = "east";
                     playerArrowLabel = new JLabel(new ImageIcon(playerArrowImage));
-                    playerArrowLabel.setBounds(856,112,32,28);
+                    playerArrowLabel.setBounds(856, 112, 32, 28);
                     panel.add(playerArrowLabel);
                     panel.add(backgroundLabel);
+
+                    int nextY = playerYPosition + 1;
+                    BufferedImage eyeViewImage = ImageIO.read(new File(level.blockPicture(playerXPosition, nextY)));
+                    eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                    eyeView.setBounds(1, 25, 720, 421);
+
+                    panel.add(eyeView);
+                    panel.add(mapLabel);
+                    panel.updateUI();
+
+                    System.out.println("Player look: " + wherePlayerLook);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            } else if (wherePlayerLook.equals("east")) {
+                try {
+                    panel.remove(playerArrowLabel);
+                    panel.remove(backgroundLabel);
+                    panel.remove(mapLabel);
+                    panel.remove(eyeView);
+                    playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow3.png"));
+                    playerArrowLabel = new JLabel(new ImageIcon(playerArrowImage));
+                    playerArrowLabel.setBounds(856, 112, 32, 28);
+                    panel.add(playerArrowLabel);
+                    panel.add(backgroundLabel);
+
+                    int nextX = playerXPosition - 1;
+                    BufferedImage eyeViewImage = ImageIO.read(new File(level.blockPicture(nextX, playerYPosition)));
+                    eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                    eyeView.setBounds(1, 25, 720, 421);
+
+                    panel.add(eyeView);
                     panel.add(mapLabel);
                     panel.updateUI();
                     wherePlayerLook = "north";
@@ -171,37 +194,51 @@ public class ClassicRPGGame implements ActionListener {
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
-            }
-           else if (wherePlayerLook.equals("north")){
+            } else if (wherePlayerLook.equals("north")) {
                 try {
                     panel.remove(playerArrowLabel);
                     panel.remove(backgroundLabel);
                     panel.remove(mapLabel);
+                    panel.remove(eyeView);
                     panel.updateUI();
                     playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow4.png"));
+                    wherePlayerLook = "west";
                     playerArrowLabel = new JLabel(new ImageIcon(playerArrowImage));
-                    playerArrowLabel.setBounds(856,112,32,28);
+                    playerArrowLabel.setBounds(856, 112, 32, 28);
                     panel.add(playerArrowLabel);
                     panel.add(backgroundLabel);
+
+                    int nextY = playerYPosition - 1;
+                    BufferedImage eyeViewImage = ImageIO.read(new File(level.blockPicture(playerXPosition, nextY)));
+                    eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                    eyeView.setBounds(1, 25, 720, 421);
+
+                    panel.add(eyeView);
                     panel.add(mapLabel);
                     panel.updateUI();
-                    wherePlayerLook = "west";
                     System.out.println("Player look: " + wherePlayerLook);
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
-            }
-            else if (wherePlayerLook.equals("west")){
+            } else if (wherePlayerLook.equals("west")) {
                 try {
                     panel.remove(playerArrowLabel);
                     panel.remove(backgroundLabel);
                     panel.remove(mapLabel);
+                    panel.remove(eyeView);
                     panel.updateUI();
                     playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow1.png"));
                     playerArrowLabel = new JLabel(new ImageIcon(playerArrowImage));
-                    playerArrowLabel.setBounds(856,112,32,28);
+                    playerArrowLabel.setBounds(856, 112, 32, 28);
                     panel.add(playerArrowLabel);
                     panel.add(backgroundLabel);
+
+                    int nextX = playerXPosition + 1;
+                    BufferedImage eyeViewImage = ImageIO.read(new File(level.blockPicture(nextX, playerYPosition)));
+                    eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                    eyeView.setBounds(1, 25, 720, 421);
+
+                    panel.add(eyeView);
                     panel.add(mapLabel);
                     panel.updateUI();
                     wherePlayerLook = "south";
@@ -215,16 +252,24 @@ public class ClassicRPGGame implements ActionListener {
 
     public class upRightButtonActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            if (wherePlayerLook.equals("south")){
+            if (wherePlayerLook.equals("south")) {
                 try {
                     panel.remove(playerArrowLabel);
                     panel.remove(backgroundLabel);
                     panel.remove(mapLabel);
+                    panel.remove(eyeView);
                     playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow4.png"));
                     playerArrowLabel = new JLabel(new ImageIcon(playerArrowImage));
-                    playerArrowLabel.setBounds(856,112,32,28);
+                    playerArrowLabel.setBounds(856, 112, 32, 28);
                     panel.add(playerArrowLabel);
                     panel.add(backgroundLabel);
+
+                    int nextY = playerYPosition - 1;
+                    BufferedImage eyeViewImage = ImageIO.read(new File(level.blockPicture(playerXPosition, nextY)));
+                    eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                    eyeView.setBounds(1, 25, 720, 421);
+
+                    panel.add(eyeView);
                     panel.add(mapLabel);
                     panel.updateUI();
                     wherePlayerLook = "west";
@@ -232,17 +277,24 @@ public class ClassicRPGGame implements ActionListener {
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
-            }
-            else if (wherePlayerLook.equals("west")){
+            } else if (wherePlayerLook.equals("west")) {
                 try {
                     panel.remove(playerArrowLabel);
                     panel.remove(backgroundLabel);
                     panel.remove(mapLabel);
+                    panel.remove(eyeView);
                     playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow3.png"));
                     playerArrowLabel = new JLabel(new ImageIcon(playerArrowImage));
-                    playerArrowLabel.setBounds(856,112,32,28);
+                    playerArrowLabel.setBounds(856, 112, 32, 28);
                     panel.add(playerArrowLabel);
                     panel.add(backgroundLabel);
+
+                    int nextX = playerXPosition - 1;
+                    BufferedImage eyeViewImage = ImageIO.read(new File(level.blockPicture(nextX, playerYPosition)));
+                    eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                    eyeView.setBounds(1, 25, 720, 421);
+
+                    panel.add(eyeView);
                     panel.add(mapLabel);
                     panel.updateUI();
                     wherePlayerLook = "north";
@@ -250,18 +302,25 @@ public class ClassicRPGGame implements ActionListener {
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
-            }
-            else if (wherePlayerLook.equals("north")){
+            } else if (wherePlayerLook.equals("north")) {
                 try {
                     panel.remove(playerArrowLabel);
                     panel.remove(backgroundLabel);
                     panel.remove(mapLabel);
+                    panel.remove(eyeView);
                     panel.updateUI();
                     playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow2.png"));
                     playerArrowLabel = new JLabel(new ImageIcon(playerArrowImage));
-                    playerArrowLabel.setBounds(856,112,32,28);
+                    playerArrowLabel.setBounds(856, 112, 32, 28);
                     panel.add(playerArrowLabel);
                     panel.add(backgroundLabel);
+
+                    int nextY = playerYPosition + 1;
+                    BufferedImage eyeViewImage = ImageIO.read(new File(level.blockPicture(playerXPosition, nextY)));
+                    eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                    eyeView.setBounds(1, 25, 720, 421);
+
+                    panel.add(eyeView);
                     panel.add(mapLabel);
                     panel.updateUI();
                     wherePlayerLook = "east";
@@ -269,18 +328,25 @@ public class ClassicRPGGame implements ActionListener {
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
-            }
-            else if (wherePlayerLook.equals("east")){
+            } else if (wherePlayerLook.equals("east")) {
                 try {
                     panel.remove(playerArrowLabel);
                     panel.remove(backgroundLabel);
                     panel.remove(mapLabel);
+                    panel.remove(eyeView);
                     panel.updateUI();
                     playerArrowImage = ImageIO.read(new File("src/Game/img/playerArrow/playerArrow1.png"));
                     playerArrowLabel = new JLabel(new ImageIcon(playerArrowImage));
-                    playerArrowLabel.setBounds(856,112,32,28);
+                    playerArrowLabel.setBounds(856, 112, 32, 28);
                     panel.add(playerArrowLabel);
                     panel.add(backgroundLabel);
+
+                    int nextX = playerXPosition + 1;
+                    BufferedImage eyeViewImage = ImageIO.read(new File(level.blockPicture(nextX, playerYPosition)));
+                    eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                    eyeView.setBounds(1, 25, 720, 421);
+
+                    panel.add(eyeView);
                     panel.add(mapLabel);
                     panel.updateUI();
                     wherePlayerLook = "south";
@@ -294,53 +360,293 @@ public class ClassicRPGGame implements ActionListener {
 
     public class downButtonActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            panel.remove(backgroundLabel);
-            panel.remove(mapLabel);
-            panel.updateUI();
-            mapY = mapY - 20;
-            mapLabel.setBounds(mapX,mapY,667,532);
-            panel.add(backgroundLabel);
-            panel.add(mapLabel);
-            panel.updateUI();
+            int nextX = playerXPosition + 1;
+            boolean nextBlockIsBlocked = level.blockIsBlocked(nextX, playerYPosition);
+            if (!nextBlockIsBlocked) {
+                panel.remove(backgroundLabel);
+                panel.remove(mapLabel);
+                panel.remove(eyeView);
+                panel.updateUI();
+                mapY = mapY - 24;
+                playerXPosition++;
+                mapLabel.setBounds(mapX, mapY, 667, 532);
+                panel.add(backgroundLabel);
+
+                int nextBlockX = 0;
+                int nextBlockY = 0;
+                if (wherePlayerLook.equals("east")){
+                    nextBlockY = playerYPosition - 1;
+                    BufferedImage eyeViewImage = null;
+                    try {
+                        eyeViewImage = ImageIO.read(new File(level.blockPicture(playerXPosition, nextBlockY)));
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                    eyeView.setBounds(1, 25, 720, 421);
+                }
+                else if(wherePlayerLook.equals("west")){
+                    nextBlockY = playerYPosition + 1;
+                    BufferedImage eyeViewImage = null;
+                    try {
+                        eyeViewImage = ImageIO.read(new File(level.blockPicture(playerXPosition, nextBlockY)));
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                    eyeView.setBounds(1, 25, 720, 421);
+                }
+                else if(wherePlayerLook.equals("north")){
+                    nextBlockX = playerXPosition - 1;
+                    BufferedImage eyeViewImage = null;
+                    try {
+                        eyeViewImage = ImageIO.read(new File(level.blockPicture(nextBlockX, playerYPosition)));
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                    eyeView.setBounds(1, 25, 720, 421);
+                }
+                else if(wherePlayerLook.equals("south")){
+                    nextBlockX = playerXPosition + 1;
+                    BufferedImage eyeViewImage = null;
+                    try {
+                        eyeViewImage = ImageIO.read(new File(level.blockPicture(nextBlockX, playerYPosition)));
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                    eyeView.setBounds(1, 25, 720, 421);
+                }
+
+                panel.add(eyeView);
+                panel.add(mapLabel);
+                panel.updateUI();
+
+                System.out.println("Player X position: " + playerXPosition + " Player Y position: " + playerYPosition);
+                System.out.println("Player stand on a " + level.blockName(playerXPosition, playerYPosition));
+                System.out.println("Next block on the east " + level.blockName(playerXPosition, playerYPosition + 1));
+                System.out.println("Next block on the west " + level.blockName(playerXPosition, playerYPosition - 1));
+            }
         }
     }
 
     public class upButtonActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            panel.remove(backgroundLabel);
-            panel.remove(mapLabel);
-            panel.updateUI();
-            mapY = mapY + 20;
-            mapLabel.setBounds(mapX,mapY,667,532);
-            panel.add(backgroundLabel);
-            panel.add(mapLabel);
-            panel.updateUI();
+            int nextX = playerXPosition - 1;
+            boolean nextBlockIsBlocked = level.blockIsBlocked(nextX, playerYPosition);
+            if (!nextBlockIsBlocked) {
+                panel.remove(backgroundLabel);
+                panel.remove(mapLabel);
+                panel.remove(eyeView);
+                panel.updateUI();
+                mapY = mapY + 24;
+                playerXPosition--;
+                mapLabel.setBounds(mapX, mapY, 667, 532);
+                panel.add(backgroundLabel);
+
+                int nextBlockX = 0;
+                int nextBlockY = 0;
+                if (wherePlayerLook.equals("east")){
+                    nextBlockY = playerYPosition - 1;
+                    BufferedImage eyeViewImage = null;
+                    try {
+                        eyeViewImage = ImageIO.read(new File(level.blockPicture(playerXPosition, nextBlockY)));
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                    eyeView.setBounds(1, 25, 720, 421);
+                }
+                else if(wherePlayerLook.equals("west")){
+                    nextBlockY = playerYPosition + 1;
+                    BufferedImage eyeViewImage = null;
+                    try {
+                        eyeViewImage = ImageIO.read(new File(level.blockPicture(playerXPosition, nextBlockY)));
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                    eyeView.setBounds(1, 25, 720, 421);
+                }
+                else if(wherePlayerLook.equals("north")){
+                    nextBlockX = playerXPosition - 1;
+                    BufferedImage eyeViewImage = null;
+                    try {
+                        eyeViewImage = ImageIO.read(new File(level.blockPicture(nextBlockX, playerYPosition)));
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                    eyeView.setBounds(1, 25, 720, 421);
+                }
+                else if(wherePlayerLook.equals("south")){
+                    nextBlockX = playerXPosition + 1;
+                    BufferedImage eyeViewImage = null;
+                    try {
+                        eyeViewImage = ImageIO.read(new File(level.blockPicture(nextBlockX, playerYPosition)));
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                    eyeView.setBounds(1, 25, 720, 421);
+                }
+
+                panel.add(eyeView);
+                panel.add(mapLabel);
+                panel.updateUI();
+
+                System.out.println("Player X position: " + playerXPosition + " Player Y position: " + playerYPosition);
+                System.out.println("Player stand on a " + level.blockName(playerXPosition, playerYPosition));
+                System.out.println("Next block on the east " + level.blockName(playerXPosition, playerYPosition + 1));
+                System.out.println("Next block on the west " + level.blockName(playerXPosition, playerYPosition - 1));
+            }
         }
     }
 
     public class leftButtonActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            panel.remove(backgroundLabel);
-            panel.remove(mapLabel);
-            panel.updateUI();
-            mapX = mapX + 31;
-            mapLabel.setBounds(mapX,mapY,667,532);
-            panel.add(backgroundLabel);
-            panel.add(mapLabel);
-            panel.updateUI();
+            int nextY = playerYPosition - 1;
+            boolean nextBlockIsBlocked = level.blockIsBlocked(playerXPosition, nextY);
+            if (!nextBlockIsBlocked) {
+                panel.remove(backgroundLabel);
+                panel.remove(mapLabel);
+                panel.remove(eyeView);
+                panel.updateUI();
+                mapX = mapX + 24;
+                playerYPosition--;
+                mapLabel.setBounds(mapX, mapY, 667, 532);
+                panel.add(backgroundLabel);
+
+                int nextBlockX = 0;
+                int nextBlockY = 0;
+                if (wherePlayerLook.equals("east")){
+                    nextBlockY = playerYPosition + 1;
+                    BufferedImage eyeViewImage = null;
+                    try {
+                        eyeViewImage = ImageIO.read(new File(level.blockPicture(playerXPosition, nextBlockY)));
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                    eyeView.setBounds(1, 25, 720, 421);
+                }
+                else if(wherePlayerLook.equals("west")){
+                    nextBlockY = playerYPosition - 1;
+                    BufferedImage eyeViewImage = null;
+                    try {
+                        eyeViewImage = ImageIO.read(new File(level.blockPicture(playerXPosition, nextBlockY)));
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                    eyeView.setBounds(1, 25, 720, 421);
+                }
+                else if(wherePlayerLook.equals("north")){
+                    nextBlockX = playerXPosition - 1;
+                    BufferedImage eyeViewImage = null;
+                    try {
+                        eyeViewImage = ImageIO.read(new File(level.blockPicture(nextBlockX, playerYPosition)));
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                    eyeView.setBounds(1, 25, 720, 421);
+                }
+                else if(wherePlayerLook.equals("south")){
+                    nextBlockX = playerXPosition + 1;
+                    BufferedImage eyeViewImage = null;
+                    try {
+                        eyeViewImage = ImageIO.read(new File(level.blockPicture(nextBlockX, playerYPosition)));
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                    eyeView.setBounds(1, 25, 720, 421);
+                }
+
+                panel.add(eyeView);
+                panel.add(mapLabel);
+                panel.updateUI();
+
+                System.out.println("Player X position: " + playerXPosition + " Player Y position: " + playerYPosition);
+                System.out.println("Player stand on a " + level.blockName(playerXPosition, playerYPosition));
+                System.out.println("Next block on the east " + level.blockName(playerXPosition, playerYPosition + 1));
+                System.out.println("Next block on the west " + level.blockName(playerXPosition, playerYPosition - 1));
+            }
         }
     }
 
     public class rightButtonActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            panel.remove(backgroundLabel);
-            panel.remove(mapLabel);
-            panel.updateUI();
-            mapX = mapX - 31;
-            mapLabel.setBounds(mapX,mapY,667,532);
-            panel.add(backgroundLabel);
-            panel.add(mapLabel);
-            panel.updateUI();
+            int nextY = playerYPosition + 1;
+            boolean nextBlockIsBlocked = level.blockIsBlocked(playerXPosition, nextY);
+            if (!nextBlockIsBlocked) {
+                panel.remove(backgroundLabel);
+                panel.remove(mapLabel);
+                panel.remove(eyeView);
+                panel.updateUI();
+                mapX = mapX - 24;
+                playerYPosition++;
+                mapLabel.setBounds(mapX, mapY, 667, 532);
+                panel.add(backgroundLabel);
+
+                int nextBlockX = 0;
+                int nextBlockY = 0;
+                if (wherePlayerLook.equals("east")){
+                    nextBlockY = playerYPosition + 1;
+                    BufferedImage eyeViewImage = null;
+                    try {
+                        eyeViewImage = ImageIO.read(new File(level.blockPicture(playerXPosition, nextBlockY)));
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                    eyeView.setBounds(1, 25, 720, 421);
+                }
+                else if(wherePlayerLook.equals("west")){
+                    nextBlockY = playerYPosition - 1;
+                    BufferedImage eyeViewImage = null;
+                    try {
+                        eyeViewImage = ImageIO.read(new File(level.blockPicture(playerXPosition, nextBlockY)));
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                    eyeView.setBounds(1, 25, 720, 421);
+                }
+                else if(wherePlayerLook.equals("north")){
+                    nextBlockX = playerXPosition - 1;
+                    BufferedImage eyeViewImage = null;
+                    try {
+                        eyeViewImage = ImageIO.read(new File(level.blockPicture(nextBlockX, playerYPosition)));
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                    eyeView.setBounds(1, 25, 720, 421);
+                }
+                else if(wherePlayerLook.equals("south")){
+                    nextBlockX = playerXPosition + 1;
+                    BufferedImage eyeViewImage = null;
+                    try {
+                        eyeViewImage = ImageIO.read(new File(level.blockPicture(nextBlockX, playerYPosition)));
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                    eyeView.setBounds(1, 25, 720, 421);
+                }
+
+                panel.add(eyeView);
+                panel.add(mapLabel);
+                panel.updateUI();
+
+                System.out.println("Player X position: " + playerXPosition + " Player Y position: " + playerYPosition);
+                System.out.println("Player stand on a " + level.blockName(playerXPosition, playerYPosition));
+                System.out.println("Next block on the east " + level.blockName(playerXPosition, playerYPosition + 1));
+                System.out.println("Next block on the west " + level.blockName(playerXPosition, playerYPosition - 1));
+            }
         }
     }
 
