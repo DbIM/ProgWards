@@ -32,7 +32,7 @@ public class MapLoader {
                 }
                 else if (letter == 'R') {
                     mapBlock.setBlock(false);
-                    mapBlock.setPic("src/Game/img/road.png");
+                    mapBlock.setPic("src/Game/img/roadRoad.png");
                     mapBlock.setName("Road");
                 }
                 else if (letter == 'C') {
