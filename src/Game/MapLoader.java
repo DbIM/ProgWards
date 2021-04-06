@@ -33,21 +33,25 @@ public class MapLoader {
                 else if (letter == 'R') {
                     mapBlock.setBlock(false);
                     mapBlock.setPic("src/Game/img/roadRoad.png");
+                    mapBlock.setPictureFar("src/Game/img/roadRoad.png");
                     mapBlock.setName("Road");
                 }
                 else if (letter == 'C') {
                     mapBlock.setBlock(true);
                     mapBlock.setPic("src/Game/img/castle.png");
+                    mapBlock.setPictureFar("src/Game/img/roadCastle.png");
                     mapBlock.setName("Castle");
                 }
                 else if (letter == 'T') {
                     mapBlock.setBlock(true);
                     mapBlock.setPic("src/Game/img/forest.png");
+                    mapBlock.setPictureFar("src/Game/img/roadForest.png");
                     mapBlock.setName("Tree");
                 }
                 else if (letter == 'S') {
                     mapBlock.setBlock(false);
                     mapBlock.setPic("src/Game/img/sand.png");
+                    mapBlock.setPictureFar("src/Game/img/sandForest.png");
                     mapBlock.setName("Sand");
                 }
                 blocks.put(counter, mapBlock);
@@ -87,6 +91,18 @@ public class MapLoader {
             mapBlock = blocks.get(i);
             if (mapBlock.getPositionX() == posX && mapBlock.getPositionY() == posY){
                 blockPicture = mapBlock.getPic();
+                return blockPicture;
+            }
+        }
+        return null;
+    }
+
+    public String blockFarPicture(int posX, int posY){
+        String blockPicture;
+        for (int i = 0; i<blocks.size(); i++){
+            mapBlock = blocks.get(i);
+            if (mapBlock.getPositionX() == posX && mapBlock.getPositionY() == posY){
+                blockPicture = mapBlock.getPictureFar();
                 return blockPicture;
             }
         }

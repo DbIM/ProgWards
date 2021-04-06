@@ -15,6 +15,7 @@ public class ClassicRPGGame implements ActionListener {
     JLabel mapLabel;
     JLabel eyeView;
     BufferedImage playerArrowImage;
+    BufferedImage whatUReallyC;
     JLabel playerArrowLabel;
     String wherePlayerLook = "";
     int mapX = 538;
@@ -128,7 +129,7 @@ public class ClassicRPGGame implements ActionListener {
         backgroundLabel.setBounds(0, 0, 1024, 640);
         panel.add(backgroundLabel);
 
-        BufferedImage eyeViewImage = ImageIO.read(new File("src/Game/img/castle.png"));
+        BufferedImage eyeViewImage = ImageIO.read(new File("src/Game/img/startScreen.png"));
         eyeView = new JLabel(new ImageIcon(eyeViewImage));
         eyeView.setBounds(1, 25, 720, 421);
         panel.add(eyeView);
@@ -288,10 +289,46 @@ public class ClassicRPGGame implements ActionListener {
                     playerArrowLabel.setBounds(856, 112, 32, 28);
                     panel.add(playerArrowLabel);
                     panel.add(backgroundLabel);
-
                     int nextX = playerXPosition - 1;
-                    BufferedImage eyeViewImage = ImageIO.read(new File(level.blockPicture(nextX, playerYPosition)));
-                    eyeView = new JLabel(new ImageIcon(eyeViewImage));
+
+                    BufferedImage eyeViewImage = null;
+                    int nextBlockX = playerXPosition - 1;
+                    int lastBlockX = nextBlockX - 1;
+                    char near = level.blockLetter(nextBlockX, playerYPosition);
+                    char far = level.blockLetter(lastBlockX, playerYPosition);
+                    if (near == 'R' && far == 'R'){
+                        try {
+                            whatUReallyC = ImageIO.read(new File(level.blockFarPicture(nextBlockX, playerYPosition)));
+                            eyeView = new JLabel(new ImageIcon(whatUReallyC));
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                    }
+                    else if (near == 'R' && far == 'C'){
+                        try {
+                            whatUReallyC = ImageIO.read(new File(level.blockFarPicture(lastBlockX, playerYPosition)));
+                            eyeView = new JLabel(new ImageIcon(whatUReallyC));
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                    }
+                    else if (near == 'R' && far == 'T'){
+                        try {
+                            whatUReallyC = ImageIO.read(new File(level.blockFarPicture(lastBlockX, playerYPosition)));
+                            eyeView = new JLabel(new ImageIcon(whatUReallyC));
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                    }
+                    else {
+                        try {
+                            eyeViewImage = ImageIO.read(new File(level.blockPicture(nextBlockX, playerYPosition)));
+                            eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                        eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                    }
                     eyeView.setBounds(1, 25, 720, 421);
 
                     panel.add(eyeView);
@@ -314,8 +351,8 @@ public class ClassicRPGGame implements ActionListener {
                     playerArrowLabel.setBounds(856, 112, 32, 28);
                     panel.add(playerArrowLabel);
                     panel.add(backgroundLabel);
-
                     int nextY = playerYPosition + 1;
+
                     BufferedImage eyeViewImage = ImageIO.read(new File(level.blockPicture(playerXPosition, nextY)));
                     eyeView = new JLabel(new ImageIcon(eyeViewImage));
                     eyeView.setBounds(1, 25, 720, 421);
@@ -340,10 +377,45 @@ public class ClassicRPGGame implements ActionListener {
                     playerArrowLabel.setBounds(856, 112, 32, 28);
                     panel.add(playerArrowLabel);
                     panel.add(backgroundLabel);
-
                     int nextX = playerXPosition + 1;
-                    BufferedImage eyeViewImage = ImageIO.read(new File(level.blockPicture(nextX, playerYPosition)));
-                    eyeView = new JLabel(new ImageIcon(eyeViewImage));
+
+                    BufferedImage eyeViewImage = null;
+                    int nextBlockX = playerXPosition + 1;
+                    int lastBlockX = nextBlockX + 1;
+                    char near = level.blockLetter(nextBlockX, playerYPosition);
+                    char far = level.blockLetter(lastBlockX, playerYPosition);
+                    if (near == 'R' && far == 'R'){
+                        try {
+                            whatUReallyC = ImageIO.read(new File(level.blockPicture(nextBlockX, playerYPosition)));
+                            eyeView = new JLabel(new ImageIcon(whatUReallyC));
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                    }
+                    else if (near == 'R' && far == 'C'){
+                        try {
+                            whatUReallyC = ImageIO.read(new File(level.blockFarPicture(lastBlockX, playerYPosition)));
+                            eyeView = new JLabel(new ImageIcon(whatUReallyC));
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                    }
+                    else if (near == 'R' && far == 'T'){
+                        try {
+                            whatUReallyC = ImageIO.read(new File(level.blockFarPicture(lastBlockX, playerYPosition)));
+                            eyeView = new JLabel(new ImageIcon(whatUReallyC));
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                    }
+                    else {
+                        try {
+                            eyeViewImage = ImageIO.read(new File(level.blockPicture(nextBlockX, playerYPosition)));
+                            eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                    }
                     eyeView.setBounds(1, 25, 720, 421);
 
                     panel.add(eyeView);
@@ -374,7 +446,19 @@ public class ClassicRPGGame implements ActionListener {
 
                 int nextBlockX = 0;
                 int nextBlockY = 0;
+                int lastBlockX = 0;
                 if (wherePlayerLook.equals("east")){
+                    nextBlockY = playerYPosition + 1;
+                    BufferedImage eyeViewImage = null;
+                    try {
+                        eyeViewImage = ImageIO.read(new File(level.blockPicture(playerXPosition, nextBlockY)));
+                        eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    eyeView.setBounds(1, 25, 720, 421);
+                }
+                else if(wherePlayerLook.equals("west")){
                     nextBlockY = playerYPosition - 1;
                     BufferedImage eyeViewImage = null;
                     try {
@@ -385,37 +469,87 @@ public class ClassicRPGGame implements ActionListener {
                     eyeView = new JLabel(new ImageIcon(eyeViewImage));
                     eyeView.setBounds(1, 25, 720, 421);
                 }
-                else if(wherePlayerLook.equals("west")){
-                    nextBlockY = playerYPosition + 1;
-                    BufferedImage eyeViewImage = null;
-                    try {
-                        eyeViewImage = ImageIO.read(new File(level.blockPicture(playerXPosition, nextBlockY)));
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                    eyeView = new JLabel(new ImageIcon(eyeViewImage));
-                    eyeView.setBounds(1, 25, 720, 421);
-                }
                 else if(wherePlayerLook.equals("north")){
-                    nextBlockX = playerXPosition - 1;
                     BufferedImage eyeViewImage = null;
-                    try {
-                        eyeViewImage = ImageIO.read(new File(level.blockPicture(nextBlockX, playerYPosition)));
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
+                    nextBlockX = playerXPosition - 1;
+                    lastBlockX = nextBlockX - 1;
+                    char near = level.blockLetter(nextBlockX, playerYPosition);
+                    char far = level.blockLetter(lastBlockX, playerYPosition);
+                    if (near == 'R' && far == 'R'){
+                        try {
+                            whatUReallyC = ImageIO.read(new File(level.blockFarPicture(nextBlockX, playerYPosition)));
+                            eyeView = new JLabel(new ImageIcon(whatUReallyC));
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
                     }
-                    eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                    else if (near == 'R' && far == 'C'){
+                        try {
+                            whatUReallyC = ImageIO.read(new File(level.blockFarPicture(lastBlockX, playerYPosition)));
+                            eyeView = new JLabel(new ImageIcon(whatUReallyC));
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                    }
+                    else if (near == 'R' && far == 'T'){
+                        try {
+                            whatUReallyC = ImageIO.read(new File(level.blockFarPicture(lastBlockX, playerYPosition)));
+                            eyeView = new JLabel(new ImageIcon(whatUReallyC));
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                    }
+                    else {
+                        try {
+                            eyeViewImage = ImageIO.read(new File(level.blockPicture(nextBlockX, playerYPosition)));
+                            eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                        eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                    }
+
                     eyeView.setBounds(1, 25, 720, 421);
                 }
+
                 else if(wherePlayerLook.equals("south")){
-                    nextBlockX = playerXPosition + 1;
                     BufferedImage eyeViewImage = null;
-                    try {
-                        eyeViewImage = ImageIO.read(new File(level.blockPicture(nextBlockX, playerYPosition)));
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
+                    nextBlockX = playerXPosition + 1;
+                    lastBlockX = nextBlockX + 1;
+                    char near = level.blockLetter(nextBlockX, playerYPosition);
+                    char far = level.blockLetter(lastBlockX, playerYPosition);
+                    if (near == 'R' && far == 'R'){
+                        try {
+                            whatUReallyC = ImageIO.read(new File(level.blockPicture(nextBlockX, playerYPosition)));
+                            eyeView = new JLabel(new ImageIcon(whatUReallyC));
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
                     }
-                    eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                    else if (near == 'R' && far == 'C'){
+                        try {
+                            whatUReallyC = ImageIO.read(new File(level.blockFarPicture(lastBlockX, playerYPosition)));
+                            eyeView = new JLabel(new ImageIcon(whatUReallyC));
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                    }
+                    else if (near == 'R' && far == 'T'){
+                        try {
+                            whatUReallyC = ImageIO.read(new File(level.blockFarPicture(lastBlockX, playerYPosition)));
+                            eyeView = new JLabel(new ImageIcon(whatUReallyC));
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                    }
+                    else {
+                        try {
+                            eyeViewImage = ImageIO.read(new File(level.blockPicture(nextBlockX, playerYPosition)));
+                            eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                    }
                     eyeView.setBounds(1, 25, 720, 421);
                 }
 
@@ -427,6 +561,8 @@ public class ClassicRPGGame implements ActionListener {
                 System.out.println("Player stand on a " + level.blockName(playerXPosition, playerYPosition));
                 System.out.println("Next block on the east " + level.blockName(playerXPosition, playerYPosition + 1));
                 System.out.println("Next block on the west " + level.blockName(playerXPosition, playerYPosition - 1));
+                System.out.println("Next block on the south " + level.blockName(playerXPosition + 1, playerYPosition));
+                System.out.println("Next block on the north " + level.blockName(playerXPosition - 1, playerYPosition));
             }
         }
     }
@@ -447,18 +583,8 @@ public class ClassicRPGGame implements ActionListener {
 
                 int nextBlockX = 0;
                 int nextBlockY = 0;
+                int lastBlockX = 0;
                 if (wherePlayerLook.equals("east")){
-                    nextBlockY = playerYPosition - 1;
-                    BufferedImage eyeViewImage = null;
-                    try {
-                        eyeViewImage = ImageIO.read(new File(level.blockPicture(playerXPosition, nextBlockY)));
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                    eyeView = new JLabel(new ImageIcon(eyeViewImage));
-                    eyeView.setBounds(1, 25, 720, 421);
-                }
-                else if(wherePlayerLook.equals("west")){
                     nextBlockY = playerYPosition + 1;
                     BufferedImage eyeViewImage = null;
                     try {
@@ -469,26 +595,97 @@ public class ClassicRPGGame implements ActionListener {
                     eyeView = new JLabel(new ImageIcon(eyeViewImage));
                     eyeView.setBounds(1, 25, 720, 421);
                 }
-                else if(wherePlayerLook.equals("north")){
-                    nextBlockX = playerXPosition - 1;
+                else if(wherePlayerLook.equals("west")){
+                    nextBlockY = playerYPosition - 1;
                     BufferedImage eyeViewImage = null;
                     try {
-                        eyeViewImage = ImageIO.read(new File(level.blockPicture(nextBlockX, playerYPosition)));
+                        eyeViewImage = ImageIO.read(new File(level.blockPicture(playerXPosition, nextBlockY)));
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
                     }
                     eyeView = new JLabel(new ImageIcon(eyeViewImage));
                     eyeView.setBounds(1, 25, 720, 421);
                 }
-                else if(wherePlayerLook.equals("south")){
-                    nextBlockX = playerXPosition + 1;
+                else if(wherePlayerLook.equals("north")){
                     BufferedImage eyeViewImage = null;
-                    try {
-                        eyeViewImage = ImageIO.read(new File(level.blockPicture(nextBlockX, playerYPosition)));
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
+                    nextBlockX = playerXPosition - 1;
+                    lastBlockX = nextBlockX - 1;
+                    char near = level.blockLetter(nextBlockX, playerYPosition);
+                    char far = level.blockLetter(lastBlockX, playerYPosition);
+                    if (near == 'R' && far == 'R'){
+                        try {
+                            whatUReallyC = ImageIO.read(new File(level.blockPicture(nextBlockX, playerYPosition)));
+                            eyeView = new JLabel(new ImageIcon(whatUReallyC));
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
                     }
-                    eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                    else if (near == 'R' && far == 'C'){
+                        try {
+                            whatUReallyC = ImageIO.read(new File(level.blockFarPicture(lastBlockX, playerYPosition)));
+                            eyeView = new JLabel(new ImageIcon(whatUReallyC));
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                    }
+                    else if (near == 'R' && far == 'T'){
+                        try {
+                            whatUReallyC = ImageIO.read(new File(level.blockFarPicture(lastBlockX, playerYPosition)));
+                            eyeView = new JLabel(new ImageIcon(whatUReallyC));
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                    }
+                    else {
+                        try {
+                            eyeViewImage = ImageIO.read(new File(level.blockPicture(nextBlockX, playerYPosition)));
+                            eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+
+                    }
+                    eyeView.setBounds(1, 25, 720, 421);
+                }
+                else if(wherePlayerLook.equals("south")){
+                    BufferedImage eyeViewImage = null;
+                    nextBlockX = playerXPosition + 1;
+                    lastBlockX = nextBlockX + 1;
+                    char near = level.blockLetter(nextBlockX, playerYPosition);
+                    char far = level.blockLetter(lastBlockX, playerYPosition);
+                    if (near == 'R' && far == 'R'){
+                        try {
+                            whatUReallyC = ImageIO.read(new File(level.blockPicture(nextBlockX, playerYPosition)));
+                            eyeView = new JLabel(new ImageIcon(whatUReallyC));
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                    }
+                    else if (near == 'R' && far == 'C'){
+                        try {
+                            whatUReallyC = ImageIO.read(new File(level.blockFarPicture(lastBlockX, playerYPosition)));
+                            eyeView = new JLabel(new ImageIcon(whatUReallyC));
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                    }
+                    else if (near == 'R' && far == 'T'){
+                        try {
+                            whatUReallyC = ImageIO.read(new File(level.blockFarPicture(lastBlockX, playerYPosition)));
+                            eyeView = new JLabel(new ImageIcon(whatUReallyC));
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                    }
+                    else {
+                        try {
+                            eyeViewImage = ImageIO.read(new File(level.blockPicture(nextBlockX, playerYPosition)));
+                            eyeView = new JLabel(new ImageIcon(eyeViewImage));
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+
+                    }
                     eyeView.setBounds(1, 25, 720, 421);
                 }
 
@@ -500,6 +697,8 @@ public class ClassicRPGGame implements ActionListener {
                 System.out.println("Player stand on a " + level.blockName(playerXPosition, playerYPosition));
                 System.out.println("Next block on the east " + level.blockName(playerXPosition, playerYPosition + 1));
                 System.out.println("Next block on the west " + level.blockName(playerXPosition, playerYPosition - 1));
+                System.out.println("Next block on the south " + level.blockName(playerXPosition + 1, playerYPosition));
+                System.out.println("Next block on the north " + level.blockName(playerXPosition - 1, playerYPosition));
             }
         }
     }
@@ -573,6 +772,8 @@ public class ClassicRPGGame implements ActionListener {
                 System.out.println("Player stand on a " + level.blockName(playerXPosition, playerYPosition));
                 System.out.println("Next block on the east " + level.blockName(playerXPosition, playerYPosition + 1));
                 System.out.println("Next block on the west " + level.blockName(playerXPosition, playerYPosition - 1));
+                System.out.println("Next block on the south " + level.blockName(playerXPosition + 1, playerYPosition));
+                System.out.println("Next block on the north " + level.blockName(playerXPosition - 1, playerYPosition));
             }
         }
     }
@@ -646,6 +847,8 @@ public class ClassicRPGGame implements ActionListener {
                 System.out.println("Player stand on a " + level.blockName(playerXPosition, playerYPosition));
                 System.out.println("Next block on the east " + level.blockName(playerXPosition, playerYPosition + 1));
                 System.out.println("Next block on the west " + level.blockName(playerXPosition, playerYPosition - 1));
+                System.out.println("Next block on the south " + level.blockName(playerXPosition + 1, playerYPosition));
+                System.out.println("Next block on the north " + level.blockName(playerXPosition - 1, playerYPosition));
             }
         }
     }

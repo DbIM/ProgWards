@@ -5,6 +5,7 @@ public class MapBlock {
     public String name;
     public boolean block;
     public String pic;
+    String pictureFar;
     public int positionX;
     public int positionY;
 
@@ -12,11 +13,18 @@ public class MapBlock {
         String name = getName();
         boolean block = isBlock();
         String pic = getPic();
+        String pictureFar = getPictureFar();
         int positionX = posX;
         int positionY = posY;
     }
 
+    public void setPictureFar(String pictureFar) {
+        this.pictureFar = pictureFar;
+    }
 
+    public String getPictureFar() {
+        return pictureFar;
+    }
 
     public void setBlockTypeLetter(char blockTypeLetter) {
         this.blockTypeLetter = blockTypeLetter;
