@@ -8,14 +8,24 @@ public class MapBlock {
     String pictureFar;
     public int positionX;
     public int positionY;
+    boolean pickable;
 
     public MapBlock(int posX, int posY){
         String name = getName();
         boolean block = isBlock();
+        boolean pickable = isPickable();
         String pic = getPic();
         String pictureFar = getPictureFar();
         int positionX = posX;
         int positionY = posY;
+    }
+
+    public boolean isPickable() {
+        return pickable;
+    }
+
+    public void setPickable(boolean pickable) {
+        this.pickable = pickable;
     }
 
     public void setPictureFar(String pictureFar) {

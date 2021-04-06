@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="Progwards">
+    <output-path>$PROJECT_DIR$/out/artifacts/Progwards</output-path>
+    <root id="root">
+      <element id="archive" name="Progwards.jar">
+        <element id="module-output" name="Progwards" />
+      </element>
+    </root>
+  </artifact>
+</component>

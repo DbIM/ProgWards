@@ -35,24 +35,28 @@ public class MapLoader {
                     mapBlock.setPic("src/Game/img/roadRoad.png");
                     mapBlock.setPictureFar("src/Game/img/roadRoad.png");
                     mapBlock.setName("Road");
+                    mapBlock.setPickable(false);
                 }
                 else if (letter == 'C') {
                     mapBlock.setBlock(true);
                     mapBlock.setPic("src/Game/img/castle.png");
                     mapBlock.setPictureFar("src/Game/img/roadCastle.png");
                     mapBlock.setName("Castle");
+                    mapBlock.setPickable(true);
                 }
                 else if (letter == 'T') {
                     mapBlock.setBlock(true);
                     mapBlock.setPic("src/Game/img/forest.png");
                     mapBlock.setPictureFar("src/Game/img/roadForest.png");
                     mapBlock.setName("Tree");
+                    mapBlock.setPickable(false);
                 }
                 else if (letter == 'S') {
                     mapBlock.setBlock(false);
                     mapBlock.setPic("src/Game/img/sand.png");
                     mapBlock.setPictureFar("src/Game/img/sandForest.png");
                     mapBlock.setName("Sand");
+                    mapBlock.setPickable(false);
                 }
                 blocks.put(counter, mapBlock);
                 counter++;
@@ -119,6 +123,18 @@ public class MapLoader {
             }
         }
         return blockIsBlocked;
+    }
+
+    public boolean blockIsPickable(int posX, int posY){
+        boolean blockIsPickable = false;
+        for (int i = 0; i<blocks.size(); i++){
+            mapBlock = blocks.get(i);
+            if (mapBlock.getPositionX() == posX && mapBlock.getPositionY() == posY){
+                blockIsPickable = mapBlock.isPickable();
+                return blockIsPickable;
+            }
+        }
+        return blockIsPickable;
     }
 
 }
