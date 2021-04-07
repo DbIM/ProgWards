@@ -956,7 +956,7 @@ public class ClassicRPGGame implements ActionListener {
 
     public class bowButtonActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            System.out.println("Bow button pressed");
+            System.out.println("Piu piu piu");
         }
     }
 
