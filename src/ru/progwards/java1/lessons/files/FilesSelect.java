@@ -6,7 +6,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Arrays;
 import java.util.List;
 
-import static ru.progwards.java1.lessons.files.FindDuplicates.fileList;
+
 // Реализовать метод с сигнатурой public void selectFiles(String inFolder, String outFolder, List<String> keys),
 // который сортирует файлы по их содержимому.
 // Нужно просмотреть содержимое всех файлов, с расширением txt,

@@ -19,7 +19,7 @@ import java.util.List;
 //Задача 1, класс FindDuplicates:
 //Ошибка 1: unreported exception java.io.IOException; must be caught or declared to be thrown
 
-public class FindDuplicates {
+public class FindDuplicatesOld {
     public static List<Path> fileList = new ArrayList<>();
     public static List<String> resultList = new ArrayList<>();
 
