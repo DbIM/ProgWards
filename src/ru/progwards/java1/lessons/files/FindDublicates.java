@@ -130,11 +130,4 @@ class FindDuplicates {
 
         return checked;
     }
-
-    public static void main(String[] args) {
-        FindDuplicates t = new FindDuplicates();
-        List<List<String>> tt = t.findDuplicates("D:\\test");
-        for (List<String> l : tt)
-            System.out.println(l);
-    }
 }
