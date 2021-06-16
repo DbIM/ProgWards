@@ -1,15 +1,14 @@
 package ru.progwards.java2.lessons.generics;
 
 public class DynamicArray<T> {
-/*
-Реализовать класс, BlockArray - обобщающий динамический массив, растущий блоками, на основе обычного статического массива.
-Стратегия роста - при полном заполнении текущего объема, новый размер массива должен быть в 2 раза больше предыдущего.
-*/
 
-    private T[] storage;    // хранилище
-    private int length;     // количество элементов в массиве
-    private int size = 16;  // размер хранилища
-    private int incPercent = 100; // на сколько процентов увеличивать переполненное хранилище
+//Реализовать класс, BlockArray - обобщающий динамический массив, растущий блоками, на основе обычного статического массива.
+//Стратегия роста - при полном заполнении текущего объема, новый размер массива должен быть в 2 раза больше предыдущего.
+
+    private T[] storage;
+    private int length;
+    private int size = 16;
+    private int incPercent = 100;
 
     DynamicArray() {
         init();
@@ -40,7 +39,7 @@ public class DynamicArray<T> {
         size = newSize;
     }
 
-    // добавляет элемент в конец массива
+    // добавить элемент в конец массива
     public void add(T item) {
         if (length == size) increment();
         storage[length++] = item;
@@ -52,7 +51,9 @@ public class DynamicArray<T> {
         if (pos < 0) throw new RuntimeException("Position " + pos + " is less than first element index");
     }
 
-    // добавляет элемент в заданную позицию позицию массива. Параметр int pos - первый, параметр с элементом массива - второй.
+    // добавить элемент в заданную позицию массива.
+    // Параметр int pos - первый,
+    // параметр с элементом массива - второй.
     public void insert(int pos, T item) {
         if (pos > length)
             throw new RuntimeException("Position " + pos + " is greater than length " + length + " of array"); // не могу checkPos, т.к. pos может быть равен length
