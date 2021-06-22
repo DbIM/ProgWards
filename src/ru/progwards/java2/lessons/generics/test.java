@@ -71,12 +71,12 @@ public class test {
 /*    private static <T> Comparable<T> compare(Object x) {
     }*/
 
-    public static void main(String[] args) {
+/*    public static void main(String[] args) {
         Integer[] ai = {1,2,3,4,5};
         List<Integer> li = from(ai);
         swap(li,1,3);
         System.out.println(li);
-    }
+    }*/
 }
 
 
